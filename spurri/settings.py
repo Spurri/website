@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_comments',
     'tagging',
-    #'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.linkedin',
     #'allauth.socialaccount.providers.google',
     #'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.github',
@@ -149,6 +149,16 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 
 LOGIN_REDIRECT_URL = "/profile/"
+
+SOCIALACCOUNT_PROVIDERS = \
+    {'linkedin':
+      {'SCOPE': ['r_emailaddress'],
+       'PROFILE_FIELDS': ['id',
+                         'first-name',
+                         'last-name',
+                         'email-address',
+                         'picture-url',
+                         'public-profile-url']}}
 
 # Update database configuration with $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
