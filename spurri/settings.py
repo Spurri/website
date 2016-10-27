@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_comments',
     'tagging',
-    #'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.linkedin',
     #'allauth.socialaccount.providers.google',
     #'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.github',
@@ -173,3 +173,10 @@ STATIC_URL = '/static/'
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+SOCIALACCOUNT_PROVIDERS = { 
+'linkedin_oauth2':
+    {'SCOPE': ['r_emailaddress'],
+     'VERIFIED_EMAIL': True,
+        }
+
+    }
