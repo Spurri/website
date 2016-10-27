@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'tagging',
     'allauth.socialaccount.providers.linkedin',
     #'allauth.socialaccount.providers.google',
-    #'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.github',
 )
 
@@ -160,6 +160,30 @@ SOCIALACCOUNT_PROVIDERS = \
                          'picture-url',
                          'public-profile-url']}}
 
+
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+       {'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4'}}
+
+        
 # Update database configuration with $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
