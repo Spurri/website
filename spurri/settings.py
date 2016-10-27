@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django_comments',
     'tagging',
     #'allauth.socialaccount.providers.linkedin',
-    #'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google',
     #'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.github',
 )
@@ -173,3 +173,8 @@ STATIC_URL = '/static/'
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+SOCIALACCOUNT_PROVIDERS = { 
+'google':
+    { 
+      'SCOPE': ['profile', 'email'],
+      'AUTH_PARAMS': { 'access_type': 'online' }}}
