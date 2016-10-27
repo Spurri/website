@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'tagging',
     #'allauth.socialaccount.providers.linkedin',
     #'allauth.socialaccount.providers.google',
-    #'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.github',
 )
 
@@ -173,3 +173,26 @@ STATIC_URL = '/static/'
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+#for social auth
+SOCIALACCOUNT_PROVIDERS = { 
+
+'facebook':
+   {'METHOD': 'oauth2',
+    'SCOPE': ['email', 'public_profile', 'user_friends'],
+    'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+    'FIELDS': [
+        'id',
+        'email',
+        'name',
+        'first_name',
+        'last_name',
+        'verified',
+        'locale',
+        'timezone',
+        'link',
+        'gender',
+        'updated_time'],
+    'EXCHANGE_TOKEN': True,
+    'LOCALE_FUNC': 'path.to.callable',
+    'VERIFIED_EMAIL': True,
+    'VERSION': 'v2.4'}}
