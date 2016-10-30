@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django_comments',
     'tagging',
     'allauth.socialaccount.providers.linkedin',
-    #'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.github',
 )
@@ -183,6 +183,12 @@ SOCIALACCOUNT_PROVIDERS = \
         'VERIFIED_EMAIL': False,
         'VERSION': 'v2.4'}}
 
+
+SOCIALACCOUNT_PROVIDERS = \
+    { 'google':
+        { 'SCOPE': ['profile', 'email'],
+          'AUTH_PARAMS': { 'access_type': 'online' } }}
+          
         
 # Update database configuration with $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
