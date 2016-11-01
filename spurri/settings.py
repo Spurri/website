@@ -39,9 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_comments',
     'tagging',
-    'allauth.socialaccount.providers.linkedin',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.linkedin',
+    #'allauth.socialaccount.providers.google',
+    #'allauth.socialaccount.providers.facebook',
     #'allauth.socialaccount.providers.github',
 )
 
@@ -56,6 +56,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 )
 
 ROOT_URLCONF = 'spurri.urls'
@@ -138,7 +139,16 @@ if 'DATABASE_URL' in os.environ:
     GS_BUCKET_NAME = 'spurrifiles'
     DEFAULT_FILE_STORAGE = 'storages.backends.gs.GSBotoStorage'
     GS_QUERYSTRING_AUTH = False
-    #MEDIA_URL="https://spurrifiles.storage.googleapis.com/"
+    ROLLBAR = {
+        'access_token': os.environ.get('ROLLBAR_ACCESS_TOKEN', '11111111111111111'),
+        'environment': 'development' if DEBUG else 'production',
+        'root': BASE_DIR,
+        'exception_level_filters': [
+            (Http404, 'warning')
+        ]
+    }
+    import rollbar
+    rollbar.init(**ROLLBAR)
 
 # local dev needs to set SMTP backend or fail at startup
 if DEBUG:
