@@ -15,8 +15,10 @@ import json
 
 
 def index(request, template="index.html"):
+    projects = Project.objects.all()
     context = {
-        'projects': Project.objects.all()[0:15],
+        'projects_count': projects.count(),
+        'projects': projects[0:15],
         'user_count': User.objects.all().count(),
     }
     return render_to_response(template, context, context_instance=RequestContext(request))
