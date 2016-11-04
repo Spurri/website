@@ -85,6 +85,9 @@ class Organization(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.name;
+
 
 class Grant(models.Model):
     organization = models.ForeignKey(Organization)
