@@ -77,12 +77,33 @@ class Collaborator(models.Model):
     def __unicode__(self):
         return self.name;
 
-#class Grants(models.Model):
 
-# grant progress...
+class Organization(models.Model):
+    name = models.CharField(max_length=200)
+    logo = models.ImageField(upload_to="logos")
+    website = models.URLField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
-#class Service(models.Model):
-#    name = models.CharField(max_length=200)
-#    slug = models.SlugField(max_length=200, unique=True)
+
+class Grant(models.Model):
+    organization = models.ForeignKey(Organization)
+    soliciation_number = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    comments = models.TextField()
+    link = models.URLField()
+    years = models.IntegerField(default=0)
+    award_count = models.IntegerField(default=0)
+    amount_max = models.DecimalField(max_digits=15, decimal_places=2)
+    deadline = models.DateTimeField()
+    tags = TagField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
 
+class Resource(models.Model):
+    project = models.ForeignKey(Project)
+    icon = models.CharField(max_length=200)
+    link = models.URLField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True) 
