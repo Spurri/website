@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import DetailView, CreateView, View
+from django.views.generic import DetailView, CreateView, View, ListView
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect, render_to_response, RequestContext
 from django.contrib.auth import get_user_model
@@ -23,7 +23,11 @@ def index(request, template="index.html"):
     }
     return render_to_response(template, context, context_instance=RequestContext(request))
 
-
+class ProjectListView(ListView):
+    model = Project      
+    template_name = 'list.html'  
+    context_object_name = "projects"    
+    paginate_by = 25 
 
 def profile(request):
     try:
