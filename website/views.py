@@ -27,7 +27,7 @@ class ProjectListView(ListView):
     model = Project      
     template_name = 'list.html'  
     context_object_name = "projects"    
-    paginate_by = 25 
+    paginate_by = 21 
 
 def profile(request):
     try:
