@@ -24,6 +24,7 @@
             <li><a href="https://mailto:placeholder@emailholder.com" style="text-decoration: none"><i class="fa fa-envelope"></i></a></li>
           </ul>
         </div>
+        <!--
         <br>
         <h2 class="text-left">Technical Readyness Level: 1 - Basic Technology Research</h2>
         <div class="progress">
@@ -31,8 +32,10 @@
             <span class="sr-only">40% Complete (success)</span>
           </div>
         </div>
-        <h2 class="text-left">Next Funding Milestone:</h2>
+        -->
+        
         {% if object.goal %}
+        <h2 class="text-left">Next Funding Milestone:</h2>
           <span style="font-size:20px">${{object.funding}} out of ${{object.goal}} raised</span>
           <div class="progress">
             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{% widthratio  object.funding  object.goal 100 %}" aria-valuemin="0" aria-valuemax="100" style="width: {% widthratio  object.funding  object.goal 100 %}%">
@@ -41,7 +44,9 @@
             
           </div>
         {% endif %}
+        <!--
         <img src="{% static 'heartbeat.jpg' %}" width="200px">
+        -->
         <form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr"  method="post">
           <input type="hidden" name="cmd" value="_xclick">
           <input type="hidden" name="business" value="{{project.paypal|default:"alphaonelabs@gmail.com"}}">

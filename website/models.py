@@ -25,7 +25,6 @@ class Project(models.Model):
     def __unicode__(self):
         return self.name;
 
-#register(Project)
 
 class Team(models.Model):
     project = models.ForeignKey(Project)
