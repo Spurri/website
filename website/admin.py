@@ -44,7 +44,8 @@ class ProjectAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('project','user','role','created','modified')
 
-
+class GrantAdmin(admin.ModelAdmin):
+    list_display = ('organization','soliciation_number','name','tags','comments','link','years','award_count','amount_max','deadline','tags','modified')
 
 
 admin.site.unregister(User)
@@ -52,7 +53,7 @@ UserAdmin.list_display = ('id','username','email', 'first_name', 'last_name', 'i
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Grant)
+admin.site.register(Grant, GrantAdmin)
 admin.site.register(Organization)
 admin.site.register(Resource)
 admin.site.register(Project, ProjectAdmin)
