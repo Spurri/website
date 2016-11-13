@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.contrib import messages
-from website.models import Project, Team
+from website.models import Project, Team, Grant
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
@@ -17,9 +17,10 @@ import json
 def index(request, template="index.html"):
     projects = Project.objects.all()
     context = {
-        'projects_count': projects.count(),
+        'project_count': projects.count(),
         'projects': projects[0:15],
         'user_count': User.objects.all().count(),
+        'grant_count': Grant.objects.all().count(),
     }
     return render_to_response(template, context, context_instance=RequestContext(request))
 

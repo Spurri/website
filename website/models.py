@@ -85,7 +85,7 @@ class Organization(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return self.name;
+        return self.name
 
 
 class Grant(models.Model):
