@@ -46,7 +46,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 class GrantAdmin(admin.ModelAdmin):
     list_display = ('organization','soliciation_number','name','tags','comments','link','years','award_count','amount_max','deadline','modified')
-
+    search_fields = ('soliciation_number', 'name')
 
 admin.site.unregister(User)
 UserAdmin.list_display = ('id','username','email', 'first_name', 'last_name', 'is_active', 'date_joined', 'is_staff')

@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from updown.fields import RatingField
 from tagging.registry import register
 from tagging.fields import TagField
+from django_comments import signals, models as comment_models
+from django.contrib.sites.models import Site
 
 class Project(models.Model):
     user = models.ForeignKey(User)
@@ -22,8 +24,13 @@ class Project(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
 
+    def get_absolute_url(self):
+        return str(self.slug)
+
     def __unicode__(self):
-        return self.name;
+        return self.name
+
+
 
 
 class Team(models.Model):
@@ -109,3 +116,22 @@ class Resource(models.Model):
     link = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True) 
+
+
+def new_comment_notifier(sender, comment, request, *args, **kwargs):
+    content_object = comment.content_object
+    print content_object
+    site = Site.objects.get_current()
+    content_object = comment.content_object
+    url = 'http://%s?c=%d' % (site.domain + content_object.get_absolute_url(), comment.id)
+    subject = "New comment posted on '%s'" % str(content_object)
+    message = "%s:\n%s" % (subject, url)
+    mail_admins(subject, message)
+
+signals.comment_was_posted.connect(new_comment_notifier, sender=comment_models.Comment)
+
+
+
+
+
+
