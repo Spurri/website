@@ -32,14 +32,14 @@ class CollaboratorInline(admin.TabularInline):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name','slug','description','created','rating_likes','public_views','private_views','funding','goal','paypal','created','modified')
+    list_display = ('name','slug','description','created','tags','rating_likes','public_views','private_views','funding','goal','paypal','created','modified')
     inlines = [
         GroupInline,
         BenefitInline,
         BarrierInline,
         CollaboratorInline,
     ]
-
+    search_fields = ('name', 'description','tags')
 
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('project','user','role','created','modified')
