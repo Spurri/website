@@ -25,7 +25,8 @@ def index(request, template="index.html"):
     return render_to_response(template, context, context_instance=RequestContext(request))
 
 class ProjectListView(ListView):
-    model = Project      
+    model = Project
+    queryset = Project.objects.order_by('-order')      
     template_name = 'list.html'  
     context_object_name = "projects"    
     paginate_by = 21 
