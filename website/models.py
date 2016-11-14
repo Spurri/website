@@ -5,6 +5,7 @@ from tagging.registry import register
 from tagging.fields import TagField
 from django_comments import signals, models as comment_models
 from django.contrib.sites.models import Site
+from django.core.mail import send_mail
 
 class Project(models.Model):
     user = models.ForeignKey(User)
@@ -127,7 +128,13 @@ def new_comment_notifier(sender, comment, request, *args, **kwargs):
     subject = "New comment posted on '%s'" % str(content_object)
     message = "%s:\n%s" % (subject, url)
     #mail_admins(subject, message)
-    
+    send_mail(
+        subject,
+        message,
+        'Spurri <no-reply@spurri.com>', 
+        [content_object.user.email],
+        fail_silently=False,
+    ) 
 
 signals.comment_was_posted.connect(new_comment_notifier, sender=comment_models.Comment)
 
