@@ -15,7 +15,7 @@ import json
 
 
 def index(request, template="index.html"):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-order')
     context = {
         'project_count': projects.count(),
         'projects': projects[0:15],

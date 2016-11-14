@@ -17,6 +17,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to="images")
     public_views = models.IntegerField(default=0)
     private_views = models.IntegerField(default=0)
+    order = models.IntegerField(default=0)
     funding = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     goal = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     paypal =models.EmailField(blank=True)
@@ -120,13 +121,13 @@ class Resource(models.Model):
 
 def new_comment_notifier(sender, comment, request, *args, **kwargs):
     content_object = comment.content_object
-    print content_object
     site = Site.objects.get_current()
     content_object = comment.content_object
     url = 'http://%s?c=%d' % (site.domain + content_object.get_absolute_url(), comment.id)
     subject = "New comment posted on '%s'" % str(content_object)
     message = "%s:\n%s" % (subject, url)
-    mail_admins(subject, message)
+    #mail_admins(subject, message)
+    
 
 signals.comment_was_posted.connect(new_comment_notifier, sender=comment_models.Comment)
 
