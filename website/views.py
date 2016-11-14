@@ -12,12 +12,15 @@ from website.models import Project, Team, Grant
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
+from django_comments import Comment
 
 
 def comment_posted( request ):
     if request.GET['c']:
-        comment_id, project_id  = request.GET['c'].split( ':' )
-        project = Project.objects.get( pk=project_id )
+        comment_id = request.GET['c'] 
+        comment = Comment.objects.get( pk=comment_id )
+        project = Project.objects.get(id=comment.object_pk) 
+
         if project:
             messages.success(self.request, 'Comment Posted!')
             return HttpResponseRedirect( project.get_absolute_url() )
