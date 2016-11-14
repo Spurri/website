@@ -22,7 +22,7 @@ def comment_posted( request ):
         project = Project.objects.get(id=comment.object_pk) 
 
         if project:
-            messages.success(self.request, 'Comment Posted!')
+            messages.success(request, 'Comment Posted!')
             return HttpResponseRedirect( project.get_absolute_url() )
 
     return HttpResponseRedirect( "/" )
