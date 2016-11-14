@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^list/$', ProjectListView.as_view()),
     url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
     url(r"^project/(?P<object_id>\d+)/rate/(?P<score>[\d\-]+)$", AddRating.as_view(), name="project_rating"),
+    url(r'^comments/posted/$', website.views.comment_posted, name='comment_posted'),
     url(r'^comments/', include('django_comments.urls')),
 ]
 

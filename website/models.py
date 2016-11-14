@@ -27,7 +27,7 @@ class Project(models.Model):
 
 
     def get_absolute_url(self):
-        return str(self.slug)
+        return "/"+str(self.slug)
 
     def __unicode__(self):
         return self.name

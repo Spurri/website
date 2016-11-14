@@ -14,6 +14,16 @@ from updown.views import AddRatingFromModel
 import json
 
 
+def comment_posted( request ):
+    if request.GET['c']:
+        comment_id, project_id  = request.GET['c'].split( ':' )
+        project = Project.objects.get( pk=project_id )
+        if project:
+            messages.success(self.request, 'Comment Posted!')
+            return HttpResponseRedirect( project.get_absolute_url() )
+
+    return HttpResponseRedirect( "/" )
+
 def index(request, template="index.html"):
     projects = Project.objects.all().order_by('-order')
     context = {
