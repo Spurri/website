@@ -12,7 +12,7 @@ from website.models import Project, Team, Grant
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
-from django_comments import Comment
+from django_comments.models import Comment
 
 
 def comment_posted( request ):
