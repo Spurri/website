@@ -27,11 +27,13 @@ urlpatterns = [
     url(r'^create/$', login_required(ProjectCreate.as_view()), name="create"),
     url(r'^profile/(?P<slug>[^/]+)/$', UserProfileDetailView.as_view(), name="profile"),
     url(r'^list/$', ProjectListView.as_view()),
-    url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
+    url(r'^favicon\.ico$', favicon_view),
     url(r"^project/(?P<object_id>\d+)/rate/(?P<score>[\d\-]+)$", AddRating.as_view(), name="project_rating"),
     url(r'^comments/posted/$', website.views.comment_posted, name='comment_posted'),
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^favicon\.ico$', favicon_view),
+    url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
+ 
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
