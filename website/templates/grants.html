@@ -1,33 +1,38 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load comments %}
+{% load humanize %}
 {% block content %}
-<style>
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-table, th, td {
-border: 1px solid black;
-padding-left: 10px;
-text-align:left;
-line-height:30px;
-}
-</style>
+	<style>
+	table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	}
+	table, th, td {
+	border: 1px solid black;
+	padding: 10px;
+	text-align:left;
+	line-height:30px;
+	}
+	</style>
 	<div class="row">
 		<center>
 		<table cellpadding="10" cellspacing="10">
+			<th>
+				<td>&nbsp;</td>
+				<td>Name</td>
+				<td>Solicitation #</td>
+				<td>Amount Max</td>
+				<td>Deadline</td>
+			</th>
 			{% for grant in grants %}
 				<tr>
 					<td><a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
 					<td><a href="{{grant.link}}" target="_new">{{grant.name}}</a></td>
 					<td>{{grant.soliciation_number}}</td>
-					<td>{{grant.amount_max}}</td>
-					<td>
-						<span style="color:{% if grant.is_past %}red{% else %}green{% endif %};">
-							{{grant.deadline}}
-						</span>
+					<td>{{grant.amount_max|intcomma}}</td>
+					<td bgcolor="{% if grant.is_past %}red{% else %}green{% endif %};">
+						{{grant.deadline}}
 					</td>
 				</tr>
 			{% endfor %}
