@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from website.views import UserProfileDetailView, ProjectCreate, ProjectDetailView, AddRating, ProjectListView 
+from website.views import UserProfileDetailView, ProjectCreate, GrantListView, ProjectDetailView, AddRating, ProjectListView 
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import RedirectView
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^create/$', login_required(ProjectCreate.as_view()), name="create"),
     url(r'^profile/(?P<slug>[^/]+)/$', UserProfileDetailView.as_view(), name="profile"),
     url(r'^list/$', ProjectListView.as_view()),
+    url(r'^grants/$', GrantListView.as_view()),
     url(r'^favicon\.ico$', favicon_view),
     url(r"^project/(?P<object_id>\d+)/rate/(?P<score>[\d\-]+)$", AddRating.as_view(), name="project_rating"),
     url(r'^comments/posted/$', website.views.comment_posted, name='comment_posted'),

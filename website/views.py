@@ -44,6 +44,13 @@ class ProjectListView(ListView):
     context_object_name = "projects"    
     paginate_by = 21 
 
+class GrantListView(ListView):
+    model = Grant
+    queryset = Grant.objects.order_by('-deadline')      
+    template_name = 'grants.html'  
+    context_object_name = "grants"    
+    paginate_by = 100 
+
 def profile(request):
     try:
         return redirect('/profile/' + request.user.username)
