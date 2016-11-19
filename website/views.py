@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
 from django_comments.models import Comment
-from datetime import date
+
 
 
 def comment_posted( request ):
@@ -47,12 +47,7 @@ class ProjectListView(ListView):
 
 class GrantListView(ListView):
     model = Grant
-    dayofyear = int(date.today().strftime("%j"))
-
-    datediff = '(DAYOFYEAR(date) - %d + 365) MOD 365' % (
-          dayofyear
-        )
-    queryset = Grant.objects.extra(select={'datediff': datediff}).order_by('datediff')
+    queryset = Grant.objects.order_by('-deadline')      
     template_name = 'grants.html'  
     context_object_name = "grants"    
     paginate_by = 100 
