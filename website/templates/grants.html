@@ -2,55 +2,34 @@
 {% load staticfiles %}
 {% load comments %}
 {% block content %}
-
-	<div class="container-fluid">
-		<div class="row">
-
-			<table>
-
-				{% for grant in grants %}
+	<div class="row">
+		<center>
+		<table>
+			{% for grant in grants %}
 				<tr>
-					<td>
-						<img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40">
-					</td>
-					<td>
-						{{grant.name}}
-					</td>
-					</td>
-						{{soliciation_number}}
-					</td>
-					<td>
-						{{name}}
-					</td>
-					<td>
-						<a href="{{link}}" target="_new">
-					</td>
-					<td>
-						{{amount_max}}
-					</td>
-					<td>
-						{{deadline}}
-					</td>
+					<td><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></td>
+					<td><a href="{{link}}" target="_new">{{grant.name}}</a></td>
+					<td>{{grant.soliciation_number}}</td>
+					<td>{{grant.amount_max}}</td>
+					<td>{{grant.deadline}}</td>
 				</tr>
-				{% endfor %}
-				</table>
-			</div>
-
-    {% if is_paginated %}
-        <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="/list?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="/list?page={{ page_obj.next_page_number }}">next</a>
-                {% endif %}
-            </span>
-        </div>
-    {% endif %}
-
-		{% endblock %}
-
+			{% endfor %}
+		</table>
+		</center>
+	</div>
+	{% if is_paginated %}
+		<div class="pagination">
+			<span class="page-links">
+				{% if page_obj.has_previous %}
+					<a href="/list?page={{ page_obj.previous_page_number }}">previous</a>
+				{% endif %}
+				<span class="page-current">
+					Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+				</span>
+				{% if page_obj.has_next %}
+					<a href="/list?page={{ page_obj.next_page_number }}">next</a>
+				{% endif %}
+			</span>
+		</div>
+	{% endif %}
+{% endblock %}
