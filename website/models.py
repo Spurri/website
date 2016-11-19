@@ -6,6 +6,7 @@ from tagging.fields import TagField
 from django_comments import signals, models as comment_models
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
+from datetime import date
 
 class Project(models.Model):
     user = models.ForeignKey(User)
@@ -110,6 +111,12 @@ class Grant(models.Model):
     tags = TagField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    @property
+    def is_past(self):
+        if date.today() > self.deadline:
+            return True
+        return False
 
 
 class Resource(models.Model):

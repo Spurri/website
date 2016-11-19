@@ -4,14 +4,18 @@
 {% block content %}
 	<div class="row">
 		<center>
-		<table cellpadding="10">
+		<table cellpadding="10" cellspacing="10">
 			{% for grant in grants %}
 				<tr>
-					<td><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></td>
+					<td><a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
 					<td><a href="{{grant.link}}" target="_new">{{grant.name}}</a></td>
 					<td>{{grant.soliciation_number}}</td>
 					<td>{{grant.amount_max}}</td>
-					<td>{{grant.deadline}}</td>
+					<td>
+						<span style="color:{% if grant.deadline.is_past %}red{% else %}green{% endif %};">
+							{{grant.deadline}}
+						</span>
+					</td>
 				</tr>
 			{% endfor %}
 		</table>
