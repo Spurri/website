@@ -18,40 +18,40 @@
 	<div class="row">
 		<center>
 		<table cellpadding="10" cellspacing="10">
-			<th>
-				<td>&nbsp;</td>
-				<td>Name</td>
-				<td>Solicitation #</td>
-				<td>Amount Max</td>
-				<td>Deadline</td>
-			</th>
+			<tr>
+				<th>&nbsp;</th>
+				<th>Name</th>
+				<th>Solicitation #</th>
+				<th>Amount Max</th>
+				<th>Deadline</th>
+			</tr>
 			{% for grant in grants %}
 				<tr>
 					<td><a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
 					<td><a href="{{grant.link}}" target="_new">{{grant.name}}</a></td>
 					<td>{{grant.soliciation_number}}</td>
 					<td>{{grant.amount_max|intcomma}}</td>
-					<td bgcolor="{% if grant.is_past %}red{% else %}green{% endif %};">
-						{{grant.deadline}}
-					</td>
-				</tr>
-			{% endfor %}
-		</table>
-		</center>
-	</div>
-	{% if is_paginated %}
-		<div class="pagination">
-			<span class="page-links">
-				{% if page_obj.has_previous %}
-					<a href="/list?page={{ page_obj.previous_page_number }}">previous</a>
-				{% endif %}
-				<span class="page-current">
-					Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-				</span>
-				{% if page_obj.has_next %}
-					<a href="/list?page={{ page_obj.next_page_number }}">next</a>
-				{% endif %}
+					<td bgcolor="{% if grant.is_past %}red{% else %}green{% endif %}">
+					{{grant.deadline}}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	</center>
+</div>
+{% if is_paginated %}
+	<div class="pagination">
+		<span class="page-links">
+			{% if page_obj.has_previous %}
+				<a href="/list?page={{ page_obj.previous_page_number }}">previous</a>
+			{% endif %}
+			<span class="page-current">
+				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
 			</span>
-		</div>
-	{% endif %}
+			{% if page_obj.has_next %}
+				<a href="/list?page={{ page_obj.next_page_number }}">next</a>
+			{% endif %}
+		</span>
+	</div>
+{% endif %}
 {% endblock %}
