@@ -113,7 +113,7 @@ class Grant(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def is_past(self):
-        if date.today() > self.deadline:
+        if date.today() > self.deadline.date():
             return True
         return False
 
