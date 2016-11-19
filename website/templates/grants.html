@@ -2,6 +2,19 @@
 {% load staticfiles %}
 {% load comments %}
 {% block content %}
+<style>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table, th, td {
+border: 1px solid black;
+padding-left: 10px;
+text-align:left;
+line-height:30px;
+}
+</style>
 	<div class="row">
 		<center>
 		<table cellpadding="10" cellspacing="10">
@@ -12,7 +25,7 @@
 					<td>{{grant.soliciation_number}}</td>
 					<td>{{grant.amount_max}}</td>
 					<td>
-						<span style="color:{% if grant.deadline.is_past %}red{% else %}green{% endif %};">
+						<span style="color:{% if grant.is_past %}red{% else %}green{% endif %};">
 							{{grant.deadline}}
 						</span>
 					</td>
