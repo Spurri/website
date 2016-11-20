@@ -125,6 +125,18 @@ class Resource(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True) 
 
+class Match(models.Model):
+    project = models.ForeignKey(Project)
+    grant = models.ForeignKey(Grant)
+    similarity = models.FloatField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True) 
+
+    class Meta:
+        unique_together = (("project", "grant"),)
+        
+    
+
 
 def new_comment_notifier(sender, comment, request, *args, **kwargs):
     content_object = comment.content_object

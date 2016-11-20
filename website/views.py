@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.contrib import messages
-from website.models import Project, Team, Grant
+from website.models import Project, Team, Grant, Match
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
@@ -51,6 +51,17 @@ class GrantListView(ListView):
     template_name = 'grants.html'  
     context_object_name = "grants"    
     paginate_by = 100 
+
+class GrantDetailView(DetailView):
+    model = Grant
+    slug_field = "id"     
+    context_object_name = "grant"     
+    template_name = "grant.html"
+    
+    def get_context_data(self, **kwargs):
+            context = super(GrantDetailView, self).get_context_data(**kwargs)
+            context['matches'] = Match.objects.filter(grant=self.get_object()).order_by('-similarity')   
+            return context
 
 def profile(request):
     try:

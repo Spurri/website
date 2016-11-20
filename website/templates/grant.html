@@ -3,6 +3,14 @@
 {% load comments %}
 {% load humanize %}
 {% block content %}
+
+<a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="150"></a>
+
+<h1><a href="{{grant.link}}" target="_new">{{grant.name}}</a></h1>
+<h2>Solicitation # {{grant.soliciation_number}}</h2>
+<h3> Amount Max: ${{grant.amount_max.normalize|intcomma}} Deadline <span style="color:{% if grant.is_past %}#ff3333{% else %}#99ff99{% endif %};">{{grant.deadline}}</span></h3>
+
+
 	<style>
 	table {
 	border-collapse: collapse;
@@ -17,23 +25,21 @@
 	</style>
 	<div class="row">
 		<center>
-		<h1>List of maker related grants</h1>
 		<table cellpadding="10" cellspacing="10">
 			<tr>
 				<th>&nbsp;</th>
-				<th>Name</th>
-				<th>Solicitation #</th>
-				<th>Amount Max</th>
-				<th>Deadline</th>
+				<th>Project</th>
+				<th>POC</th>
+				<th>Match (Similarity Ratio)</th>
 			</tr>
-			{% for grant in grants %}
+			{% for match in matches %}
 				<tr>
-					<td><a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
-					<td><a href="/grant/{{grant.id}}" target="_new">{{grant.name}}</a></td>
-					<td><a href="{{grant.link}}" target="_new">{{grant.soliciation_number}}</a></td>
-					<td>${{grant.amount_max.normalize|intcomma}}</td>
-					<td bgcolor="{% if grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
-					{{grant.deadline}}
+					<td><a href="/{{match.project.slug}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.project.image}}" height="40"></a></td>
+					<td><a href="/{{match.project.slug}}" target="_new">{{match.project}}</a></td>
+					<td>{{match.project.user.first_name}} {{match.project.user.first_name}}</td>
+					
+					<td>
+					{{match.similarity}}
 				</td>
 			</tr>
 		{% endfor %}

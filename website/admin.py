@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from website.models import Project, Team, Group, Benefit, Barrier, Collaborator, Grant, Organization, Resource
+from website.models import Project, Team, Group, Benefit, Barrier, Collaborator, Grant, Organization, Resource, Match
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from tagging.models import Tag
@@ -48,6 +48,10 @@ class GrantAdmin(admin.ModelAdmin):
     list_display = ('organization','soliciation_number','name','tags','comments','link','years','award_count','amount_max','deadline','modified')
     search_fields = ('soliciation_number', 'name')
 
+class MatchAdmin(admin.ModelAdmin):
+    list_display = ('project','grant','similarity','created','modified')
+
+
 admin.site.unregister(User)
 UserAdmin.list_display = ('id','username','email', 'first_name', 'last_name', 'is_active', 'date_joined', 'is_staff')
 
@@ -62,3 +66,4 @@ admin.site.register(Group, GroupAdmin)
 admin.site.register(Benefit, BenefitAdmin)
 admin.site.register(Barrier, BarrierAdmin)
 admin.site.register(Collaborator, CollaboratorAdmin)
+admin.site.register(Match, MatchAdmin)
