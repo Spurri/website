@@ -112,6 +112,9 @@ class Grant(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.name
+        
     def is_past(self):
         if date.today() > self.deadline.date():
             return True
@@ -134,7 +137,7 @@ class Match(models.Model):
 
     class Meta:
         unique_together = (("project", "grant"),)
-        
+
     
 
 
