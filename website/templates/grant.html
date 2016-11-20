@@ -34,9 +34,9 @@
 			</tr>
 			{% for match in matches %}
 				<tr>
-					<td><a href="/{{match.project.slug}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.project.image.url}}" height="40"></a></td>
+					<td><a href="/{{match.project.slug}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.project.image.url}}" width="40"></a></td>
 					<td><a href="/{{match.project.slug}}" target="_new">{{match.project}}</a></td>
-					<td>{{match.project.user.first_name}} {{match.project.user.last_name}}</td>
+					<td><a href="/profile/{{match.project.user}}">{{match.project.user.first_name}} {{match.project.user.last_name}}</a></td>
 					
 					<td>
 					{{match.similarity}}

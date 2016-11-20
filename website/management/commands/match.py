@@ -29,6 +29,6 @@ class Command(BaseCommand):
                     ''.join([collaborator.name+ " " for collaborator in project.collaborator_set.all()]) 
                 )
                 match, created = Match.objects.update_or_create(
-                    project=project, grant=grant, similarity=similarity)
+                    project=project, grant=grant, defaults={'similarity': similarity})
 
         self.stdout.write(self.style.SUCCESS('Successfully matched projects'))
