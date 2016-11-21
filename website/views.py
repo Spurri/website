@@ -130,6 +130,10 @@ class ProjectDetailView(DetailView):
         self.object.save()
         return super(ProjectDetailView, self).get(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+            context = super(ProjectDetailView, self).get_context_data(**kwargs)
+            context['matches'] = Match.objects.filter(project=self.get_object()).order_by('-score')   
+            return context
 
 
 class ProjectCreate(CreateView):

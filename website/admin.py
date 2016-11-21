@@ -49,7 +49,7 @@ class GrantAdmin(admin.ModelAdmin):
     search_fields = ('soliciation_number', 'name')
 
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('project','grant','similarity','created','modified')
+    list_display = ('project','grant','similarity','score','created','modified')
 
 
 admin.site.unregister(User)

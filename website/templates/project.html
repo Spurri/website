@@ -192,6 +192,35 @@
   </table>
 </div>
 </div>
+
+<center>
+    <table cellpadding="10" cellspacing="10">
+      <tr>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>Solicitation #</th>
+        <th>Amount Max</th>
+        <th>Deadline</th>
+        <th>Score</th>
+      </tr>
+      {% for match in matches %}
+
+        <tr>
+          <td><a href="/{{match.grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.grant.organization.logo.url}}" width="40"></a></td>
+          <td><a href="/grant/{{match.grant.id}}" target="_new">{{match.grant.name}}</a></td>
+          <td><a href="{{match.grant.link}}" target="_new">{{match.grant.soliciation_number}}</a></td>
+          <td>${{match.grant.amount_max.normalize|intcomma}}</td>
+          <td bgcolor="{% if match.grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
+          {{match.grant.deadline}}
+        </td>
+
+          <td>
+          {{match.score}}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  </center>
 <!--
 <div class="col-md-5">
 <h2 class="text-center">Endorsers</h2>
