@@ -134,6 +134,7 @@ class Match(models.Model):
     project = models.ForeignKey(Project)
     grant = models.ForeignKey(Grant)
     similarity = models.FloatField()
+    score = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True) 
 

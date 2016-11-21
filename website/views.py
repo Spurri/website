@@ -60,7 +60,7 @@ class GrantDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
             context = super(GrantDetailView, self).get_context_data(**kwargs)
-            context['matches'] = Match.objects.filter(grant=self.get_object()).order_by('-similarity')   
+            context['matches'] = Match.objects.filter(grant=self.get_object()).order_by('-score')   
             return context
 
 def profile(request):

@@ -55,7 +55,7 @@ class Command(BaseCommand):
                     , grant.corpus)
 
                 match, created = Match.objects.update_or_create(
-                    project=project, grant=grant, defaults={'similarity': similarity})
+                    project=project, grant=grant, defaults={'score': similarity})
                 print project, grant, similarity
 
         self.stdout.write(self.style.SUCCESS('Successfully matched projects'))
