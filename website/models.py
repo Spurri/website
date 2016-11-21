@@ -111,10 +111,11 @@ class Grant(models.Model):
     tags = TagField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    corpus = models.TextField(default=" ")
 
     def __unicode__(self):
         return self.name
-        
+
     def is_past(self):
         if date.today() > self.deadline.date():
             return True
@@ -127,6 +128,7 @@ class Resource(models.Model):
     link = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True) 
+
 
 class Match(models.Model):
     project = models.ForeignKey(Project)

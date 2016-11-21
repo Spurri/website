@@ -16,6 +16,8 @@ class Command(BaseCommand):
         
         for grant in grants:
             for project in projects:
+                
+                # matching first attempt - projects with less text ended up matching more
                 # similarity = similar(
                 #     grant.name + " " + grant.organization.name + " " + grant.comments + " " + grant.tags, 
                 #     project.name + " " + 
@@ -28,11 +30,19 @@ class Command(BaseCommand):
                 #     ''.join([barrier.name+ " " for barrier in project.barrier_set.all()]) + 
                 #     ''.join([collaborator.name+ " " for collaborator in project.collaborator_set.all()]) 
                 # )
+                
+                # matching second attempt, matching is more even, however more relavant projects are not matching with appropriate grants
+                # similarity = similar(
+                #     grant.name + " " + grant.organization.name + " " + grant.comments + " " + grant.tags, 
+                #     project.name + " " + 
+                #     project.description
+                # )
+
                 similarity = similar(
-                    grant.name + " " + grant.organization.name + " " + grant.comments + " " + grant.tags, 
-                    project.name + " " + 
+                    grant.corpus, 
                     project.description
                 )
+
                 match, created = Match.objects.update_or_create(
                     project=project, grant=grant, defaults={'similarity': similarity})
 
