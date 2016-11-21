@@ -8,6 +8,7 @@ django-gravatar2==1.4.0
 django-storages==1.5.1
 django-tagging==0.4.5
 django-updown==1.0.1
+fuzzywuzzy==0.14.0
 gunicorn==19.4.5
 oauthlib==2.0.0
 Pillow==3.4.1
