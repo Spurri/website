@@ -55,7 +55,7 @@ class ProjectListView(ListView):
     def get_queryset(self):
         object_list  = Project.objects.order_by(self.request.GET.get('sort','-order'))
         if self.request.GET.get('q'):
-            object_list = object_list.filter(Q(name__icontains=self.request.GET.get('q')) | Q(description__icontains=self.request.GET.get('q')))
+            object_list = object_list.filter(Q(name__icontains=self.request.GET.get('q')) | Q(description__icontains=self.request.GET.get('q')) | Q(tags__icontains=self.request.GET.get('q')) )
         return object_list
 
 
