@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
 from django_comments.models import Comment
+from django.db.models import Q
 
 
 
@@ -40,10 +41,23 @@ def index(request, template="index.html"):
 
 class ProjectListView(ListView):
     model = Project
-    queryset = Project.objects.order_by('-order')      
     template_name = 'list.html'  
     context_object_name = "projects"    
     paginate_by = 21 
+
+    def dispatch(self, request, *args, **kwargs):
+        sort = self.request.GET.get('sort','-order')
+        if sort not in ['-created','-rating_likes','-public_views','-order']:
+            messages.error(self.request, 'invalid sort option')
+            return HttpResponseRedirect("/list")
+        return super(ProjectListView, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        object_list  = Project.objects.order_by(self.request.GET.get('sort','-order'))
+        if self.request.GET.get('q'):
+            object_list = object_list.filter(Q(name__icontains=self.request.GET.get('q')) | Q(description__icontains=self.request.GET.get('q')))
+        return object_list
+
 
 class GrantListView(ListView):
     model = Grant
