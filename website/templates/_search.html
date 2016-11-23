@@ -6,6 +6,7 @@
 					<button type="submit" class="btn btn-{% if request.GET.sort == "-created" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-created';">Most Recent</button>
 					<button type="submit" class="btn btn-{% if request.GET.sort == "-rating_likes" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-rating_likes';">Most Upvotes</button>
 					<button type="submit" class="btn btn-{% if request.GET.sort == "-public_views" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-public_views';">Most Views</button>
+					<button type="submit" class="btn btn-{% if request.GET.sort == "-comment_count" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-comment_count';">Most Comments</button>
 					<input type="hidden" name="sort" value="{{request.GET.sort|default:'-order'}}" id="sort">
 				</div>
 				<input class="form-control" name="q" placeholder="Search for" style="width:300px;display:inline-block;" value="{{request.GET.q}}">
