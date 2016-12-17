@@ -27,9 +27,9 @@
             <li><a href="https://mailto:placeholder@emailholder.com" style="text-decoration: none"><i class="fa fa-envelope"></i></a></li>
           </ul>
         </div>
-         
         
-       
+        
+        
         <h2 class="text-left">Technical Readyness Level: 1 - Basic Technology Research</h2>
         <div class="progress">
           <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
@@ -39,7 +39,7 @@
         -->
         
         {% if object.goal %}
-        <h2 class="text-left">Next Funding Milestone:</h2>
+          <h2 class="text-left">Next Funding Milestone:</h2>
           <span style="font-size:20px">${{object.funding}} out of ${{object.goal}} raised</span>
           <div class="progress">
             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{% widthratio  object.funding  object.goal 100 %}" aria-valuemin="0" aria-valuemax="100" style="width: {% widthratio  object.funding  object.goal 100 %}%">
@@ -60,7 +60,9 @@
           
         </form>
       </div>
-      <!-- <h2 class="text-left">Tags: Placeholder, Placeholder, Placeholder<h2> -->
+      {% if project.tags %}
+        <h2 class="text-left">Tags: {{project.tags}}<h2>
+      {% endif %}
       <a href="/project/{{project.id}}/rate/1" class="like" id="{{project.id}}" onclick="return false;">
         <h2 id="vote_count" style="font-size: 9px; margin-top: -10px;" >
         <span class="glyphicon glyphicon-triangle-top vote1 text-center" aria-hidden="true">
@@ -86,8 +88,9 @@
     
   </div>
 </div>
-<br>
+</div>
 
+<br>
 {% if object.problem %}
   <h1>Diagnostic Statement</h1>
   <table>
@@ -107,121 +110,118 @@
       </td>
       <td>
         {{object.tags}}
-     
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#EEEEEE">Impacted Groups or Individuals
-      </br>
-      <span>list of those impacted by problem (organize with largest impact top)</span>
-    </td>
-    <td>
-      <ul>
-        {% for group in object.group_set.all %}
-          <li>{{group}}</li>
-        {% endfor %}
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#EEEEEE">
-      Benefit of Solving the Problem</br>
-      <span>description of positive potential</span>
-    </td>
-    <td>
-      <ul>
-        {% for benefit in object.benefit_set.all %}
-          <li>{{benefit}}</li>
-        {% endfor %}
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#EEEEEE">
-      Known Barriers</br>
-      <span>those things which would prevent success of a future solution</span>
-    </td>
-    <td>
-      <ul>
-        {% for barrier in object.barrier_set.all %}
-          <li>{{barrier}}</li>
-        {% endfor %}
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#EEEEEE">
-      Potential Collaborators</br>
-      <span>list of those interested in helping to solve this problem</span>
-    </td>
-    <td>
-      <ul>
-        {% for collaborator in object.collaborator_set.all %}
-          <li>{{collaborator}}</li>
-        {% endfor %}
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#EEEEEE">
-      Statement POC</br>
-      <span>name and contact info</span>
-    </td>
-    <td>
-      {{object.user.first_name}} {{object.user.last_name}}
-    </td>
-  </tr>
-</table>
+        
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#EEEEEE">Impacted Groups or Individuals
+        </br>
+        <span>list of those impacted by problem (organize with largest impact top)</span>
+      </td>
+      <td>
+        <ul>
+          {% for group in object.group_set.all %}
+            <li>{{group}}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#EEEEEE">
+        Benefit of Solving the Problem</br>
+        <span>description of positive potential</span>
+      </td>
+      <td>
+        <ul>
+          {% for benefit in object.benefit_set.all %}
+            <li>{{benefit}}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#EEEEEE">
+        Known Barriers</br>
+        <span>those things which would prevent success of a future solution</span>
+      </td>
+      <td>
+        <ul>
+          {% for barrier in object.barrier_set.all %}
+            <li>{{barrier}}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#EEEEEE">
+        Potential Collaborators</br>
+        <span>list of those interested in helping to solve this problem</span>
+      </td>
+      <td>
+        <ul>
+          {% for collaborator in object.collaborator_set.all %}
+            <li>{{collaborator}}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#EEEEEE">
+        Statement POC</br>
+        <span>name and contact info</span>
+      </td>
+      <td>
+        {{object.user.first_name}} {{object.user.last_name}}
+      </td>
+    </tr>
+  </table>
 {% endif %}
 <div class="row">
-<div class="col-md-7">
-  <h5 class="text-center">Comments</h5>
-  <div id="chatlioWidgetPlaceholder" style="margin: auto; ">
-    {% render_comment_list for object %}
-    {% get_comment_form for object as form %}
-    <form action="{% comment_form_target %}" method="post">
-      {% csrf_token %}
-      <input type="text" id="id_comment" maxlength="3000" name="comment">
-      <input id="id_honeypot" name="honeypot" type="text" style="display:none;"/>
-      {{ form.content_type }}
-      {{ form.object_pk }}
-      {{ form.timestamp }}
-      {{ form.security_hash }}
-      <input type="submit" name="submit" value="Post">
-      <input type="submit" name="preview" value="Preview">
-    </form>
-  </table>
+  <div class="col-md-7">
+    <h5 class="text-center">Comments</h5>
+    <div id="chatlioWidgetPlaceholder" style="margin: auto; ">
+      {% render_comment_list for object %}
+      {% get_comment_form for object as form %}
+      <form action="{% comment_form_target %}" method="post">
+        {% csrf_token %}
+        <input type="text" id="id_comment" maxlength="3000" name="comment">
+        <input id="id_honeypot" name="honeypot" type="text" style="display:none;"/>
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input type="submit" name="submit" value="Post">
+        <input type="submit" name="preview" value="Preview">
+      </form>
+    </table>
+  </div>
 </div>
-</div>
-
 <center>
-    <table cellpadding="10" cellspacing="10">
-      <tr>
-        <th>&nbsp;</th>
-        <th>Name</th>
-        <th>Solicitation #</th>
-        <th>Amount Max</th>
-        <th>Deadline</th>
-        <th>Score</th>
-      </tr>
-      {% for match in matches %}
-
-        <tr>
-          <td><a href="/{{match.grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.grant.organization.logo.url}}" width="40"></a></td>
-          <td><a href="/grant/{{match.grant.id}}" target="_new">{{match.grant.name}}</a></td>
-          <td><a href="{{match.grant.link}}" target="_new">{{match.grant.soliciation_number}}</a></td>
-          <td>${{match.grant.amount_max.normalize|intcomma}}</td>
-          <td bgcolor="{% if match.grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
-          {{match.grant.deadline}}
-        </td>
-
-          <td>
-          {{match.score}}
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-  </center>
+<table cellpadding="10" cellspacing="10">
+  <tr>
+    <th>&nbsp;</th>
+    <th>Name</th>
+    <th>Solicitation #</th>
+    <th>Amount Max</th>
+    <th>Deadline</th>
+    <th>Score</th>
+  </tr>
+  {% for match in matches %}
+    <tr>
+      <td><a href="/{{match.grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.grant.organization.logo.url}}" width="40"></a></td>
+      <td><a href="/grant/{{match.grant.id}}" target="_new">{{match.grant.name}}</a></td>
+      <td><a href="{{match.grant.link}}" target="_new">{{match.grant.soliciation_number}}</a></td>
+      <td>${{match.grant.amount_max.normalize|intcomma}}</td>
+      <td bgcolor="{% if match.grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
+      {{match.grant.deadline}}
+    </td>
+    <td>
+      {{match.score}}
+    </td>
+  </tr>
+{% endfor %}
+</table>
+</center>
 <!--
 <div class="col-md-5">
 <h2 class="text-center">Endorsers</h2>
