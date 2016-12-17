@@ -44,19 +44,25 @@
 										</div>
 									</div>
 									<h4>{{ project.name }}</h4>
-									<!-- <p class="text-center"><strong>Category:</strong> Drones</p> -->
+									{% comment %}
+									{% if project.tags %}
+									<p class="text-center"><strong>Tags:</strong> {{project.tags}}</p>
+									{% endif}
+									{% endcomment %}
 									<div style="height:44px; overflow:hidden;">
 										<p>{{ project.description }}</p>
 									</div>
+
 									<a href="/{{ project.slug }}" class="btn-center btn btn-success">Learn More</a>
 								</div>
 							</a>
 						</div>
 					</li>
 				{% endfor %}
-				
+				</ul>
 			</div>
 			<a type="button" class="btn btn-lg btn-default" href="/list">View More</a>
 		{% endblock %}
+		</div>
 
 

@@ -22,20 +22,23 @@
 				-->
 				<hr>
 				<p class="profile">Last seen {{object.last_login|naturaltime}}.</p>
-				<p class="profile">{{object.project_set.all|length}} open project{{object.project_set.all|pluralize}}</p>
-				<p class="profile">$3,746 raised</p>
+				<p class="profile">{{object.project_set.all|length}} project{{object.project_set.all|pluralize}}</p>
+				<!-- <p class="profile">$3,746 raised</p> 
 				<ul class="list-unstyled list-inline">
 					<li><i class="fa fa-github fa-3x" aria-hidden="true"></i></li>
 					<li><i class="fa fa-linkedin fa-3x" aria-hidden="true"></i></li>
 					<li><i class="fa fa-envelope fa-3x" aria-hidden="true"></i></li>
 				</ul>
+				-->
 			</div>
+			<!--
 			<div class="col-md-4">
 					<ul class="list-unstyled list-inline text-center" style="padding-top: 80px;">
 					<li><i class="fa fa-trophy fa-5x" aria-hidden="true"></i></li>
 					<h3>Inventions Master</h3>
 				</ul>
 			</div>
+			-->
 		</div>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
@@ -51,9 +54,10 @@
 						<li>
 							<div class="col-md-6">
 								<div class="well well-project">
-									<img src="{{MEDIA_ROOT}}{{project.image.url}}" height="200px" width="300px" class="img-rounded center-block">
+									<img src="{{MEDIA_ROOT}}{{project.image.url}}" width="300px" class="img-rounded center-block">
 									<h4 class="text-center">{{project.name}}</h4>
 									<p>{{project.description}}</p>
+									<!--
 									<p><strong>Money funded:</strong>  $4,748</p>
 									<p class="text-center"><strong>60%</strong></p>
 										<div class="progress">
@@ -61,6 +65,7 @@
 												60%
 											  </div>
 										</div>
+										-->
 									<a class="btn btn-success btn-center" href="/{{project.slug}}">Learn More</a>
 								</div>
 							</div>
@@ -69,7 +74,7 @@
 						
 					</ul>
 			</div>
-			
+			<!--
 			<div class="col-md-4">
 					<h2 class="display-2 text-center">Activity</h2>
 					
@@ -84,7 +89,7 @@
 				</div>
 					
 			</div>
-		
+			-->
 		</div>
 		<hr>
 		<!--
