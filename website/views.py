@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.contrib import messages
-from website.models import Project, Team, Grant, Match
+from website.models import Project, Team, Grant, Match, Resource
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
@@ -168,6 +168,18 @@ class ProjectCreate(CreateView):
         obj.save()
         messages.success(self.request, 'Project added!')
         return HttpResponseRedirect("/"+obj.slug) 
+
+class AddResource(View):
+  
+    def post(self, request, *args, **kwargs):
+        project = Project.objects.get(id=self.request.POST.get('project_id'))
+        
+        Resource.objects.create(user=self.request.user, project=project, link=self.request.POST.get('link'), icon=self.request.POST.get('icon'))
+        messages.success(request, 'Resource Added!')
+        return HttpResponseRedirect("/"+project.slug) 
+  
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
     # def get_context_data(self, **kwargs):
     #     context = super(ProjectCreate, self).get_context_data(**kwargs)

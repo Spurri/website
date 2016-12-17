@@ -34,8 +34,6 @@ class Project(models.Model):
         return self.name
 
 
-
-
 class Team(models.Model):
     project = models.ForeignKey(Project)
     user = models.ForeignKey(User)
@@ -123,8 +121,9 @@ class Grant(models.Model):
 
 
 class Resource(models.Model):
+    user = models.ForeignKey(User, default=1)
     project = models.ForeignKey(Project)
-    icon = models.CharField(max_length=200)
+    icon = models.CharField(max_length=200, blank=True, null=True)
     link = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True) 

@@ -4,7 +4,13 @@
 {% load humanize %}
 {% load gravatar %}
 {% block content %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{% static 'css/fontawesome-iconpicker.min.css' %}" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="../static/css/project.css" />
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <div class="container-fluid">
     <!--   Project   -->
     <div class="row">
@@ -16,15 +22,57 @@
         <br>
         <h2 class="text-center"> {{object.description}}<h2>
         <br>
-        <!--
+        <div class="container">
+          <div class="row">
+            <!-- Button trigger modal -->
+            <button class="btn btn-primary btn-lg"  title="Share this content" data-toggle="modal" data-target="#myModal">
+            <i class="fa fa-plus"></i> Add a Resource
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> Add Resource</h4>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <form action="/add_resource/{{project_id}}" method="post">
+                    {% csrf_token %}
+                      Link:
+                      <input type="hidden" name="project_id" value="{{project.id}}">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                        <input type="link" class="form-control" name="link" placeholder="http://...">
+                      </div>
+                      <br />
+                      Icon:
+                      <div class="input-group">
+                         <input data-placement="bottomRight" name="icon" class="form-control icp icp-auto" value="fa-archive" type="text" />
+                         <span class="input-group-addon"></span>
+                      </div>
+                                </br>
+                      <button type="submit" value="sub" name="sub" class="btn btn-primary"><i class="fa fa-plus"></i> Add Resource</button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
         <div class="col-md-6">
           <ul class="icons list-unstyled list-inline list-center">
-            <li><a href="https://www.github.com" style="icon-decoration: none"><i class="fa fa-github" align="middle"></i></a></li>
-            <li><a href="https://www.twitter.com" style="icon-decoration: none"><i class="fa fa-social-twitter"></i></i></a></li>
-            <li><a href="https://www.facebook.com" style="icon-decoration: none"><i class="fa fa-facebook-official"></i></i></a></li>
-            <li><a href="https://www.reddit.com/r/spurri" style="icon-decoration: none"><i class="fa fa-social-reddit"></i></a></li>
-            <li><a href="https://www.linkedin.com" style="icon-decoration: none"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://mailto:placeholder@emailholder.com" style="text-decoration: none"><i class="fa fa-envelope"></i></a></li>
+          {% for resource in project.resource_set.all %}
+            <li><a href="{{resource.link}}" style="icon-decoration: none" target="_new"><i class="fa {{resource.icon}}" align="middle"></i></a></li>
+            {% endfor %}
+
           </ul>
         </div>
         
@@ -89,136 +137,135 @@
   </div>
 </div>
 </div>
-
 <br>
 {% if object.problem %}
-  <h1>Diagnostic Statement</h1>
-  <table>
-    <tr>
-      <td bgcolor="#EEEEEE">
-        Problem Statement</br>
-        <span>succinct, one-sentence description</span>
-      </td>
-      <td>
-        {{object.problem}}
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="#EEEEEE" >
-        Category</br>
-        <span >broad category of impact</span>
-      </td>
-      <td>
-        {{object.tags}}
-        
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="#EEEEEE">Impacted Groups or Individuals
-        </br>
-        <span>list of those impacted by problem (organize with largest impact top)</span>
-      </td>
-      <td>
-        <ul>
-          {% for group in object.group_set.all %}
-            <li>{{group}}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="#EEEEEE">
-        Benefit of Solving the Problem</br>
-        <span>description of positive potential</span>
-      </td>
-      <td>
-        <ul>
-          {% for benefit in object.benefit_set.all %}
-            <li>{{benefit}}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="#EEEEEE">
-        Known Barriers</br>
-        <span>those things which would prevent success of a future solution</span>
-      </td>
-      <td>
-        <ul>
-          {% for barrier in object.barrier_set.all %}
-            <li>{{barrier}}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="#EEEEEE">
-        Potential Collaborators</br>
-        <span>list of those interested in helping to solve this problem</span>
-      </td>
-      <td>
-        <ul>
-          {% for collaborator in object.collaborator_set.all %}
-            <li>{{collaborator}}</li>
-          {% endfor %}
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="#EEEEEE">
-        Statement POC</br>
-        <span>name and contact info</span>
-      </td>
-      <td>
-        {{object.user.first_name}} {{object.user.last_name}}
-      </td>
-    </tr>
-  </table>
+<h1>Diagnostic Statement</h1>
+<table>
+  <tr>
+    <td bgcolor="#EEEEEE">
+      Problem Statement</br>
+      <span>succinct, one-sentence description</span>
+    </td>
+    <td>
+      {{object.problem}}
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#EEEEEE" >
+      Category</br>
+      <span >broad category of impact</span>
+    </td>
+    <td>
+      {{object.tags}}
+      
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#EEEEEE">Impacted Groups or Individuals
+      </br>
+      <span>list of those impacted by problem (organize with largest impact top)</span>
+    </td>
+    <td>
+      <ul>
+        {% for group in object.group_set.all %}
+          <li>{{group}}</li>
+        {% endfor %}
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#EEEEEE">
+      Benefit of Solving the Problem</br>
+      <span>description of positive potential</span>
+    </td>
+    <td>
+      <ul>
+        {% for benefit in object.benefit_set.all %}
+          <li>{{benefit}}</li>
+        {% endfor %}
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#EEEEEE">
+      Known Barriers</br>
+      <span>those things which would prevent success of a future solution</span>
+    </td>
+    <td>
+      <ul>
+        {% for barrier in object.barrier_set.all %}
+          <li>{{barrier}}</li>
+        {% endfor %}
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#EEEEEE">
+      Potential Collaborators</br>
+      <span>list of those interested in helping to solve this problem</span>
+    </td>
+    <td>
+      <ul>
+        {% for collaborator in object.collaborator_set.all %}
+          <li>{{collaborator}}</li>
+        {% endfor %}
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#EEEEEE">
+      Statement POC</br>
+      <span>name and contact info</span>
+    </td>
+    <td>
+      {{object.user.first_name}} {{object.user.last_name}}
+    </td>
+  </tr>
+</table>
 {% endif %}
 <div class="row">
-  <div class="col-md-7">
-    <h5 class="text-center">Comments</h5>
-    <div id="chatlioWidgetPlaceholder" style="margin: auto; ">
-      {% render_comment_list for object %}
-      {% get_comment_form for object as form %}
-      <form action="{% comment_form_target %}" method="post">
-        {% csrf_token %}
-        <input type="text" id="id_comment" maxlength="3000" name="comment">
-        <input id="id_honeypot" name="honeypot" type="text" style="display:none;"/>
-        {{ form.content_type }}
-        {{ form.object_pk }}
-        {{ form.timestamp }}
-        {{ form.security_hash }}
-        <input type="submit" name="submit" value="Post">
-        <input type="submit" name="preview" value="Preview">
-      </form>
-    </table>
-  </div>
+<div class="col-md-7">
+  <h5 class="text-center">Comments</h5>
+  <div id="chatlioWidgetPlaceholder" style="margin: auto; ">
+    {% render_comment_list for object %}
+    {% get_comment_form for object as form %}
+    <form action="{% comment_form_target %}" method="post">
+      {% csrf_token %}
+      <input type="text" id="id_comment" maxlength="3000" name="comment">
+      <input id="id_honeypot" name="honeypot" type="text" style="display:none;"/>
+      {{ form.content_type }}
+      {{ form.object_pk }}
+      {{ form.timestamp }}
+      {{ form.security_hash }}
+      <input type="submit" name="submit" value="Post">
+      <input type="submit" name="preview" value="Preview">
+    </form>
+  </table>
+</div>
 </div>
 <center>
 <table cellpadding="10" cellspacing="10">
+<tr>
+  <th>&nbsp;</th>
+  <th>Name</th>
+  <th>Solicitation #</th>
+  <th>Amount Max</th>
+  <th>Deadline</th>
+  <th>Score</th>
+</tr>
+{% for match in matches %}
   <tr>
-    <th>&nbsp;</th>
-    <th>Name</th>
-    <th>Solicitation #</th>
-    <th>Amount Max</th>
-    <th>Deadline</th>
-    <th>Score</th>
-  </tr>
-  {% for match in matches %}
-    <tr>
-      <td><a href="/{{match.grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.grant.organization.logo.url}}" width="40"></a></td>
-      <td><a href="/grant/{{match.grant.id}}" target="_new">{{match.grant.name}}</a></td>
-      <td><a href="{{match.grant.link}}" target="_new">{{match.grant.soliciation_number}}</a></td>
-      <td>${{match.grant.amount_max.normalize|intcomma}}</td>
-      <td bgcolor="{% if match.grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
-      {{match.grant.deadline}}
-    </td>
-    <td>
-      {{match.score}}
-    </td>
-  </tr>
+    <td><a href="/{{match.grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.grant.organization.logo.url}}" width="40"></a></td>
+    <td><a href="/grant/{{match.grant.id}}" target="_new">{{match.grant.name}}</a></td>
+    <td><a href="{{match.grant.link}}" target="_new">{{match.grant.soliciation_number}}</a></td>
+    <td>${{match.grant.amount_max.normalize|intcomma}}</td>
+    <td bgcolor="{% if match.grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
+    {{match.grant.deadline}}
+  </td>
+  <td>
+    {{match.score}}
+  </td>
+</tr>
 {% endfor %}
 </table>
 </center>
@@ -268,33 +315,40 @@
 <div class="tabs-panel is-active" id="panel1">
 <h4>Endorsers</h4>
 <div class="media-object stack-for-small">
-  <div class="media-object-section">
-    <img class="thumbnail" src="#">
-  </div>
-  <div class="media-object-section">
-    <h5>Endorser</h5>
-    <p>Message</p>
-  </div>
-  <label>
-    My End
-    <textarea placeholder="None"></textarea>
-  </label>
-  <button class="button">Submit Endorsment</button>
+<div class="media-object-section">
+  <img class="thumbnail" src="#">
+</div>
+<div class="media-object-section">
+  <h5>Endorser</h5>
+  <p>Message</p>
+</div>
+<label>
+  My End
+  <textarea placeholder="None"></textarea>
+</label>
+<button class="button">Submit Endorsment</button>
 </div>
 <div class="tabs-panel" id="panel2">
-  <div class="row medium-up-3 large-up-5">
-    <div class="column">
-      <img class="thumbnail" src="#">
-      <h5>Other Product<small></small></h5>
-      <p></p>
-      <a href="#" class="button hollow tiny expanded">Back to Top</a>
-    </div>
+<div class="row medium-up-3 large-up-5">
+  <div class="column">
+    <img class="thumbnail" src="#">
+    <h5>Other Product<small></small></h5>
+    <p></p>
+    <a href="#" class="button hollow tiny expanded">Back to Top</a>
   </div>
+</div>
 </div>
 </div>
 </div>
 </div>
 -->
 <script src="https://use.fortawesome.com/9db245c7.js"></script>
+        <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/fontawesome-iconpicker.js' %}"></script>
+<script>
+
+           $('.icp-auto').iconpicker();
+        </script>
 Private Views: {{object.private_views}}  Public Views: {{object.public_views}}
 {% endblock %}

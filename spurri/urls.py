@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from website.views import UserProfileDetailView, ProjectCreate, GrantListView, GrantDetailView, ProjectDetailView, AddRating, ProjectListView 
+from website.views import UserProfileDetailView, ProjectCreate, GrantListView, GrantDetailView, ProjectDetailView, AddRating, ProjectListView,AddResource
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import RedirectView
@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^grant/(?P<pk>\d+)/$', GrantDetailView.as_view()),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     url(r"^project/(?P<object_id>\d+)/rate/(?P<score>[\d\-]+)$", login_required(AddRating.as_view()), name="project_rating"),
+    url(r"^add_resource/$", login_required(AddResource.as_view()), name="add_resource"),
     url(r'^comments/posted/$', website.views.comment_posted, name='comment_posted'),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
