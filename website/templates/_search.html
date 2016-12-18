@@ -3,7 +3,7 @@
 			<div>Sort:
 				<div class="btn-group">
 					<button type="submit" class="btn btn-{% if request.GET.sort|default:"-order" == "-order" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-order';">Random</button>
-					<button type="submit" class="btn btn-{% if request.GET.sort == "-created" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-created';">Date</button>
+					<button type="submit" class="btn btn-{% if request.GET.sort == "-created" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-created';">Newest</button>
 					<button type="submit" class="btn btn-{% if request.GET.sort == "-rating_likes" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-rating_likes';">Votes</button>
 					<button type="submit" class="btn btn-{% if request.GET.sort == "-public_views" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-public_views';">Views</button>
 					<button type="submit" class="btn btn-{% if request.GET.sort == "-comment_count" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-comment_count';">Comments</button>
