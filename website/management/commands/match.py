@@ -54,8 +54,9 @@ class Command(BaseCommand):
                     ''.join([collaborator.name+ " " for collaborator in project.collaborator_set.all()])
                     , grant.corpus)
 
+                print project, grant, similarity
                 match, created = Match.objects.update_or_create(
                     project=project, grant=grant, defaults={'score': similarity})
-                print project, grant, similarity
+                
 
         self.stdout.write(self.style.SUCCESS('Successfully matched projects'))
