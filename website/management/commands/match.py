@@ -57,7 +57,7 @@ class Command(BaseCommand):
                 print project, grant, similarity
                 try:
                     match, created = Match.objects.update_or_create(
-                        project=project, grant=grant, defaults={'score': similarity or })
+                        project=project, grant=grant, defaults={'score': similarity or 1})
                 except Exception:
                     print "error"
 
