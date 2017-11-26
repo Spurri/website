@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from website.models import Project, Team, Group, Benefit, Barrier, Collaborator, Grant, Organization, Resource, Match
+from website.models import Project, Team, Group, Benefit, Barrier, Collaborator, Grant, Organization, Resource, Match, Cryptocurrency
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from tagging.models import Tag
@@ -31,6 +31,11 @@ class CollaboratorInline(admin.TabularInline):
     model = Collaborator
 
 
+class CryptocurrencyAdmin(admin.ModelAdmin):
+    list_display = ('name','slug','description','tags','created','modified')
+    search_fields = ('name', 'description','tags')
+    list_per_page = 500
+
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name','slug','description','created','tags','rating_likes','public_views','private_views','funding','goal','paypal','created','modified')
     inlines = [
@@ -60,6 +65,7 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Grant, GrantAdmin)
 admin.site.register(Organization)
 admin.site.register(Resource)
+admin.site.register(Cryptocurrency, CryptocurrencyAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Group, GroupAdmin)

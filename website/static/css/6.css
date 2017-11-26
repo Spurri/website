@@ -1,0 +1,813 @@
+/* glue: 0.13 hash: c2e6695b63 */
+        .s-s-zurcoin,
+.s-s-zephyr,
+.s-s-zcash-gold,
+.s-s-yashcoin,
+.s-s-xplay,
+.s-s-women,
+.s-s-virtacoinplus,
+.s-s-virta-unique-coin,
+.s-s-usde,
+.s-s-tristar-coin,
+.s-s-torcoin-tor,
+.s-s-theresa-may-coin,
+.s-s-tajcoin,
+.s-s-swing,
+.s-s-stakecoin-stcn,
+.s-s-socialcoin-socc,
+.s-s-sling,
+.s-s-scorecoin,
+.s-s-rustbits,
+.s-s-roofs,
+.s-s-reecoin,
+.s-s-redcoin,
+.s-s-real-estate-tokens,
+.s-s-prospectors-gold,
+.s-s-prcoin,
+.s-s-orbitcoin,
+.s-s-oraclechain,
+.s-s-nevacoin,
+.s-s-nebulas-token,
+.s-s-mincoin,
+.s-s-master-swiscoin,
+.s-s-maecenas,
+.s-s-luckchain,
+.s-s-litecoin-ultra,
+.s-s-litecoin-plus,
+.s-s-litebitcoin,
+.s-s-litebar,
+.s-s-link-platform,
+.s-s-levoplus,
+.s-s-leviarcoin,
+.s-s-leacoin,
+.s-s-jinn,
+.s-s-janus,
+.s-s-interzone,
+.s-s-intelligent-trading-tech,
+.s-s-infinitecoin,
+.s-s-iethereum,
+.s-s-honey,
+.s-s-hexx,
+.s-s-harmonycoin-hmc,
+.s-s-grimcoin,
+.s-s-gpu-coin,
+.s-s-globaltoken,
+.s-s-globalboost-y,
+.s-s-geysercoin,
+.s-s-funcoin,
+.s-s-francs,
+.s-s-falcoin,
+.s-s-exchangen,
+.s-s-ethereumcash,
+.s-s-eot-token,
+.s-s-embercoin,
+.s-s-elcoin-el,
+.s-s-ebtc,
+.s-s-ebitcoin-cash,
+.s-s-eaglecoin,
+.s-s-e-coin,
+.s-s-cryptoworldx-token,
+.s-s-cryptojacks,
+.s-s-cryptcoin,
+.s-s-crevacoin,
+.s-s-corethum,
+.s-s-confido,
+.s-s-compucoin,
+.s-s-colossuscoin-v2,
+.s-s-coinonatx,
+.s-s-coin2-1,
+.s-s-coin,
+.s-s-coimatic-2,
+.s-s-carboncoin,
+.s-s-campuscoin,
+.s-s-cachecoin,
+.s-s-c-bit,
+.s-s-bunnycoin,
+.s-s-bumbacoin,
+.s-s-boostcoin,
+.s-s-bitsilver,
+.s-s-bitland,
+.s-s-bitgold,
+.s-s-biteur,
+.s-s-billarycoin,
+.s-s-berncash,
+.s-s-atc-coin,
+.s-s-asiacoin,
+.s-s-arcade-token,
+.s-s-adshares,
+.s-s-adelphoi,
+.s-s-acoin,
+.s-s-808coin,
+.s-s-fedoracoin {
+            background-image: url('/static/cryptocurrency_sprites/6.png');
+            background-repeat: no-repeat;
+        }
+        
+        .s-s-zurcoin {
+            background-position: 0 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-zephyr {
+            background-position: -16px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-zcash-gold {
+            background-position: 0 -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-yashcoin {
+            background-position: -16px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-xplay {
+            background-position: -32px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-women {
+            background-position: -32px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-virtacoinplus {
+            background-position: 0 -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-virta-unique-coin {
+            background-position: -16px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-usde {
+            background-position: -32px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-tristar-coin {
+            background-position: -48px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-torcoin-tor {
+            background-position: -48px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-theresa-may-coin {
+            background-position: -48px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-tajcoin {
+            background-position: 0 -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-swing {
+            background-position: -16px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-stakecoin-stcn {
+            background-position: -32px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-socialcoin-socc {
+            background-position: -48px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-sling {
+            background-position: -64px 0;
+            width: 15px;
+            height: 16px;
+        }
+        
+        .s-s-scorecoin {
+            background-position: -79px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-rustbits {
+            background-position: -79px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-roofs {
+            background-position: -79px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-reecoin {
+            background-position: -79px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-redcoin {
+            background-position: 0 -64px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-real-estate-tokens {
+            background-position: -16px -64px;
+            width: 16px;
+            height: 13px;
+        }
+        
+        .s-s-prospectors-gold {
+            background-position: -95px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-prcoin {
+            background-position: -95px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-orbitcoin {
+            background-position: -95px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-oraclechain {
+            background-position: -95px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-nevacoin {
+            background-position: -95px -64px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-nebulas-token {
+            background-position: 0 -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-mincoin {
+            background-position: -16px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-master-swiscoin {
+            background-position: -32px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-maecenas {
+            background-position: -48px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-luckchain {
+            background-position: -64px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-litecoin-ultra {
+            background-position: -80px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-litecoin-plus {
+            background-position: -111px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-litebitcoin {
+            background-position: -111px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-litebar {
+            background-position: -111px -32px;
+            width: 16px;
+            height: 13px;
+        }
+        
+        .s-s-link-platform {
+            background-position: -111px -45px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-levoplus {
+            background-position: -111px -61px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-leviarcoin {
+            background-position: -111px -77px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-leacoin {
+            background-position: 0 -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-jinn {
+            background-position: -16px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-janus {
+            background-position: -32px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-interzone {
+            background-position: -48px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-intelligent-trading-tech {
+            background-position: -64px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-infinitecoin {
+            background-position: -80px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-iethereum {
+            background-position: -96px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-honey {
+            background-position: -127px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-hexx {
+            background-position: -127px -16px;
+            width: 14px;
+            height: 16px;
+        }
+        
+        .s-s-harmonycoin-hmc {
+            background-position: -127px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-grimcoin {
+            background-position: -127px -48px;
+            width: 12px;
+            height: 16px;
+        }
+        
+        .s-s-gpu-coin {
+            background-position: -127px -64px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-globaltoken {
+            background-position: -127px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-globalboost-y {
+            background-position: -127px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-geysercoin {
+            background-position: 0 -112px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-funcoin {
+            background-position: -16px -112px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-francs {
+            background-position: -32px -112px;
+            width: 16px;
+            height: 14px;
+        }
+        
+        .s-s-falcoin {
+            background-position: -143px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-exchangen {
+            background-position: -143px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-ethereumcash {
+            background-position: -143px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-eot-token {
+            background-position: -143px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-embercoin {
+            background-position: -143px -64px;
+            width: 14px;
+            height: 16px;
+        }
+        
+        .s-s-elcoin-el {
+            background-position: -143px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-ebtc {
+            background-position: -143px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-ebitcoin-cash {
+            background-position: -143px -112px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-eaglecoin {
+            background-position: 0 -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-e-coin {
+            background-position: -16px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-cryptoworldx-token {
+            background-position: -32px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-cryptojacks {
+            background-position: -48px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-cryptcoin {
+            background-position: -64px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-crevacoin {
+            background-position: -80px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-corethum {
+            background-position: -96px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-confido {
+            background-position: -112px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-compucoin {
+            background-position: -128px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-colossuscoin-v2 {
+            background-position: -159px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-coinonatx {
+            background-position: -159px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-coin2-1 {
+            background-position: -159px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-coin {
+            background-position: -159px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-coimatic-2 {
+            background-position: -159px -64px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-carboncoin {
+            background-position: -159px -80px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-campuscoin {
+            background-position: -159px -96px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-cachecoin {
+            background-position: -159px -112px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-c-bit {
+            background-position: -159px -128px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-bunnycoin {
+            background-position: 0 -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-bumbacoin {
+            background-position: -16px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-boostcoin {
+            background-position: -32px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-bitsilver {
+            background-position: -64px -16px;
+            width: 10px;
+            height: 16px;
+        }
+        
+        .s-s-bitland {
+            background-position: -48px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-bitgold {
+            background-position: -64px -32px;
+            width: 10px;
+            height: 16px;
+        }
+        
+        .s-s-biteur {
+            background-position: -64px -48px;
+            width: 10px;
+            height: 16px;
+        }
+        
+        .s-s-billarycoin {
+            background-position: -64px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-berncash {
+            background-position: -80px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-atc-coin {
+            background-position: -96px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-asiacoin {
+            background-position: -112px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-arcade-token {
+            background-position: -128px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-adshares {
+            background-position: -48px -112px;
+            width: 16px;
+            height: 14px;
+        }
+        
+        .s-s-adelphoi {
+            background-position: -144px -144px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-acoin {
+            background-position: -175px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-808coin {
+            background-position: -175px -16px;
+            width: 12px;
+            height: 16px;
+        }
+        
+        .s-s-fedoracoin {
+            background-position: -175px -32px;
+            width: 14px;
+            height: 15px;
+        }
+        
+        @media screen and (-webkit-min-device-pixel-ratio: 1.0), screen and (min--moz-device-pixel-ratio: 1.0), screen and (-o-min-device-pixel-ratio: 100/100), screen and (min-device-pixel-ratio: 1.0), screen and (min-resolution: 1.0dppx) {
+            .s-s-zurcoin,
+    .s-s-zephyr,
+    .s-s-zcash-gold,
+    .s-s-yashcoin,
+    .s-s-xplay,
+    .s-s-women,
+    .s-s-virtacoinplus,
+    .s-s-virta-unique-coin,
+    .s-s-usde,
+    .s-s-tristar-coin,
+    .s-s-torcoin-tor,
+    .s-s-theresa-may-coin,
+    .s-s-tajcoin,
+    .s-s-swing,
+    .s-s-stakecoin-stcn,
+    .s-s-socialcoin-socc,
+    .s-s-sling,
+    .s-s-scorecoin,
+    .s-s-rustbits,
+    .s-s-roofs,
+    .s-s-reecoin,
+    .s-s-redcoin,
+    .s-s-real-estate-tokens,
+    .s-s-prospectors-gold,
+    .s-s-prcoin,
+    .s-s-orbitcoin,
+    .s-s-oraclechain,
+    .s-s-nevacoin,
+    .s-s-nebulas-token,
+    .s-s-mincoin,
+    .s-s-master-swiscoin,
+    .s-s-maecenas,
+    .s-s-luckchain,
+    .s-s-litecoin-ultra,
+    .s-s-litecoin-plus,
+    .s-s-litebitcoin,
+    .s-s-litebar,
+    .s-s-link-platform,
+    .s-s-levoplus,
+    .s-s-leviarcoin,
+    .s-s-leacoin,
+    .s-s-jinn,
+    .s-s-janus,
+    .s-s-interzone,
+    .s-s-intelligent-trading-tech,
+    .s-s-infinitecoin,
+    .s-s-iethereum,
+    .s-s-honey,
+    .s-s-hexx,
+    .s-s-harmonycoin-hmc,
+    .s-s-grimcoin,
+    .s-s-gpu-coin,
+    .s-s-globaltoken,
+    .s-s-globalboost-y,
+    .s-s-geysercoin,
+    .s-s-funcoin,
+    .s-s-francs,
+    .s-s-falcoin,
+    .s-s-exchangen,
+    .s-s-ethereumcash,
+    .s-s-eot-token,
+    .s-s-embercoin,
+    .s-s-elcoin-el,
+    .s-s-ebtc,
+    .s-s-ebitcoin-cash,
+    .s-s-eaglecoin,
+    .s-s-e-coin,
+    .s-s-cryptoworldx-token,
+    .s-s-cryptojacks,
+    .s-s-cryptcoin,
+    .s-s-crevacoin,
+    .s-s-corethum,
+    .s-s-confido,
+    .s-s-compucoin,
+    .s-s-colossuscoin-v2,
+    .s-s-coinonatx,
+    .s-s-coin2-1,
+    .s-s-coin,
+    .s-s-coimatic-2,
+    .s-s-carboncoin,
+    .s-s-campuscoin,
+    .s-s-cachecoin,
+    .s-s-c-bit,
+    .s-s-bunnycoin,
+    .s-s-bumbacoin,
+    .s-s-boostcoin,
+    .s-s-bitsilver,
+    .s-s-bitland,
+    .s-s-bitgold,
+    .s-s-biteur,
+    .s-s-billarycoin,
+    .s-s-berncash,
+    .s-s-atc-coin,
+    .s-s-asiacoin,
+    .s-s-arcade-token,
+    .s-s-adshares,
+    .s-s-adelphoi,
+    .s-s-acoin,
+    .s-s-808coin,
+    .s-s-fedoracoin {
+                background-image: url('/static/cryptocurrency_sprites/6.png');
+                -webkit-background-size: 191px 160px;
+                -moz-background-size: 191px 160px;
+                background-size: 191px 160px;
+            }
+        }
+        

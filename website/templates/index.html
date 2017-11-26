@@ -2,18 +2,7 @@
 {% load staticfiles %}
 {% load comments %}
 {% block content %}
-	<div class="jumbotron text-center">
-		<div class="container">
-			<img style="height:250px" src="{% static 'SpurriNewLogo.png' %}">
-			<h1>Crowdsourced Innovation</h1>
-			<h2 class="display-2 text-center">Connecting innovators with government agencies on terms they love.</h2>
-			<a type="button" class="btn btn-lg btn-default" href="/create">Add a Project</a>
-			<!--
-			<a type="button" class="btn btn-lg btn-primary" href="#" title="coming soon">Start a Challenge</a>
-			-->
-		</div>
-		<h2> {{project_count}} projects | {{user_count}} users | <a href="/grants/">{{grant_count}} grants</a></h2>
-	</div>
+
 	<div class="container-fluid">
 	 {% include '_search.html' %}		
 		<div class="row">

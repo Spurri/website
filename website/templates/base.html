@@ -8,6 +8,24 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="{% static "js/notify.js" %}"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static "css/0.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/1.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/2.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/3.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/4.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/5.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/6.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/7.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/8.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/9.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/10.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/11.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/12.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/13.css" %}" />
+
+
+
     <style type="text/css">
     .jumbotron{
     
@@ -96,6 +114,47 @@
     </style>
   </head>
   <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src='{% static "logo.png" %}'></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/cryptocurrency">Cryptocurrencies <span class="badge">{{cryptocurrencies_count}}</a></li>
+            <li><a href="#about">Projects <span class="badge">{{projects_count}}</span></a>  </li>
+            <li><a href="#contact">Users <span class="badge">{{user_count}}</span> </a></li>
+            <li><a href="#contact">Grants <span class="badge">{{grant_count}}</span></a></li>
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">About</a></li>
+            <li><a href="../navbar-static-top/">Contact</a></li>
+
+          </ul>
+          <div class="nav navbar-nav pull-right">
+          {% if user.is_authenticated %}
+            <span ><a href="/profile/{{user.username}}">{{user.username}}</a> </span>
+            <a class="btn btn-info navbar-btn btn-sm" href="{% url 'account_logout' %}">Logout</a>
+          {% else %}
+            <a class="btn btn-default navbar-btn btn-sm" href="{% url 'account_login' %}">Sign In</a>
+            <a class="btn btn-info navbar-btn btn-sm" href="{% url 'account_signup' %}">Sign Up</a>
+          {% endif %}
+        </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <!--/.nav-collapse
     <nav class="navbar navbar-default navbar-static-top navbar-inverse">
       <div class="container">
         <ul class="nav navbar-nav">
@@ -109,7 +168,7 @@
           <li>
             <a href="#" title="coming soon" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Start a Challenge</a>
           </li>
-          -->
+         
         </ul>
         <div class="nav navbar-nav pull-right">
           {% if user.is_authenticated %}
@@ -121,7 +180,15 @@
           {% endif %}
         </div>
       </nav>
+
+       -->
+
+
+
       {% block content %}{% endblock %}
+      
+
+
       {% if messages %}
         {% for message in messages %}
           <script> $.notify("{{ message }}",{ position: 'top center', className: "{{message.level_tag }}" }); </script>
@@ -192,5 +259,8 @@ Follow @Spurri</a>
   ga('send', 'pageview');
 
 </script>
+
+<script id="cid0020000172413408368" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 200px;height: 300px;">{"handle":"spurri2","arch":"js","styles":{"a":"CC0000","b":100,"c":"FFFFFF","d":"FFFFFF","k":"CC0000","l":"CC0000","m":"CC0000","n":"FFFFFF","p":"10","q":"CC0000","r":100,"pos":"br","cv":1,"cvbg":"CC0000","cvw":75,"cvh":30}}</script>
+
     </body>
   </html>

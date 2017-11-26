@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from website.views import UserProfileDetailView, ProjectCreate, GrantListView, GrantDetailView, ProjectDetailView, AddRating, ProjectListView,AddResource
+from website.views import *
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import RedirectView
@@ -22,6 +22,9 @@ urlpatterns = [
     url(r'^profile/(?P<slug>[^/]+)/$', UserProfileDetailView.as_view(), name="profile"),
     url(r'^list/$', ProjectListView.as_view()),
     url(r'^grants/$', GrantListView.as_view()),
+    url(r'^cryptocurrency/(?P<slug>[^/]+)/$', CryptocurrencyDetailView.as_view()),
+    url(r'^cryptocurrency/$', CryptocurrencyListView.as_view()),
+
     url(r'^grant/(?P<pk>\d+)/$', GrantDetailView.as_view()),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     url(r"^project/(?P<object_id>\d+)/rate/(?P<score>[\d\-]+)$", login_required(AddRating.as_view()), name="project_rating"),
@@ -29,6 +32,7 @@ urlpatterns = [
     url(r'^comments/posted/$', website.views.comment_posted, name='comment_posted'),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
+    url(r'^emoji/', include('emoji.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

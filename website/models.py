@@ -8,6 +8,76 @@ from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from datetime import date
 
+
+class Cryptocurrency(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True, default="-")
+    symbol = models.CharField(max_length=200)
+    description = models.TextField()
+    market_cap = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    chart_24h = models.TextField()
+    price = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    supply = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    volume_24h = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    percent_1h = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    percent_24h = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    percent_7d = models.DecimalField(max_digits=5, decimal_places=2, default=0) 
+    donation_count = models.IntegerField(default=0)
+    donation_total = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    donation_wallet = models.TextField()
+    percent_locked = models.DecimalField(max_digits=4, decimal_places=2, default=0) 
+    masternode_count = models.IntegerField(default=0)
+    masternode_cost_coins = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    masternode_cost_dollars = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    masternode_roi_days = models.IntegerField(default=0)
+    masternode_coins_daily = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    masternode_roi_yearly_percent = models.DecimalField(max_digits=21, decimal_places=2, default=0) 
+    masternode_dollars_daily = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    masternode_dollars_weekly = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    masternode_dollars_monthly = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    masternode_dollars_yearly = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    algorithm = models.CharField(max_length=200)
+    block_count = models.IntegerField(default=0)
+    proof_type = models.CharField(max_length=200)
+    pool1 = models.URLField(blank=True, null=True)
+    pool2 = models.URLField(blank=True, null=True)
+    pool3 = models.URLField(blank=True, null=True)
+    emoji = models.URLField(blank=True, null=True)
+    exchange1 = models.URLField(blank=True, null=True)
+    exchange2 = models.URLField(blank=True, null=True)
+    exchange3 = models.URLField(blank=True, null=True)
+    social1 = models.URLField(blank=True, null=True)
+    social2 = models.URLField(blank=True, null=True)
+    social3 = models.URLField(blank=True, null=True)
+    block_explorer = models.URLField(blank=True, null=True)
+    source_code = models.URLField(blank=True, null=True)
+    issue_count = models.URLField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
+    logo_image = models.ImageField(upload_to="logos", blank=True, null=True)
+    tags = TagField()
+    logo_word = models.ImageField(upload_to="words", blank=True, null=True)
+    paper_wallet = models.URLField(blank=True, null=True)
+    white_paper = models.URLField(blank=True, null=True)
+    multi_wallet = models.URLField(blank=True, null=True)
+    mobile_wallet = models.URLField(blank=True, null=True)
+    related_to = models.CharField(max_length=200, blank=True, null=True)
+    windows_wallet = models.URLField(blank=True, null=True)
+    mac_wallet = models.URLField(blank=True, null=True)
+    linux_wallet = models.URLField(blank=True, null=True)
+    forum = models.URLField(blank=True, null=True)
+    chat = models.URLField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+
+    def get_absolute_url(self):
+        return "/"+str(self.slug)
+
+    def __unicode__(self):
+        return self.name
+
+
+
 class Project(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=200)

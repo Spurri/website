@@ -8,15 +8,20 @@ from django.shortcuts import redirect
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.contrib import messages
-from website.models import Project, Team, Grant, Match, Resource
+from website.models import *
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from updown.views import AddRatingFromModel
 import json
 from django_comments.models import Comment
 from django.db.models import Q
 from django.db.models import Count
-
-
+import django_tables2 as tables
+from django_filters import FilterSet
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+from django_tables2 import RequestConfig
+from django.utils.html import format_html
+from django.template.defaultfilters import slugify
 
 def comment_posted( request ):
     if request.GET['c']:
@@ -37,6 +42,7 @@ def index(request, template="index.html"):
         'projects': projects[0:15],
         'user_count': User.objects.all().count(),
         'grant_count': Grant.objects.all().count(),
+        'cryptocurrencies_count': Cryptocurrency.objects.all().count(),
     }
     return render_to_response(template, context, context_instance=RequestContext(request))
 
@@ -64,6 +70,52 @@ class ProjectListView(ListView):
         if self.request.GET.get('q'):
             object_list = object_list.filter(Q(name__icontains=self.request.GET.get('q')) | Q(description__icontains=self.request.GET.get('q')) | Q(tags__icontains=self.request.GET.get('q')) )
         return object_list
+
+
+class CryptocurrencyFilter(FilterSet):
+    class Meta:
+        model = Cryptocurrency
+        fields = ['symbol', 'name']
+
+
+class CryptoTable(tables.Table):
+    class Meta:
+        model = Cryptocurrency
+        exclude = ['id','slug','symbol','description']
+
+        name = tables.Column()
+
+    def render_name(self, value):
+        return format_html('<div class="s-s-{} currency-logo-sprite"></div><span><a href="/cryptocurrency/{}">{}</a></span>', slugify(value), slugify(value), value )
+
+
+class CryptocurrencyListView(SingleTableMixin, FilterView):
+    model = Cryptocurrency
+    template_name = 'cryptocurrency_list.html'
+    context_object_name = "cryptocurrencies"
+    paginate_by = 100 
+    table_class = CryptoTable
+    filterset_class = CryptocurrencyFilter
+    
+
+    def get_context_data(self, **kwargs):
+            context = super(CryptocurrencyListView, self).get_context_data(**kwargs)
+            table = CryptoTable(Cryptocurrency.objects.all(), order_by="-market_cap")
+            RequestConfig(self.request).configure(table)
+            table.paginate(page=self.request.GET.get('page', 1), per_page=100)
+            context['table'] = table     
+            return context
+
+class CryptocurrencyDetailView(DetailView):
+    model = Cryptocurrency
+    slug_field = "slug"     
+    context_object_name = "cryptocurrency"     
+    template_name = "cryptocurrency_detail.html"
+    
+    # def get_context_data(self, **kwargs):
+    #         context = super(GrantDetailView, self).get_context_data(**kwargs)
+    #         context['matches'] = Match.objects.filter(grant=self.get_object()).order_by('-score')   
+    #         return context
 
 
 class GrantListView(ListView):

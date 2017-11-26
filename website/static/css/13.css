@@ -1,0 +1,173 @@
+/* glue: 0.13 hash: 7896d9cfaa */
+        .s-s-xtd-coin,
+.s-s-ugain,
+.s-s-tyrocoin,
+.s-s-turbocoin,
+.s-s-teamup,
+.s-s-tattoocoin-limited,
+.s-s-swisscoin,
+.s-s-sportscoin,
+.s-s-richcoin,
+.s-s-prismchain,
+.s-s-peepcoin,
+.s-s-microcoin,
+.s-s-mavro,
+.s-s-linkedcoin,
+.s-s-kexcoin,
+.s-s-excelcoin,
+.s-s-etherx,
+.s-s-clinton,
+.s-s-axfunds,
+.s-s-amis {
+            background-image: url('/static/cryptocurrency_sprites/13.png');
+            background-repeat: no-repeat;
+        }
+        
+        .s-s-xtd-coin {
+            background-position: 0 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-ugain {
+            background-position: -16px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-tyrocoin {
+            background-position: 0 -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-turbocoin {
+            background-position: -16px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-teamup {
+            background-position: -32px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-tattoocoin-limited {
+            background-position: -32px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-swisscoin {
+            background-position: 0 -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-sportscoin {
+            background-position: -16px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-richcoin {
+            background-position: -32px -32px;
+            width: 15px;
+            height: 16px;
+        }
+        
+        .s-s-prismchain {
+            background-position: -48px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-peepcoin {
+            background-position: -48px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-microcoin {
+            background-position: -48px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-mavro {
+            background-position: 0 -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-linkedcoin {
+            background-position: -16px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-kexcoin {
+            background-position: -32px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-excelcoin {
+            background-position: -48px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-etherx {
+            background-position: -64px 0;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-clinton {
+            background-position: -64px -16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-axfunds {
+            background-position: -64px -32px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .s-s-amis {
+            background-position: -64px -48px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        @media screen and (-webkit-min-device-pixel-ratio: 1.0), screen and (min--moz-device-pixel-ratio: 1.0), screen and (-o-min-device-pixel-ratio: 100/100), screen and (min-device-pixel-ratio: 1.0), screen and (min-resolution: 1.0dppx) {
+            .s-s-xtd-coin,
+    .s-s-ugain,
+    .s-s-tyrocoin,
+    .s-s-turbocoin,
+    .s-s-teamup,
+    .s-s-tattoocoin-limited,
+    .s-s-swisscoin,
+    .s-s-sportscoin,
+    .s-s-richcoin,
+    .s-s-prismchain,
+    .s-s-peepcoin,
+    .s-s-microcoin,
+    .s-s-mavro,
+    .s-s-linkedcoin,
+    .s-s-kexcoin,
+    .s-s-excelcoin,
+    .s-s-etherx,
+    .s-s-clinton,
+    .s-s-axfunds,
+    .s-s-amis {
+                background-image: url('/static/cryptocurrency_sprites/13.png');
+                -webkit-background-size: 80px 64px;
+                -moz-background-size: 80px 64px;
+                background-size: 80px 64px;
+            }
+        }
+        
