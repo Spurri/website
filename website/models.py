@@ -9,20 +9,26 @@ from django.core.mail import send_mail
 from datetime import date
 
 
+
 class Cryptocurrency(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, default="-")
     symbol = models.CharField(max_length=200)
     description = models.TextField()
-    market_cap = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    market_cap_usd = models.DecimalField(max_digits=21, decimal_places=0, default=0)
     chart_24h = models.TextField()
-    price = models.DecimalField(max_digits=21, decimal_places=0, default=0)
-    supply = models.DecimalField(max_digits=21, decimal_places=0, default=0)
-    volume_24h = models.DecimalField(max_digits=21, decimal_places=0, default=0)
-    percent_1h = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    percent_24h = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    percent_7d = models.DecimalField(max_digits=5, decimal_places=2, default=0) 
+    price_usd = models.DecimalField(max_digits=21, decimal_places=12, default=0)
+    price_btc = models.DecimalField(max_digits=21, decimal_places=9, default=0)
+    available_supply = models.DecimalField(max_digits=21, decimal_places=0, default=0)
+    total_supply = models.DecimalField(max_digits=21, decimal_places=2, default=0)
+    max_supply = models.DecimalField(max_digits=21, decimal_places=2, default=0)
+    volume_usd_24h = models.DecimalField(max_digits=21, decimal_places=8, default=0)
+    percent_change_1h = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    percent_change_24h = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    percent_change_7d = models.DecimalField(max_digits=6, decimal_places=2, default=0) 
+    last_updated = models.DateTimeField()
     donation_count = models.IntegerField(default=0)
+    rank = models.IntegerField(default=0)
     donation_total = models.DecimalField(max_digits=21, decimal_places=0, default=0)
     donation_wallet = models.TextField()
     percent_locked = models.DecimalField(max_digits=4, decimal_places=2, default=0) 
