@@ -81,8 +81,9 @@ class Cryptocurrency(models.Model):
 
     def __unicode__(self):
         return self.name
-
-
+    
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Cryptocurrency._meta.fields]
 
 class Project(models.Model):
     user = models.ForeignKey(User)
