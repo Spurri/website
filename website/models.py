@@ -85,6 +85,12 @@ class Cryptocurrency(models.Model):
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Cryptocurrency._meta.fields]
 
+# milestone
+
+# name 
+# address
+# completed
+
 class Project(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=200)
