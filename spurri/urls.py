@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^comments/', include('django_comments.urls')),
     url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
     url(r'^emoji/', include('emoji.urls')),
+    url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: "))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
