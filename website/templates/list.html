@@ -6,7 +6,9 @@
 	<div class="container-fluid">
 		 {% include '_search.html' %}
 		<div class="row">
+			{% if projects %}
 			<ul class="list-unstyled">
+
 				{% for project in projects %}
 					<li>
 						<div class="col-md-4 col-xs-6 text-center">
@@ -44,6 +46,9 @@
 					</li>
 				{% endfor %}
 				</ul>
+				{% else %}
+				<h1> No projects found matching your search: {{request.GET.q}}</h1>
+				{% endif %}
 			</div>
 			</div>
 
