@@ -22,6 +22,7 @@ from django_tables2.views import SingleTableMixin
 from django_tables2 import RequestConfig
 from django.utils.html import format_html
 from django.template.defaultfilters import slugify
+import requests
 
 def comment_posted( request ):
     if request.GET['c']:
@@ -112,10 +113,19 @@ class CryptocurrencyDetailView(DetailView):
     context_object_name = "cryptocurrency"     
     template_name = "cryptocurrency_detail.html"
     
-    # def get_context_data(self, **kwargs):
-    #         context = super(GrantDetailView, self).get_context_data(**kwargs)
-    #         context['matches'] = Match.objects.filter(grant=self.get_object()).order_by('-score')   
-    #         return context
+    def get_context_data(self, **kwargs):
+        context = super(CryptocurrencyDetailView, self).get_context_data(**kwargs)
+        
+        r1=requests.get("http://interzone.space:8080/ext/getbalance/1H18CUy3jN5Xjvn9Uyo7goxup6cEM17prH")
+
+        context['goal1'] = r1.text
+
+        r2=requests.get("http://interzone.space:8080/ext/getbalance/17C8JEz4xmQSGCwzGLZQCN6tz7J7vv3ksF")
+
+        context['goal2'] = r2.text
+        return context
+
+
 
 
 class GrantListView(ListView):
