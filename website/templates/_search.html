@@ -1,5 +1,10 @@
+	<form action="/create">
+    <input type="submit" value="Add a Project" class="btn btn-info navbar-btn btn-sm"/>
+</form>	
 <form action="/list/" method="get">
 			<center>
+
+		
 			<div>Sort:
 				<div class="btn-group">
 					<button type="submit" class="btn btn-{% if request.GET.sort|default:"-order" == "-order" %}success{% else %}default{% endif %} btn-filter" onclick="document.getElementById('sort').value = '-order';">Random</button>
