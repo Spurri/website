@@ -3,11 +3,14 @@ from website.models import Cryptocurrency
 import requests
 import datetime
 import decimal
+from django.core.mail import send_mail
+import os
 
 class Command(BaseCommand):
-    help = 'Reorders'
 
     def handle(self, *args, **options):
+
+        new_coin_list = ""
 
         r = requests.get('https://api.coinmarketcap.com/v1/ticker/?limit=0')
         for coin in r.json():
@@ -28,9 +31,22 @@ class Command(BaseCommand):
                         'percent_change_1h': coin['percent_change_1h'] or 0,
                         'percent_change_24h': coin['percent_change_24h'] or 0,
                         'percent_change_7d': coin['percent_change_7d'] or 0,
-                        'last_updated': datetime.datetime.fromtimestamp(float(coin['last_updated'])) 
+                        'last_updated': datetime.datetime.fromtimestamp(float(coin['last_updated'] or 0)) 
                         },
                 )
+                if created:
+                    new_coin_list += obj.name + "\n"
+
                 print obj,created
             except Exception as error:
-                print coin, error, decimal.Decimal(coin['market_cap_usd']).normalize()
+                print coin, error
+
+        if len(new_coin_list) > 0:
+
+            send_mail(
+                'Spurri Cryptocurrency Report',
+                "New coins added to CoinMarketCap:\n" + new_coin_list,
+                'info@spurri.com',
+                [os.environ.get('EMAIL_TO', 'info@spurri.com'),],
+                fail_silently=False,
+            )
