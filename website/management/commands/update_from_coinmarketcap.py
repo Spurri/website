@@ -41,7 +41,7 @@ class Command(BaseCommand):
             except Exception as error:
                 print coin, error
 
-        if len(new_coin_list) > 0:
+        if new_coin_list:
 
             send_mail(
                 'Spurri Cryptocurrency Report',
