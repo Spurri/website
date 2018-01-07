@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from website.models import Project, Team, Group, Benefit, Barrier, Collaborator, Grant, Organization, Resource, Match, Cryptocurrency
+from website.models import Project, Team, Group, Benefit, Barrier, Collaborator, Grant, Organization, Resource, Match, Cryptocurrency, Goal
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from tagging.models import Tag
@@ -65,6 +65,7 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Grant, GrantAdmin)
 admin.site.register(Organization)
 admin.site.register(Resource)
+admin.site.register(Goal)
 admin.site.register(Cryptocurrency, CryptocurrencyAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Team, TeamAdmin)

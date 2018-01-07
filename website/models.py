@@ -44,6 +44,7 @@ class Cryptocurrency(models.Model):
     masternode_dollars_yearly = models.DecimalField(max_digits=21, decimal_places=0, default=0)
     algorithm = models.CharField(max_length=200)
     block_count = models.IntegerField(default=0)
+    block_time_seconds = models.IntegerField(default=0)
     proof_type = models.CharField(max_length=200)
     pool1 = models.URLField(blank=True, null=True)
     pool2 = models.URLField(blank=True, null=True)
@@ -56,6 +57,9 @@ class Cryptocurrency(models.Model):
     social2 = models.URLField(blank=True, null=True)
     social3 = models.URLField(blank=True, null=True)
     block_explorer = models.URLField(blank=True, null=True)
+    block_explorer_balance_api = models.URLField(blank=True, null=True)
+    block_explorer_balance_url = models.URLField(blank=True, null=True)
+    block_explorer_balance_in_satoshis = models.BooleanField(default=False)
     source_code = models.URLField(blank=True, null=True)
     issue_count = models.URLField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
@@ -76,6 +80,9 @@ class Cryptocurrency(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
 
+    class Meta:
+        ordering = ['name',]
+
     def get_absolute_url(self):
         return "/"+str(self.slug)
 
@@ -85,11 +92,24 @@ class Cryptocurrency(models.Model):
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Cryptocurrency._meta.fields]
 
-# milestone
 
-# name 
-# address
-# completed
+class Goal(models.Model):
+    number = models.IntegerField(default=0)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    target_amount = models.DecimalField(max_digits=21, decimal_places=9, default=0)
+    cryptocurrency = models.ForeignKey(Cryptocurrency)
+    current_amount = models.DecimalField(max_digits=21, decimal_places=9, default=0)
+    target_cryptocurrency = models.ForeignKey(Cryptocurrency, related_name="target_cryptocurrency", blank=True, null=True)
+    wallet_address = models.CharField(max_length=255)
+    status = models.CharField(max_length=255)
+    result = models.CharField(max_length=255, blank=True, null=True)
+    contribution_count = models.IntegerField(default=0)
+    updated = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+
 
 class Project(models.Model):
     user = models.ForeignKey(User)

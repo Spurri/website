@@ -1,11 +1,19 @@
 {% extends "base.html" %} 
 {% load bootstrap3 %} 
 {% load staticfiles %} 
-{% load comments %} 
+{% load comments %}
+{% load replace %}
+{% block extra_head %}
+
+    <link rel="icon" type="image/png" href="https://files.coinmarketcap.com/static/img/coins/16x16/{{ object.slug }}.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="https://files.coinmarketcap.com/static/img/coins/32x32/{{ object.slug }}.png" sizes="32x32"/>
+{% endblock %}
+{% block title %}{{ object }} {% endblock %}
+
 {% block content %}
+
 </br>
-</br>
-</br>
+
 <style>
 body {
     margin: 30px 0px;
@@ -35,12 +43,8 @@ body {
 
 </style>
 
-
-
-
 <div>
 	<center>
-	Spurri aims to join innovative projects with funds through grants and cryptocurrency.  We're a work in progress!
     <table class="maintable">
         <tr>
             <td width="200px;" style="padding: 15px;">
@@ -56,9 +60,39 @@ body {
             <td width="500px;" style="padding: 15px;" valign="top">
             	
             	<center><h1>{{ object }} Goals</h1></center>
+                {% for goal in cryptocurrency.goal_set.all %}
+                
+
+                    <div style="border: 2px solid black; border-radius: 5px; padding:20px; ">
+                    <!-- Progress bar -->
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">
+                            <h6 class="panel-title">#{{goal.number}} {{goal.title}}</h6>
+                        </div>
+                        <div class="panel-body">
+                            {{goal.description}}
+                        </div>
+                        <div class="">
+                            <div class="row">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {% widthratio goal.current_amount goal.target_amount 100 %}%;">
+                                        <span class="sr-only">{% widthratio goal.current_amount goal.target_amount 100 %}% Complete</span>
+                                    </div>
+                                    <span class="progress-type">{{goal.current_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</span>
+                                    <span class="progress-completed">{% widthratio goal.current_amount goal.target_amount 100 %}%</span>
+                                </div>
+                                Goal Wallet Address: {{goal.target_cryptocurrency.symbol}}: <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new"> {{goal.wallet_address}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                {% endfor %}
+
+
             	{% if object.name == "Interzone" %}
 
-            	<div style="border: 2px solid black; border-radius: 5px; padding:20px; ">
+
+            <div style="border: 2px solid black; border-radius: 5px; padding:20px; ">
                 <!-- Progress bar -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
@@ -76,12 +110,11 @@ body {
                                 <span class="progress-type">{{goal1}} ITZ / 1000 ITZ</span>
                                 <span class="progress-completed">{% widthratio goal1 1000 100 %}%</span>
                             </div>
-                            Goal Wallet Address: <a href="http://interzone.space:8080/address/1H18CUy3jN5Xjvn9Uyo7goxup6cEM17prH" target="new">1H18CUy3jN5Xjvn9Uyo7goxup6cEM17prH</a>
+                            Goal Wallet Address: <a href="http://explorer.interzone.space/address/1H18CUy3jN5Xjvn9Uyo7goxup6cEM17prH" target="new">1H18CUy3jN5Xjvn9Uyo7goxup6cEM17prH</a>
                         </div>
                     </div>
                 </div>
-            	</div>
-
+                </div>
 
 
             	<div style="border: 2px solid black; border-radius: 5px; padding:20px; ">
@@ -104,7 +137,7 @@ body {
 
                                
                             </div>
-                            Goal Wallet Address: <a href="http://interzone.space:8080/address/17C8JEz4xmQSGCwzGLZQCN6tz7J7vv3ksF" target="new">17C8JEz4xmQSGCwzGLZQCN6tz7J7vv3ksF</a>
+                            Goal Wallet Address: <a href="http://explorer.interzone.space/address/17C8JEz4xmQSGCwzGLZQCN6tz7J7vv3ksF" target="new">17C8JEz4xmQSGCwzGLZQCN6tz7J7vv3ksF</a>
                         </div>
                     </div>
                 </div>
