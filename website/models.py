@@ -102,7 +102,7 @@ class Goal(models.Model):
     current_amount = models.DecimalField(max_digits=21, decimal_places=9, default=0)
     target_cryptocurrency = models.ForeignKey(Cryptocurrency, related_name="target_cryptocurrency", blank=True, null=True)
     wallet_address = models.CharField(max_length=255)
-    status = models.CharField(max_length=255)
+    #status = models.CharField(max_length=255)
     result = models.CharField(max_length=255, blank=True, null=True)
     contribution_count = models.IntegerField(default=0)
     updated = models.DateTimeField()
