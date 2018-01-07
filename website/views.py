@@ -117,7 +117,7 @@ class CryptocurrencyDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CryptocurrencyDetailView, self).get_context_data(**kwargs)
 
-        for goal in Goal.objects.filter(cryptocurrency=self.object).exclude(status="Complete"):
+        for goal in Goal.objects.filter(cryptocurrency=self.object).exclude(result="Complete"):
             time_threshold = datetime.now() - timedelta(seconds=goal.target_cryptocurrency.block_time_seconds)
             if time_threshold > goal.updated:
 
