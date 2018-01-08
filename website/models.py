@@ -110,7 +110,7 @@ class Goal(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['number',]
+        ordering = ['-number',]
 
 
 class Project(models.Model):
