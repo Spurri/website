@@ -120,7 +120,7 @@ body {
                                     <span class="progress-type">{{goal.current_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</span>
                                     <span class="progress-completed">{% widthratio goal.current_amount goal.target_amount 100 %}%</span>
                                 </div>
-                                Goal Wallet Address: {{goal.target_cryptocurrency.symbol}}: <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new"> {{goal.wallet_address}}</a>
+                                Goal Address: {{goal.target_cryptocurrency.symbol}}: <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new"> {{goal.wallet_address}}</a>
                             </div>
                         </div>
                         {% if goal.result %}
