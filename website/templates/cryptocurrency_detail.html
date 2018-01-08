@@ -90,19 +90,11 @@ body {
 	<center>
     <table class="maintable">
         <tr>
-            <td width="200px;" style="padding: 15px;">
-                <table border="1">
-                    {% for name, value in cryptocurrency.get_fields %} {% if value %}
-                    <tr>
-                        <td>{{ name }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
-                    {% endif %} {% endfor %}
-                </table>
-            </td>
             <td width="500px;" style="padding: 15px;" valign="top">
-            	
-            	<center><h1>{{ object }} Goals</h1></center>
+
+
+            
+              <center><h1>{{ object }} Goals</h1></center>
                 {% for goal in cryptocurrency.goal_set.all %}
                 
 
@@ -140,6 +132,24 @@ body {
                     </div>
                 {% endfor %}
 
+
+              
+
+
+
+          
+
+
+            </td>
+            <td width="200px;" style="padding: 15px;" valign="top">
+                  <table border="1">
+                    {% for name, value in cryptocurrency.get_fields %} {% if value %}
+                    <tr>
+                        <td>{{ name }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endif %} {% endfor %}
+                </table>
             </td>
         </tr>
     </table>
