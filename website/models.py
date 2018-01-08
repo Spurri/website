@@ -109,6 +109,8 @@ class Goal(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['number',]
 
 
 class Project(models.Model):
