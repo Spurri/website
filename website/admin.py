@@ -8,6 +8,12 @@ from tagging.models import Tag
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('project','name')
 
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ('id','cryptocurrency','number','title','description','target_cryptocurrency','current_amount','target_amount','wallet_address','status','result','contribution_count','updated','created','modified')
+
+
+
+
 class BenefitAdmin(admin.ModelAdmin):
     list_display = ('project','name')
 
@@ -65,7 +71,7 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Grant, GrantAdmin)
 admin.site.register(Organization)
 admin.site.register(Resource)
-admin.site.register(Goal)
+admin.site.register(Goal, GoalAdmin)
 admin.site.register(Cryptocurrency, CryptocurrencyAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Team, TeamAdmin)
