@@ -99,8 +99,8 @@ body {
                 
 
                     <div style="border: 2px solid black; border-radius: 5px; padding:20px; margin-bottom:15px; position: relative;">
-                                                {% if goal.status %}
-                        <div class="ribbon"><span>{{goal.status}}</span></div>
+                        {% if goal.status %}
+                            <div class="ribbon"><span>{{goal.status}}</span></div>
                         {% endif %}
 
                     <!-- Progress bar -->
@@ -113,6 +113,16 @@ body {
                         </div>
                         <div class="">
                             <div class="row">
+                                {% if goal.status == "Complete" %}
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                        <span class="sr-only">100% Complete</span>
+                                    </div>
+                                    <span class="progress-type">{{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</span>
+                                    <span class="progress-completed">100%</span>
+                                </div>
+                                {% else %}
+
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {% widthratio goal.current_amount goal.target_amount 100 %}%;">
                                         <span class="sr-only">{% widthratio goal.current_amount goal.target_amount 100 %}% Complete</span>
@@ -120,6 +130,8 @@ body {
                                     <span class="progress-type">{{goal.current_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</span>
                                     <span class="progress-completed">{% widthratio goal.current_amount goal.target_amount 100 %}%</span>
                                 </div>
+
+                                {% endif %}
                                 Goal Address: {{goal.target_cryptocurrency.symbol}}: <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new"> {{goal.wallet_address}}</a>
                             </div>
                         </div>
