@@ -109,7 +109,7 @@ body {
                             <h6 class="panel-title">#{{goal.number}} {{goal.title}}</h6>
                         </div>
                         <div class="panel-body">
-                            {{goal.description|urlize}}
+                            {{goal.description|urlizetrunc:30}}
                         </div>
                         <div class="">
                             <div class="row">
