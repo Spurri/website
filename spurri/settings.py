@@ -221,6 +221,13 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
