@@ -123,21 +123,18 @@ class CryptocurrencyDetailView(DetailView):
 
                 url = goal.target_cryptocurrency.block_explorer_balance_api % goal.wallet_address
                 r1=requests.get(url)
-                if goal.target_cryptocurrency.block_explorer_balance_in_satoshis:
-                    goal.current_amount = int(r1.text) * .00000001
-                else:
-                    goal.current_amount = r1.text 
+                try:
+                    if goal.target_cryptocurrency.block_explorer_balance_in_satoshis:
+                        goal.current_amount = int(r1.text) * .00000001
+                    else:
+                        goal.current_amount = r1.text 
+                except:
+                    goal.current_amount = 0
 
                 goal.updated = datetime.now()
                 goal.save()
 
-        r1=requests.get("http://interzone.space:8080/ext/getbalance/1H18CUy3jN5Xjvn9Uyo7goxup6cEM17prH")
 
-        context['goal1'] = r1.text
-
-        r2=requests.get("http://interzone.space:8080/ext/getbalance/17C8JEz4xmQSGCwzGLZQCN6tz7J7vv3ksF")
-
-        context['goal2'] = r2.text
 
         return context
 
