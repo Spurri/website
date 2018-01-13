@@ -31,9 +31,11 @@ urlpatterns = [
     url(r"^add_resource/$", login_required(AddResource.as_view()), name="add_resource"),
     url(r'^comments/posted/$', website.views.comment_posted, name='comment_posted'),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^fly_eye/$', FlyEyeView.as_view()),
     url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
     url(r'^emoji/', include('emoji.urls')),
-    url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: "))
+    url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ")),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -90,6 +90,10 @@ class CryptoTable(tables.Table):
     def render_name(self, value):
         return format_html('<div class="s-s-{} currency-logo-sprite"></div><span><a href="/cryptocurrency/{}">{}</a></span>', slugify(value), slugify(value), value )
 
+class FlyEyeView(ListView):
+    model = Cryptocurrency
+    template_name = 'fly_eye.html'  
+
 
 class CryptocurrencyListView(SingleTableMixin, FilterView):
     model = Cryptocurrency
