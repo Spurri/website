@@ -9,6 +9,7 @@ admin.autodiscover()
 from django.conf import settings
 from updown.views import AddRatingFromModel
 from django.conf.urls.static import static
+from django.views.decorators.cache import cache_page
 
 import website.views
 
@@ -22,8 +23,8 @@ urlpatterns = [
     url(r'^profile/(?P<slug>[^/]+)/$', UserProfileDetailView.as_view(), name="profile"),
     url(r'^list/$', ProjectListView.as_view()),
     url(r'^grants/$', GrantListView.as_view()),
-    url(r'^cryptocurrency/(?P<slug>[^/]+)/$', CryptocurrencyDetailView.as_view()),
-    url(r'^cryptocurrency/$', CryptocurrencyListView.as_view()),
+    url(r'^cryptocurrency/(?P<slug>[^/]+)/$', cache_page(60*60)(CryptocurrencyDetailView.as_view())),
+    url(r'^cryptocurrency/$', cache_page(60*60)(CryptocurrencyListView.as_view())),
 
     url(r'^grant/(?P<pk>\d+)/$', GrantDetailView.as_view()),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
