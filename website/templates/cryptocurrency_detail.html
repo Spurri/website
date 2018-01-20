@@ -96,7 +96,7 @@ body {
             
               <center><h1>{{ object }} Goals</h1></center>
                 {% for goal in cryptocurrency.goal_set.all %}
-                {% if goal goal.target_cryptocurrency.symbol == "BTC" %}
+                {% if goal.target_cryptocurrency.symbol == "BTC" %}
                 
 
                     <div style="border: 2px solid black; border-radius: 5px; padding:20px; margin-bottom:15px; position: relative;">
@@ -151,7 +151,7 @@ body {
                     * We'll show the previous goals again once we reach this one. 
                     {% endif %}
                 {% endfor %}
-                
+
 
             </td>
             <td width="200px;" style="padding: 15px;" valign="top">
