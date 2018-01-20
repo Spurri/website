@@ -129,9 +129,9 @@ body {
                                         <span class="sr-only">{% widthratio goal.current_amount goal.target_amount 100 %}% Complete</span>
                                     </div>
                                     {% if goal.target_amount < 1 %}
-                                    <span class="progress-type">{{goal.target_amount|floatformat:8}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat:8}} {{goal.target_cryptocurrency.symbol}}</span>
+                                    <span class="progress-type">{{goal.current_amount|floatformat:8}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat:8}} {{goal.target_cryptocurrency.symbol}}</span>
                                     {% else %}
-                                    <span class="progress-type">{{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</span>
+                                    <span class="progress-type">{{goal.current_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</span>
                                     {% endif %}
 
                                     <span class="progress-completed">{% widthratio goal.current_amount goal.target_amount 100 %}%</span>
