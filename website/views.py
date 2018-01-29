@@ -127,13 +127,22 @@ class CryptocurrencyDetailView(DetailView):
 
                 url = goal.target_cryptocurrency.block_explorer_balance_api % goal.wallet_address
                 r1=requests.get(url)
-                try:
-                    if goal.target_cryptocurrency.block_explorer_balance_in_satoshis:
-                        goal.current_amount = int(r1.text) * .00000001
-                    else:
-                        goal.current_amount = r1.text 
-                except:
-                    goal.current_amount = 0
+                goal.current_amount = 0
+
+                if goal.target_cryptocurrency.name == 'Dotcoin':
+                    try:
+                       
+                        goal.current_amount = int(r1.json()['result']['tokens']['DOT'])
+                    except:
+                        goal.current_amount = 0
+                else:
+                    try:
+                        if goal.target_cryptocurrency.block_explorer_balance_in_satoshis:
+                            goal.current_amount = int(r1.text) * .00000001
+                        else:
+                            goal.current_amount = r1.text 
+                    except:
+                        goal.current_amount = 0
 
                 goal.updated = datetime.now()
                 goal.save()
