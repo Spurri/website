@@ -96,6 +96,7 @@ body {
             
               <center><h1>{{ object }} Goals</h1></center>
                 {% for goal in cryptocurrency.goal_set.all %}
+		    {% if goal.target_cryptocurrency.symbol == "BTC" %}
                 
                 
 
@@ -148,7 +149,8 @@ body {
                         {% endif %}
                     </div>
                     </div>
-
+We'll show the previous goals again once we reach this one. 		
+                   {% endif %}
                 {% endfor %}
 
 
