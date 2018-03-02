@@ -1,0 +1,40 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+boto = "==2.42.0"
+chardet = "==3.0.4"
+dj-database-url = "==0.4.0"
+Django = "==1.9.2"
+django-allauth = "==0.28.0"
+"django-bootstrap3" = "==7.1.0"
+django-contrib-comments = "==1.7.3"
+django-csv-importer = "==0.1.3.5"
+django-csvimport = "==2.11"
+django-emoji = "==2.2.0"
+django-filter = "==1.1.0"
+django-filters = "==0.2.1"
+"django-gravatar2" = "==1.4.0"
+django-storages = "==1.5.1"
+"django-tables2" = "==1.14.2"
+django-tagging = "==0.4.5"
+django-updown = "==1.0.1"
+fuzzywuzzy = "==0.14.0"
+gunicorn = "==19.4.5"
+oauthlib = "==2.0.0"
+Pillow = "*"
+"psycopg2" = "*"
+python-openid = "==2.2.5"
+requests = "==2.11.1"
+requests-oauthlib = "==0.7.0"
+rollbar = "==0.13.8"
+whitenoise = "==2.0.6"
+
+
+[dev-packages]
+

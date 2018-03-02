@@ -131,7 +131,6 @@ class CryptocurrencyDetailView(DetailView):
 
                 if goal.target_cryptocurrency.name == 'Dotcoin':
                     try:
-                       
                         goal.current_amount = int(r1.json()['result']['tokens']['DOT'])
                     except:
                         goal.current_amount = 0
@@ -147,10 +146,7 @@ class CryptocurrencyDetailView(DetailView):
                 goal.updated = datetime.now()
                 goal.save()
 
-
-
         return context
-
 
 
 
@@ -188,7 +184,7 @@ class AddRating(View):
         }
         params.update(kwargs)
         response = AddRatingFromModel()(request, **params)
-        print response 
+
         if response.status_code == 200:
 
             return HttpResponse(Project.objects.get(id=kwargs['object_id']).rating.likes)
@@ -268,7 +264,3 @@ class AddResource(View):
   
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(ProjectCreate, self).get_context_data(**kwargs)
-    #     return context
