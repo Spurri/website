@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+import django_heroku
 from django.http import Http404
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
