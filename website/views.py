@@ -230,7 +230,7 @@ class ProjectDetailView(DetailView):
             self.object = self.get_object()
         except Http404:
            return HttpResponseNotFound('<h1>Page not found</h1>')
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             self.object.private_views = self.object.private_views + 1
         else:
             self.object.public_views = self.object.public_views + 1
