@@ -27,7 +27,6 @@ pillow = "*"
 python-openid = "==2.2.5"
 requests = "==2.11.1"
 requests-oauthlib = "==0.7.0"
-whitenoise = "==2.0.6"
 djangorestframework = "*"
 django = "==2.0.3"
 django-updown = "*"
@@ -36,6 +35,7 @@ django-filter = "*"
 django-emoji = "*"
 rollbar = "*"
 django-heroku = "*"
+whitenoise = "*"
 
 
 [dev-packages]
