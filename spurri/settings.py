@@ -39,8 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_comments',
     'tagging',
-    'emoji',
-    'csvimport.app.CSVImportConf',
+    'rest_framework',
+    #'emoji',
+    #'csvimport.app.CSVImportConf',
     'django_tables2',
     #'allauth.socialaccount.providers.linkedin',
     #'allauth.socialaccount.providers.google',
@@ -51,20 +52,18 @@ INSTALLED_APPS = (
 SITE_ID = 1
 
 
-
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
-     'django.middleware.cache.FetchFromCacheMiddleware',
-)
+     #'django.middleware.cache.FetchFromCacheMiddleware'
+]
 
 ROOT_URLCONF = 'spurri.urls'
 
@@ -227,6 +226,7 @@ STATIC_URL = '/static/'
 
 CACHES = {
     'default': {
+#'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
         'TIMEOUT': 3600,

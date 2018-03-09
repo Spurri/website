@@ -98,9 +98,9 @@ class Goal(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     target_amount = models.DecimalField(max_digits=21, decimal_places=9, default=0)
-    cryptocurrency = models.ForeignKey(Cryptocurrency)
+    cryptocurrency = models.ForeignKey(Cryptocurrency, on_delete=models.CASCADE)
     current_amount = models.DecimalField(max_digits=21, decimal_places=9, default=0)
-    target_cryptocurrency = models.ForeignKey(Cryptocurrency, related_name="target_cryptocurrency", blank=True, null=True)
+    target_cryptocurrency = models.ForeignKey(Cryptocurrency, related_name="target_cryptocurrency", blank=True, null=True, on_delete=models.CASCADE)
     wallet_address = models.CharField(max_length=255)
     status = models.CharField(max_length=255, default=None, blank=True, null=True)
     result = models.CharField(max_length=255, blank=True, null=True)
@@ -114,7 +114,7 @@ class Goal(models.Model):
 
 
 class Project(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField()
@@ -140,8 +140,8 @@ class Project(models.Model):
 
 
 class Team(models.Model):
-    project = models.ForeignKey(Project)
-    user = models.ForeignKey(User)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -151,7 +151,7 @@ class Team(models.Model):
 
 
 class Group(models.Model):
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -161,7 +161,7 @@ class Group(models.Model):
 
 
 class Benefit(models.Model):
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -171,7 +171,7 @@ class Benefit(models.Model):
 
 
 class Barrier(models.Model):
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -181,7 +181,7 @@ class Barrier(models.Model):
 
 
 class Collaborator(models.Model):
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -202,7 +202,7 @@ class Organization(models.Model):
 
 
 class Grant(models.Model):
-    organization = models.ForeignKey(Organization)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     soliciation_number = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     comments = models.TextField()
@@ -226,8 +226,8 @@ class Grant(models.Model):
 
 
 class Resource(models.Model):
-    user = models.ForeignKey(User, default=1)
-    project = models.ForeignKey(Project)
+    user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     icon = models.CharField(max_length=200, blank=True, null=True)
     link = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
@@ -235,8 +235,8 @@ class Resource(models.Model):
 
 
 class Match(models.Model):
-    project = models.ForeignKey(Project)
-    grant = models.ForeignKey(Grant)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    grant = models.ForeignKey(Grant, on_delete=models.CASCADE)
     similarity = models.FloatField()
     score = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)

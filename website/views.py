@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView, CreateView, View, ListView
 from django.contrib.auth import get_user_model
-from django.shortcuts import redirect, render_to_response, RequestContext
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.template import RequestContext
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.http import Http404
@@ -46,7 +48,7 @@ def index(request, template="index.html"):
         'grant_count': Grant.objects.all().count(),
         'cryptocurrencies_count': Cryptocurrency.objects.all().count(),
     }
-    return render_to_response(template, context, context_instance=RequestContext(request))
+    return render(request, template, context)
 
 class ProjectListView(ListView):
     model = Project

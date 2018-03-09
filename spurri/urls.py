@@ -1,8 +1,10 @@
 from django.conf.urls import include, url
 from website.views import *
+from django.urls import path
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import RedirectView
+from website.serializers import router
 
 admin.autodiscover()
 
@@ -14,8 +16,9 @@ from django.views.decorators.cache import cache_page
 import website.views
 
 urlpatterns = [
+    url(r'^api/', include(router.urls)),
     url(r'^$', website.views.index, name='index'),
-    url(r'^admin/', include(admin.site.urls)),
+    path('admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^profile/$', website.views.profile, name='profile'),
     url(r'^like_button/$', AddRating.as_view(), name='like_button'),
