@@ -222,6 +222,7 @@ ALLOWED_HOSTS = ['*']
 #STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
+django_heroku.settings(locals())
 # Extra places for collectstatic to find static files.
 
 CACHES = {
