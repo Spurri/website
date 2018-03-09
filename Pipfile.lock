@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5a755bdd9736b3d50000550a69e5f944bcb11eb0a653abffdfa1fbdc60e78b7f"
+            "sha256": "f0fa224c0820de7d5a16a97dc2bb09a66753300c4a5237b873a43889d77faa91"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -50,9 +50,10 @@
         },
         "dj-database-url": {
             "hashes": [
-                "sha256:858312abb7b330ea875733a65806a36ad04d7b8451c6ce8835118a2fa10d6870"
+                "sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9",
+                "sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163"
             ],
-            "version": "==0.4.0"
+            "version": "==0.5.0"
         },
         "django": {
             "hashes": [
@@ -118,6 +119,13 @@
                 "sha256:94b19a30d49d64febbd3a64967769dba8965209be1890fb80f62e83a8df498ec"
             ],
             "version": "==1.4.0"
+        },
+        "django-heroku": {
+            "hashes": [
+                "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762",
+                "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"
+            ],
+            "version": "==0.3.1"
         },
         "django-storages": {
             "hashes": [
