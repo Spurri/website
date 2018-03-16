@@ -36,6 +36,7 @@ django-emoji = "*"
 rollbar = "*"
 django-heroku = "*"
 whitenoise = "*"
+pylibmc = "*"
 
 
 [dev-packages]
