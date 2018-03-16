@@ -38,6 +38,7 @@ django-heroku = "*"
 whitenoise = "*"
 pylibmc = "*"
 pytz = "*"
+six = "*"
 
 
 [dev-packages]
