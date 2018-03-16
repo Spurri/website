@@ -37,6 +37,7 @@ rollbar = "*"
 django-heroku = "*"
 whitenoise = "*"
 pylibmc = "*"
+pytz = "*"
 
 
 [dev-packages]
