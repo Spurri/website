@@ -89,8 +89,8 @@ class CryptoTable(tables.Table):
 
         name = tables.Column()
 
-    def render_name(self, value):
-        return format_html('<div class="s-s-{} currency-logo-sprite"></div><span><a href="/cryptocurrency/{}">{}</a></span>', slugify(value), slugify(value), value )
+    def render_name(self, value, record):
+        return format_html('<div class="s-s-{} currency-logo-sprite"></div><span><a href="/cryptocurrency/{}">{}</a></span>', record.slug, record.slug, value )
 
 class FlyEyeView(ListView):
     model = Cryptocurrency
