@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^profile/(?P<slug>[^/]+)/$', UserProfileDetailView.as_view(), name="profile"),
     url(r'^list/$', ProjectListView.as_view()),
     url(r'^grants/$', GrantListView.as_view()),
-    url(r'^cryptocurrency/(?P<slug>[^/]+)/$', cache_page(60*60)(CryptocurrencyDetailView.as_view())),
+    url(r'^cryptocurrency/(?P<slug>[\w-]+)/$', cache_page(60*60)(CryptocurrencyDetailView.as_view())),
     url(r'^cryptocurrency/$', cache_page(60*60)(CryptocurrencyListView.as_view())),
 
     url(r'^grant/(?P<pk>\d+)/$', GrantDetailView.as_view()),
