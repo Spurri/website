@@ -5,6 +5,15 @@ import datetime
 import decimal
 from django.core.mail import send_mail
 import os
+from django.conf import settings
+
+ROLLBAR = {
+    'access_token': os.environ.get('ROLLBAR_ACCESS_TOKEN', '11111111111111111'),
+    'environment': 'development' if settings.DEBUG else 'production',
+    'root': settings.BASE_DIR
+}
+import rollbar
+rollbar.init(**ROLLBAR)
 
 class Command(BaseCommand):
 
@@ -37,9 +46,9 @@ class Command(BaseCommand):
                 if created:
                     new_coin_list += obj.name + "\n"
 
-                print obj,created
+                print (obj,created)
             except Exception as error:
-                print coin, error
+                print (coin, error)
 
         if new_coin_list:
 
