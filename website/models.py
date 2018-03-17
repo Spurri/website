@@ -81,7 +81,7 @@ class Cryptocurrency(models.Model):
 
 
     class Meta:
-        ordering = ['name',]
+        ordering = ['-market_cap_usd',]
 
     def get_absolute_url(self):
         return "/"+str(self.slug)
