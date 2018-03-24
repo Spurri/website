@@ -256,6 +256,9 @@ fieldset {
   margin: 0;
   border: 0; }
 
+pingendo {
+  visibility: hidden;
+}
 legend {
   display: block;
   width: 100%;
