@@ -126,6 +126,9 @@ strong {
 small {
   font-size: 80%; }
 
+tiny {
+  font-size: 70%; }
+
 sub,
 sup {
   position: relative;
@@ -366,6 +369,11 @@ small,
   font-size: 80%;
   font-weight: 200; }
 
+tiny,
+.tiny {
+  font-size: 70%;
+  font-weight: 150; }
+
 mark,
 .mark {
   padding: 0.2em;
@@ -405,7 +413,9 @@ mark,
 
 .img-thumbnail {
   border: 1px solid #fdd947;
-  max-width: 35px; 
+  max-width: 35px;
+  margin: 0;
+  padding: 0; 
 }
 
 .figure {
@@ -1054,7 +1064,7 @@ pre {
   .table th,
   .table td {
     padding: 0.75rem;
-    vertical-align: top;
+    vertical-align: center;
     border-top: 1px solid #dee2e6; }
   .table thead th {
     vertical-align: bottom;
@@ -1066,7 +1076,8 @@ pre {
 
 .table-sm th,
 .table-sm td {
-  padding: 0.3rem; }
+  padding: 0.3rem;
+  margin: 0rem; }
 
 .table-bordered {
   border: 1px solid #dee2e6; }
@@ -2993,7 +3004,7 @@ tbody.collapse.show {
 
 .card-body {
   flex: 1 1 auto;
-  padding: 1.25rem; }
+  padding: .25rem; }
 
 .card-title {
   margin-bottom: 0.75rem; }
@@ -3012,7 +3023,7 @@ tbody.collapse.show {
   margin-left: 1.25rem; }
 
 .card-header {
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
@@ -3022,7 +3033,7 @@ tbody.collapse.show {
     border-top: 0; }
 
 .card-footer {
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 1px solid rgba(0, 0, 0, 0.125); }
   .card-footer:last-child {
