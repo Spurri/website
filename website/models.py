@@ -86,7 +86,7 @@ class Cryptocurrency(models.Model):
     def get_absolute_url(self):
         return "/"+str(self.slug)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
     
     def get_fields(self):
@@ -135,7 +135,7 @@ class Project(models.Model):
     def get_absolute_url(self):
         return "/"+str(self.slug)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -146,7 +146,7 @@ class Team(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.project;
 
 
@@ -166,7 +166,7 @@ class Benefit(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name;
 
 
@@ -176,7 +176,7 @@ class Barrier(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name;
 
 
@@ -186,7 +186,7 @@ class Collaborator(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name;
 
 
@@ -197,7 +197,7 @@ class Organization(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -216,7 +216,7 @@ class Grant(models.Model):
     modified = models.DateTimeField(auto_now=True)
     corpus = models.TextField(default=" ")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def is_past(self):
