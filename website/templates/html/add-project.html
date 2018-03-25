@@ -56,70 +56,47 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="py-5">
     <div class="container">
       <div class="row">
-        <div class="col-md-10 py-3">
-          <ul class="breadcrumb" style="margin-bottom:0px;margin-top:0px">
-            <li class="breadcrumb-item">
-              <a href="#">Home</a>
-            </li>
-            <li class="breadcrumb-item active">Grants</li>
-          </ul>
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header"> Header </div>
+            <form class="form-horizontal">
+              <fieldset>
+                <!-- Form Name -->
+                <legend>Add a Project</legend>
+                <!-- Text input-->
+                <div class="form-group"> <label class="col-md-4 control-label" for="textinput">Project Name</label>
+                  <div class="col-md-4">
+                    <input id="textinput" name="textinput" type="text" placeholder="title" class="form-control input-md" required=""> </div>
+                </div>
+                <!-- Prepended text-->
+                <div class="form-group"> <label class="col-md-4 control-label" for="prependedtext">Spurri URL</label>
+                  <div class="col-md-4">
+                    <div class="input-group"> <span class="input-group-addon">www.spuri.com/</span>
+                      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="slug" type="text" required=""> </div>
+                  </div>
+                </div>
+                <!-- Textarea -->
+                <div class="form-group"> <label class="col-md-4 control-label" for="textarea">Project Description</label>
+                  <div class="col-md-4"> <textarea class="form-control" id="textarea" name="textarea">describe your project</textarea> </div>
+                </div>
+                <!-- File Button -->
+                <div class="form-group"> <label class="col-md-4 control-label" for="filebutton">Project Image (square)</label>
+                  <div class="col-md-4">
+                    <input id="filebutton" name="filebutton" class="input-file" type="file"> </div>
+                </div>
+                <!-- Button -->
+                <div class="form-group"> <label class="col-md-4 control-label" for=""></label>
+                  <div class="col-md-4">
+                    <button id="" name="" class="btn btn-primary">Add Project</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
         </div>
-        <div class="col-md-2 d-flex align-items-center ">
-          <a class="btn text-center btn-danger" href="#">Add a Grant </a>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 py-2">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>ID#</th>
-              <th>Max $</th>
-              <th>Deadline</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onclick="document.location.href='http://google.com';">
-              <td>
-                <img class="img-thumbnail rounded-circle" src="../../static/img/sean.jpg" alt="Card image"> </td>
-              <td class="text-left">Economic Development Assistance Programs Application submission and program requirements for EDA’s Public Works and Economic Adjustment Assistance programs.</td>
-              <td>EDAP2016</td>
-              <td>$3,000,000</td>
-              <td nowrap="" class="text-left">12/12/2017
-                <br>8:54 p.m.
-                <icon class="fa fa-ban text-danger"></icon>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img class="img-thumbnail rounded-circle" src="../../static/img/sean.jpg" alt="Card image"> </td>
-              <td class="text-left">Economic Development Assistance Programs Application submission and program requirements for EDA’s Public Works and Economic Adjustment Assistance programs.</td>
-              <td>EDAP2016</td>
-              <td>$3,000,000</td>
-              <td nowrap="" class="text-left">12/12/2017
-                <br>8:54 p.m.
-                <icon class="fa fa-ban text-danger"></icon>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img class="img-thumbnail rounded-circle" src="../../static/img/sean.jpg" alt="Card image"> </td>
-              <td class="text-left">Economic Development Assistance Programs Application submission and program requirements for EDA’s Public Works and Economic Adjustment Assistance programs.</td>
-              <td>EDAP2016</td>
-              <td>$3,000,000</td>
-              <td nowrap="" class="text-left">12/12/2017
-                <br>8:54 p.m.
-                <icon class="far fa-check-circle text-success"></icon>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
