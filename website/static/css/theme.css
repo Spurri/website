@@ -37,6 +37,18 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
+.secondaryiconcolor {
+  color: #00a8a1; }
+
+.dangericoncolor {
+  color: #dc3545; }
+
+.successiconcolor {
+  color: #28a745; }
+
+.lighticoncolor {
+  color: #D5D5D3; }
+
 *,
 *::before,
 *::after {
@@ -412,10 +424,11 @@ mark,
   height: auto; }
 
 .img-thumbnail {
-  border: 1px solid #fdd947;
-  max-width: 35px;
-  margin: 0;
-  padding: 0; 
+  border: 1.15px solid #fdd947;
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  margin-left: .1em;
 }
 
 .figure {
@@ -1076,8 +1089,12 @@ pre {
 
 .table-sm th,
 .table-sm td {
-  padding: 0.3rem;
-  margin: 0rem; }
+  padding-right: .5rem;
+  padding-top: .3rem;
+  padding-left: .3rem;
+  margin-left: .3rem; 
+  vertical-align: center;
+  border-bottom: 1px solid #dee2e6;}
 
 .table-bordered {
   border: 1px solid #dee2e6; }
@@ -3033,7 +3050,7 @@ tbody.collapse.show {
     border-top: 0; }
 
 .card-footer {
-  padding: 0.5rem 1.25rem;
+  padding: 0.25rem 1.25rem;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 1px solid rgba(0, 0, 0, 0.125); }
   .card-footer:last-child {
