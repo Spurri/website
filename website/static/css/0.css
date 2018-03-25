@@ -99,7 +99,7 @@
 .s-s-0x,
 .s-s-stellar,
 .s-s-kucoin-shares {
-            background-image: url('/static/cryptocurrency_sprites/0.png');
+            background-image: url('../cryptocurrency_sprites/0.png');
             background-repeat: no-repeat;
         }
         
@@ -804,7 +804,7 @@
     .s-s-0x,
     .s-s-stellar,
     .s-s-kucoin-shares {
-                background-image: url('/static/cryptocurrency_sprites/0.png');
+                background-image: url('../cryptocurrency_sprites/0.png');
                 -webkit-background-size: 190px 160px;
                 -moz-background-size: 190px 160px;
                 background-size: 190px 160px;

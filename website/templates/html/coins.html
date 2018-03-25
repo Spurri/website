@@ -4,8 +4,57 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+  <script src="../../static/js/jquery.peity.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../static/css/theme.css" type="text/css"> </head>
+  <link rel="stylesheet" href="../../static/css/theme.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/0.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/1.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/2.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/3.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/4.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/5.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/6.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/7.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/8.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/9.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/10.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/11.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/12.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/13.css">
+  <script>
+    $(function() {
+     
+      var updatingChart1 = $(".updating-chart1").peity("line", { width: 100 , height:25})
+      var updatingChart2 = $(".updating-chart2").peity("line", { width: 100 , height:25})
+      var updatingChart3 = $(".updating-chart3").peity("line", { width: 100 , height:25})
+    
+      setInterval(function() {
+        var random1 = Math.round(Math.random() * 10)
+        var random2 = Math.round(Math.random() * 10)
+        var random3 = Math.round(Math.random() * 10)
+        var values1 = updatingChart1.text().split(",")
+        var values2 = updatingChart2.text().split(",")
+        var values3 = updatingChart3.text().split(",")
+        values1.shift()
+        values1.push(random1)
+    
+        values2.shift()
+        values2.push(random2)
+        
+        values3.shift()
+        values3.push(random3)
+    
+        updatingChart1.text(values1.join(",")).change()
+        updatingChart2.text(values2.join(",")).change()
+        updatingChart3.text(values3.join(",")).change()
+    
+      }, 1000)
+    
+    
+    })
+  </script>
+</head>
 
 <body>
   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -64,68 +113,78 @@
             <li class="breadcrumb-item">
               <a href="#">Home</a>
             </li>
-            <li class="breadcrumb-item active">Grants</li>
-            <li class="breadcrumb-item">
-              <a href="#">EDA-HDQ-TA-HDQ-2016-20047593</a>
-            </li>
+            <li class="breadcrumb-item active">Coins</li>
           </ul>
         </div>
         <div class="col-md-2 d-flex align-items-center ">
-          <a class="btn text-center btn-danger" href="#">Add a Grant </a>
+          <a class="btn text-center btn-danger" href="#">Add a Coin</a>
         </div>
       </div>
     </div>
-    <div class="row py-3">
-      <div class="col-md-3">
-        <img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"> </div>
-      <div class="col-md-7">
-        <p class="lead text-left"><b>Economic Development Assistance Programs Application submission and program requirements for EDA’s Public Works and Economic Adjustment Assistance programs. </b></p>
-        <div class="row">
-          <div class="col-md-12">
-            <h3 class="display-4" contenteditable="true"><b>$300,000</b></h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <h1 class="">Deadline</h1>
-        <p><b>12/12/2015
-          <br>3:45:00 pm&nbsp;</b>
-          <icon class="fa fa-ban text-danger"></icon>
-        </p>
-        <a class="btn btn-success" href="#">Quick Apply</a>
-      </div>
-    </div>
-    <div class="container py-4">
-      <div class="row">
-        <div class="col-md-8">
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="active nav-link" href="" data-toggle="tab" data-target="#tabone">Description</a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link" data-toggle="tab" data-target="#tabtwo">Details</a>
-            </li>
-          </ul>
-          <div class="tab-content mt-2">
-            <div class="tab-pane fade show active" id="tabone" role="tabpanel">
-              <p class="">Tab pane one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="tab-pane fade" id="tabtwo" role="tabpanel">
-              <p class="">Tab pane two. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="tab-pane fade" id="tabthree" role="tabpanel">
-              <p class="">Tab pane three. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <h1 class="pi-draggable" draggable="true">Matching Projects</h1>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <span class="badge badge-primary badge-pill">14</span> </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> Dapibus ac facilisis in <span class="badge badge-primary badge-pill">2</span> </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center"> Morbi leo risus <span class="badge badge-primary badge-pill">1</span> </li>
-          </ul>
-        </div>
+    <div class="row">
+      <div class="col-md-12 py-2">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th nowrap="">Market Cap</th>
+              <th nowrap="">Price</th>
+              <th nowrap="">Volume (24h)</th>
+              <th nowrap="">Circulating Supply</th>
+              <th nowrap="">Change (24h)</th>
+              <th nowrap="">Price Graph (24h)</th>
+              <th nowrap="">Tags</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="document.location.href='http://google.com';">
+              <td>
+                <icon class="s-s-bitcoin currency-logo-sprite"></icon>
+              </td>
+              <td class="text-left">Bitcoin</td>
+              <td>$145,421,201,175</td>
+              <td>$8,585.38</td>
+              <td>$5,069,060,000</td>
+              <td>16,938,237 BTC</td>
+              <td class="text-danger">-4.00%</td>
+              <td><span class="updating-chart1">5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2</span></td>
+              <td nowrap="">
+                <icon class="far fa-hdd" title="Masternode"></icon>
+              </td>
+            </tr>
+            <tr onclick="document.location.href='http://google.com';">
+              <td>
+                <icon class="s-s-bitcoin currency-logo-sprite"></icon>
+              </td>
+              <td class="text-left">Bitcoin</td>
+              <td>$145,421,201,175</td>
+              <td>$8,585.38</td>
+              <td>$5,069,060,000</td>
+              <td>16,938,237 BTC</td>
+              <td class="text-success">-4.00%</td>
+              <td><span class="updating-chart2">5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2</span></td>
+              <td>
+                <icon class="fa fa-map-pin" title="Proof of Stake"></icon>
+              </td>
+            </tr>
+            <tr onclick="document.location.href='http://google.com';">
+              <td>
+                <icon class="s-s-bitcoin currency-logo-sprite"></icon>
+              </td>
+              <td class="text-left">Bitcoin</td>
+              <td>$145,421,201,175</td>
+              <td>$8,585.38</td>
+              <td>$5,069,060,000</td>
+              <td>16,938,237 BTC</td>
+              <td>-4.00%</td>
+              <td><span class="updating-chart3">5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2</span></td>
+              <td>
+                <icon class="far fa-gem" title="Proof of Work"></icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -173,7 +232,6 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:180px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo&nbsp;&nbsp;
