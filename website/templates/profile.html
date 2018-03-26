@@ -3,9 +3,7 @@
 {% load humanize %}
 {% load gravatar %}
 {% block content %}
-
-
-<div class="container">
+  <div class="container">
     <div class="container">
       <div class="row">
         <div class="col-md-12 py-3">
@@ -31,12 +29,12 @@
         <div class="row">
           <div class="text-left col-md-9">
             <h3 class="display-4"><b>{% if object.first_name and object.last_name %}{{object.first_name}} {{object.last_name}}{% else %}{{object.username}}{% endif %}</b></h3>
-            <p class="">Inventor, entreprenour and doer of good</p>
+            <p class="">{{object.user_profile.bio}}</p>
           </div>
           <div class="col-md-3">
             <h1 class="">Joined</h1>
             <p><b>{{object.date_joined|date:"m/d/Y"}}
-          <br>{{object.date_joined|date:"g:i a"}}</b> </p>
+            <br>{{object.date_joined|date:"g:i a"}}</b> </p>
           </div>
         </div>
         <div class="row">
@@ -47,24 +45,24 @@
                 <p class=""><b>Project{{object.project_set.all|pluralize}}<br>Created</b></p>
               </div>
               <div class="col-md-2"><i class="d-block fab fa-bitcoin fa-2x "><br></i>
-                <h1 class=""><b>35</b></h1>
-                <p class=""><b>Coins
-                  <br>Listed</b></p>
+                <h1 class=""><b>{{object.coin_set.all|length}}</b></h1>
+                <p class=""><b>Coin{{object.coin_set.all|pluralize}}
+                <br>Listed</b></p>
               </div>
               <div class="col-md-2"><i class="d-block  fa fa-2x fa-university"><br></i>
-                <h1 class=""><b>35</b></h1>
-                <p class=""><b>Grants
-                  <br>Added</b></p>
+                <h1 class=""><b>{{object.grant_set.all|length}}</b></h1>
+                <p class=""><b>Grant{{object.grant_set.all|pluralize}}
+                <br>Added</b></p>
               </div>
               <div class="col-md-2"><i class="d-block  fa fa-2x fa-flag-checkered"><br></i>
-                <h1 class=""><b>35</b></h1>
-                <p class=""><b>Goals
-                  <br>Created</b></p>
+                <h1 class=""><b>{{object.goal_set.all|length}}</b></h1>
+                <p class=""><b>Goal{{object.goal_set.all|pluralize}}
+                <br>Created</b></p>
               </div>
               <div class="col-md-2"><i class="d-block  fa fa-2x fa-newspaper"><br></i>
-                <h1 class=""><b>35</b></h1>
-                <p class=""><b>Articles
-                  <br>Posted</b></p>
+                <h1 class=""><b>{{object.article_set.all|length}}</b></h1>
+                <p class=""><b>Article{{object.article_set.all|pluralize}}
+                <br>Posted</b></p>
               </div>
             </div>
           </div>
@@ -85,21 +83,39 @@
           <div class="tab-content mt-2">
             <div class="tab-pane fade show active" id="tabone" role="tabpanel">
               <div class="row">
-              	{% for project in object.project_set.all %}
-
-	                <div class="col-md-4">
-	                  <div class="card">
-	                    <img class="card-img-top" src="{{MEDIA_ROOT}}{{project.image.url}}" alt="Card image cap">
-	                    <div class="card-body">
-	                      <h5 class="card-title">{{project.name}}</h5>
-	                      <p class="card-text">{{project.description}}</p>
-	                      <a href="/{{project.slug}}" class="btn btn-primary">Learn More</a>
-	                    </div>
-	                  </div>
-	                </div>
-
-				{% endfor %}
-
+                {% for project in object.project_set.all %}
+                  <div class="col-md-4 pb-4">
+                    <div class="card">
+                      <div class="project-large">
+                      <img class="card-img-top portrait" src="{{MEDIA_ROOT}}{{project.image.url}}" alt="Card image cap"> </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <a href="project/{{project.id}}/rate/1" class="like" id="{{project.id}}" onclick="return false;">
+                            <div class="col-md-1 col-1 col-sm-1">
+                              <i class="d-block fa fa-thumbs-up text-light">
+                              <span id="vote_count_{{project.id}}">{{project.rating.likes }}
+                              </span>
+                              </i>
+                            </div>
+                          </a>
+                          <div class="col-lg-9 col-9 col-md-8">
+                            <h5 class="card-title">{{ project.name|truncatechars:30 }}</h5>
+                          </div>
+                          <div class="col-md-1 col-1 col-sm-1">
+                            <i class="d-block fa fa-1x fa-comment text-light">
+                            <span>
+                              {% get_comment_count for project as comment_count %}
+                              {{comment_count}}
+                            </span>
+                            </i>
+                          </div>
+                        </div>
+                        <p class="card-text">{{ project.description|truncatechars:90}}</p>
+                        <a href="/{{ project.slug }}" class="btn btn-primary">Learn More</a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
             <div class="tab-pane fade" id="tabtwo" role="tabpanel">
@@ -113,7 +129,4 @@
       </div>
     </div>
   </div>
-
-
-
 {% endblock %}
