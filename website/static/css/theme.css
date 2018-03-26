@@ -49,6 +49,9 @@
 .lighticoncolor {
   color: #D5D5D3; }
 
+.primaryiconcolor {
+  color: #FDD947; }
+
 *,
 *::before,
 *::after {
@@ -430,6 +433,33 @@ mark,
   align-items: center;
   margin-left: .1em;
 }
+
+.project {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 0.2rem;
+  border: .5px solid #00a8a1;
+
+
+}
+.project img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: .1rem;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+.project img.portrait {
+  max-width: 35px;
+  
+
+}
+
 
 .figure {
   display: inline-block; }
@@ -1075,7 +1105,7 @@ pre {
   margin-bottom: 1.5rem;
   background-color: transparent; }
   .table th,
-  .table td {
+  .table td  {
     padding: 0.75rem;
     vertical-align: center;
     border-top: 1px solid #dee2e6; }
@@ -1087,8 +1117,8 @@ pre {
   .table .table {
     background-color: white; }
 
-.table-sm th,
-.table-sm td {
+.table-sm td,
+.table-sm th {
   padding-right: .5rem;
   padding-top: .3rem;
   padding-left: .3rem;
@@ -1124,13 +1154,15 @@ pre {
 
 .table-secondary,
 .table-secondary > th,
-.table-secondary > td {
+.table-secondary > td
+ {
   background-color: #b8e7e5; }
 
 .table-hover .table-secondary:hover {
   background-color: #a5e1de; }
   .table-hover .table-secondary:hover > td,
-  .table-hover .table-secondary:hover > th {
+  .table-hover .table-secondary:hover > th,
+   {
     background-color: #a5e1de; }
 
 .table-success,
@@ -3470,6 +3502,7 @@ tbody.collapse.show {
 .progress {
   display: flex;
   height: 1rem;
+  min-width: 100px;
   overflow: hidden;
   font-size: 0.75rem;
   background-color: #e9ecef;
