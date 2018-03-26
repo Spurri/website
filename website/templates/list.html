@@ -23,8 +23,10 @@
 					{% for project in projects %}
 						<div class="col-md-4 pb-4">
 							<div class="card">
+								<a href="/{{ project.slug }}" >
 								<div class="project-large">
 								<img class="card-img-top portrait" src="{{MEDIA_ROOT}}{{project.image.url}}" alt="Card image cap"> </div>
+							</a>
 								<div class="card-body">
 									<div class="row">
 										<a href="project/{{project.id}}/rate/1" class="like" id="{{project.id}}" onclick="return false;">
