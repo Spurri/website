@@ -281,7 +281,12 @@ if 'DATABASE_URL' in os.environ:
             }
         }
     }
-
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
@@ -310,3 +315,7 @@ SOCIALACCOUNT_PROVIDERS = {
     'LOCALE_FUNC': 'path.to.callable',
     'VERIFIED_EMAIL': True,
     'VERSION': 'v2.4'}}
+
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'website.forms.SignupForm'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False

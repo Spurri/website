@@ -4,31 +4,31 @@
 {% load account socialaccount %}
 {% load bootstrap3 %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
-
 {% block content %}
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Sign In" %}</h3>
-        </div>
-        <div class="panel-body">
-          {% get_providers as socialaccount_providers %}
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6">
+          <div class="card text-white p-5 bg-primary">
+            <div class="card-body">
 
-          <form class="login" method="POST" action="{% url 'account_login' %}?next={{next}}">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% if redirect_field_value %}
-              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-            {% buttons %}
-              <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
-              <a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-            {% endbuttons %}
-          </form>
-        </div>
-        {% if socialaccount_providers %}
+              <h1 class="mb-4">Sign Up</h1>
+               {% get_providers as socialaccount_providers %}
+              <form class="login" method="POST" action="{% url 'account_login' %}?next={{next}}">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                {% buttons %}
+                  <button class="btn btn-default" type="submit">{% trans "Sign In" %}</button>
+                  <a class="btn btn-link" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                {% endbuttons %}
+              </form>
+            </div>
+          {% if socialaccount_providers %}
           <div class="panel-body">
             <p>
               {% blocktrans with site.name as site_name %}Please sign in with one
@@ -50,7 +50,11 @@
             <p>{% blocktrans %}To register an account please <a href="{{ signup_url }}">sign up</a>.{% endblocktrans %}</p>
           </div>
         {% endif %}
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
 {% endblock %}
+

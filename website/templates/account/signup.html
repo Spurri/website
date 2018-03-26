@@ -3,17 +3,16 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
-
 {% block content %}
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Sign Up" %}</h3>
-        </div>
-        <div class="panel-body">
-          <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"> </div>
+        <div class="col-md-6">
+          <div class="card text-white p-5 bg-primary">
+            <div class="card-body">
+              <h1 class="mb-4">Sign Up</h1>
+              <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% if redirect_field_value %}
@@ -23,9 +22,8 @@
               <button type="submit" class="btn btn-default">{% trans "Sign Up" %} &raquo;</button>
             {% endbuttons %}
           </form>
-        </div>
-        <div class="panel-footer">
-          <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

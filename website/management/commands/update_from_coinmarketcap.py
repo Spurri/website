@@ -6,6 +6,8 @@ import decimal
 from django.core.mail import send_mail
 import os
 from django.conf import settings
+from django.contrib.humanize.templatetags.humanize import intcomma
+from decimal import *
 
 ROLLBAR = {
     'access_token': os.environ.get('ROLLBAR_ACCESS_TOKEN', '11111111111111111'),
@@ -44,18 +46,30 @@ class Command(BaseCommand):
                         },
                 )
                 if created:
-                    new_coin_list += obj.name + "\n"
+                    new_coin_list += "<a href='https://coinmarketcap.com/currencies/"+obj.slug+"/'>" + obj.name + "</a> ("+str(Decimal(obj.price_usd))+")<br>"
 
-                print (obj,created)
+                chart_list = obj.chart_24h.split(",")
+                if len(chart_list) == 24:
+                    chart_list.pop(0)
+
+                if Decimal(obj.price_usd) > 1:
+                    chart_list.append("{0:.2f}".format(Decimal(obj.price_usd)))
+                else:
+                    chart_list.append(Decimal(obj.price_usd).normalize())
+
+                obj.chart_24h = ','.join(map(str, chart_list)).lstrip(',')
+                obj.save()
+
+                print (obj, obj.chart_24h, created)
             except Exception as error:
                 print (coin, error)
 
         if new_coin_list:
 
             send_mail(
-                'Spurri Cryptocurrency Report',
-                "New coins added to CoinMarketCap:\n" + new_coin_list,
-                'info@spurri.com',
-                [os.environ.get('EMAIL_TO', 'info@spurri.com'),],
+                subject = 'Spurri Cryptocurrency Report',
+                html_message = "New coins added to CoinMarketCap:<br>" + new_coin_list,
+                from_email = 'info@spurri.com',
+                recipient_list = [os.environ.get('EMAIL_TO', 'info@spurri.com'),],
                 fail_silently=False,
             )

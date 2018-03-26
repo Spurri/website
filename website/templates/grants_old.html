@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load comments %}
+{% load humanize %}
+{% block content %}
+	<style>
+	table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	}
+	table, th, td {
+	border: 1px solid black;
+	padding: 10px;
+	text-align:left;
+	line-height:30px;
+	}
+	</style>
+	<div class="row">
+		<center>
+		<h1>List of maker related grants</h1>
+		<table cellpadding="10" cellspacing="10">
+			<tr>
+				<th>&nbsp;</th>
+				<th>Name</th>
+				<th>Solicitation #</th>
+				<th>Amount Max</th>
+				<th>Deadline</th>
+			</tr>
+			{% for grant in grants %}
+				<tr>
+					<td><a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
+					<td><a href="/grant/{{grant.id}}" target="_new">{{grant.name}}</a></td>
+					<td><a href="{{grant.link}}" target="_new">{{grant.soliciation_number}}</a></td>
+					<td>${{grant.amount_max.normalize|intcomma}}</td>
+					<td bgcolor="{% if grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
+					{{grant.deadline}}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	</center>
+</div>
+{% if is_paginated %}
+	<div class="pagination">
+		<span class="page-links">
+			{% if page_obj.has_previous %}
+				<a href="/list?page={{ page_obj.previous_page_number }}">previous</a>
+			{% endif %}
+			<span class="page-current">
+				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+			</span>
+			{% if page_obj.has_next %}
+				<a href="/list?page={{ page_obj.next_page_number }}">next</a>
+			{% endif %}
+		</span>
+	</div>
+{% endif %}
+{% endblock %}

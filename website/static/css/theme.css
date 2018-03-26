@@ -456,10 +456,29 @@ mark,
 }
 .project img.portrait {
   max-width: 35px;
-  
-
 }
 
+
+.project-large {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.project-large img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: .1rem;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+.project-large img.portrait {
+  max-width: 347px;
+}
 
 .figure {
   display: inline-block; }
@@ -2693,6 +2712,8 @@ tbody.collapse.show {
     text-decoration: none; }
   .nav-link.disabled {
     color: #6c757d; }
+  .nav-link.active {
+    text-decoration: underline;  }
 
 .nav-tabs {
   border-bottom: 1px solid #dee2e6; }
@@ -6369,3 +6390,12 @@ body {
   background-color: #fff;
   text-align:center;
 }
+
+
+.help-block {
+  color: #f00;
+}
+
+
+
+

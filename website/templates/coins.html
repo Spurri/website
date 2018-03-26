@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load comments %}
+{% block extra_head %}
+  <script src="{% static "js/jquery.sparkline.js" %}"></script>
+  
+  <link rel="stylesheet" type="text/css" href="{% static "css/0.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/1.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/2.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/3.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/4.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/5.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/6.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/7.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/8.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/9.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/10.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/11.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/12.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/13.css" %}" />
+  
+  <script>
+$(function() {
+$(".inlinesparkline").show();
+$('.inlinesparkline').sparkline('html', { width: '120px', height: '24px' });
+})
+  </script>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 py-3">
+          <ul class="breadcrumb" style="margin-bottom:0px;margin-top:0px">
+            <li class="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Coins</li>
+          </ul>
+        </div>
+        <div class="col-md-2 d-flex align-items-center ">
+          <a class="btn text-center btn-danger" href="#">Add a Coin</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 py-2">
+        {% render_table table 'table.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

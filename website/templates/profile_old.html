@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+{% load gravatar %}
+{% block content %}
+
+
+<div class="container-fluid">
+
+		<h1 class="text-center">{% if object.first_name and object.last_name %}{{object.first_name}} {{object.last_name}}{% else %}{{object.username}}{% endif %}</h1>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<img class="img-rounded center-block" src="{% gravatar_url  object 300 %} " ></img>
+				<!--
+				<p class="text-center">New York, New York</p>
+			    <p class="text-center"><a href="www.mywebsite.com">www.mywebsite.com</a></p>
+			</div>
+			<div class="col-md-4"><!--
+				<div class="well well-header">
+					<p class="text-center" style="font-size: 18px;">I like my code shaken, not stirred.</p>
+				</div>
+				-->
+				<hr>
+				<p class="profile">Last seen {{object.last_login|naturaltime}}.</p>
+				<p class="profile">{{object.project_set.all|length}} project{{object.project_set.all|pluralize}}</p>
+				<!-- <p class="profile">$3,746 raised</p> 
+				<ul class="list-unstyled list-inline">
+					<li><i class="fa fa-github fa-3x" aria-hidden="true"></i></li>
+					<li><i class="fa fa-linkedin fa-3x" aria-hidden="true"></i></li>
+					<li><i class="fa fa-envelope fa-3x" aria-hidden="true"></i></li>
+				</ul>
+				-->
+			</div>
+			<!--
+			<div class="col-md-4">
+					<ul class="list-unstyled list-inline text-center" style="padding-top: 80px;">
+					<li><i class="fa fa-trophy fa-5x" aria-hidden="true"></i></li>
+					<h3>Inventions Master</h3>
+				</ul>
+			</div>
+			-->
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+		
+			<div class="col-md-7 col-md-offset-1">
+				<h2 class="display-2 text-center">Projects</h2>
+					<ul class="list-unstyled">
+					{% for project in object.project_set.all %}
+						<li>
+							<div class="col-md-6">
+								<div class="well well-project">
+									<img src="{{MEDIA_ROOT}}{{project.image.url}}" width="300px" class="img-rounded center-block">
+									<h4 class="text-center">{{project.name}}</h4>
+									<p>{{project.description}}</p>
+									<!--
+									<p><strong>Money funded:</strong>  $4,748</p>
+									<p class="text-center"><strong>60%</strong></p>
+										<div class="progress">
+											  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+												60%
+											  </div>
+										</div>
+										-->
+									<a class="btn btn-success btn-center" href="/{{project.slug}}">Learn More</a>
+								</div>
+							</div>
+						</li>
+						{% endfor %}
+						
+					</ul>
+			</div>
+			<!--
+			<div class="col-md-4">
+					<h2 class="display-2 text-center">Activity</h2>
+					
+				<div class="activity">
+					<ul class="list-unstyled activity-list">
+						<li>Left comment on project {{project.name}} "Hey, that's right, good point!"</li>
+						<li>Submitted new project: Cold Fusion Reactor</li>
+						<li>Received an upvote for comment on topic "How do I understand Relativity?"</li>
+						<li>Upgraded reputation from "Novice" to "Master"</li>
+						<li>Made an update to project "The Terminator", added additional funding goal of $5,000</li>
+					</ul>
+				</div>
+					
+			</div>
+			-->
+		</div>
+		<hr>
+		<!--
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<h2 class="display-2">Bio</h2>
+				<p style="font-size: 16px;">My name is Jonathan and I'm a web developer who has the following passions: </p>
+				<ul>
+					<li>Clean and elegant code.</li>
+					<li>Maintaining modern web principles.</li>
+					<li>Marching forward with the drumbeat of technology.</li>
+				</ul>
+			</div>
+		</div>
+		-->
+</div>
+
+{% endblock %}

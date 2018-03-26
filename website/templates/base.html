@@ -1,169 +1,93 @@
 {% load staticfiles %}
+
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- {% now "jS F Y H:i" %} --> 
-    <title>{% block title %} {% endblock %}Spurri - Connecting innovative projects with funds through grants and cryptocurrency.</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="{% static "js/notify.js" %}"></script>
-    
-    <link rel="stylesheet" type="text/css" href="{% static "css/0.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/1.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/2.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/3.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/4.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/5.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/6.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/7.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/8.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/9.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/10.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/11.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/12.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "css/13.css" %}" />
 
+<head>
+  <title>{% block title %} {% endblock %}Spurri - Connecting projects to grants and cryptocurrency.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/theme.css' %}" type="text/css"> </head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+  <script src="{% static 'js/notify.js' %}"></script>
 
-
-    <style type="text/css">
-    .jumbotron{
-    
-   background: url("static/overlay.png");
-   background: url("static/drone.jpeg");
-   background-size: cover; 
-  
-
-    }
-    .jumbotron h1, h2, h2 a {
-    color: #331D1D;
-    }
-    .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7;
-    }
-    .jumbotron .btn-primary:hover {
-    background: #7646c1
-    }
-    .jumbotron p {
-    color: white;
-    max-width: 75%;
-    margin: 1em auto 2em
-    }
-    .navbar+.jumbotron {
-    margin-top: -30px
-    }
-    .jumbotron .lang-logo {
-    display: block;
-    background: #b01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white
-    }
-    .jumbotron .lang-logo img {
-    max-width: 100%
-    }
-    .project {
-    border: 1px solid #f1f1f1;
-    padding-top: 15px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 1px #ccc;
-    padding-bottom: 20px;
-    text-align: center;
-    margin-bottom: 30px;
-    }
-    .project:hover {
-    background-color: #eef7fa;
-    /*  font-weight: bold; was making text jump */
-    }
-    body {
-    margin-bottom: 40px;
-    }
-    .glyphicon {
-    font-size: 25px;
-    }
-    
-    .well-header {
-    background-color: #ffedcc;
-    }
-    
-    .well-project {
-    background-color: #e8f4f8;
-    }
-    
-    .activity-list {
-    margin-top: 20px;
-    }
-    
-    .activity-list li {
-    line-height: 1.75em;
-    font-size: 18px;
-    margin-bottom: 15px;
-    padding-left: 10px;
-    }
-    
-    .activity {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    min-height: 465px;
-    box-shadow: 1px 1px #d3d3d3;
-    }
-    </style>
 {% block extra_head %}
-
 {% endblock %}
-  </head>
-  <body>
+</head>
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><img src='{% static "logo.png" %}'></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/cryptocurrency">Cryptocurrencies <span class="badge">{{cryptocurrencies_count}}</a></li>
-            <li><a href="/list">Projects <span class="badge">{{project_count}}</span></a>  </li>
-            <li><a href="#contact">Users <span class="badge">{{user_count}}</span> </a></li>
-            <li><a href="/grants">Grants <span class="badge">{{grant_count}}</span></a></li>
-            
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">About</a></li>
-            <li><a href="mailto:info@spurri.com">Contact</a></li>
+<body>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="clip_frame">
+      <a href="/"><img src="{% static 'img/spurrilogoW.png' %}" height="50"></a> </div>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
 
-          </ul>
-          <div class="nav navbar-nav pull-right">
-          {% if user.is_authenticated %}
-            <span ><a href="/profile/{{user.username}}">{{user.username}}</a> </span>
-            <a class="btn btn-info navbar-btn btn-sm" href="{% url 'account_logout' %}">Logout</a>
-          {% else %}
-            <a class="btn btn-default navbar-btn btn-sm" href="{% url 'account_login' %}">Sign In</a>
-            <a class="btn btn-info navbar-btn btn-sm" href="{% url 'account_signup' %}">Sign Up</a>
+
+        <li class="nav-item  ml-5">
+          <a class="nav-link {% if '/coins' in request.path %}active{% endif %}" href="/coins">Coins</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if '/list' in request.path %}active{% endif %}" href="/list">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if '/grants' in request.path %}active{% endif %}" href="/grants">Grants</a>
+        </li>
+      </ul>
+      <form class="form-inline m-auto" action="/list/" method="get"> 
+        <input class="form-control mr-2" width="250" placeholder="search" name="q"  value="{{request.GET.q}}">
+        <button class="btn btn-primary" type="submit">search</button>
+      </form>
+
+      {% if user.is_authenticated %}
+
+       <div class="row m-auto">
+        
+        <form  action="{% url 'account_logout' %}">
+          <span ><a href="/profile/{{user.username}}">{{user.username}}</a> </span>
+        <button class="btn-sm btn-outline-secondary m-1" type="submit">Logout</button>
+       
+        </form>
+      </div>
+      {% else %}
+      <div class="row m-auto">
+      <form  action="{% url 'account_login' %}">
+        <button type="submit" class="btn-sm btn-outline-light ml-3 m-1">Login</button>
+      </form>
+      <form   action="{% url 'account_signup' %}">
+        <button class="btn-sm btn-outline-secondary m-1" type="submit">Sign up</button>
+      </form>
+    </div>
+
           {% endif %}
-        </div>
+
+
+
+    </div>
+  </nav>
+  <div class="text-center bg-gradient py-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row justify-content-center pt-2 ">
+            <p class="text-center mr-3">Get daily updates on crypto, projects and grants for <b>$5 / month</b>.</p>
+            <form method="post" action="" class="pr-3">
+              <div class="row">
+                <div class="col">
+                  <input type="email" name="email" class="form-control" placeholder="Your e-mail here"> </div>
+                <div class="col">
+                  <button type="submit" class="btn-sm btn-secondary">Subscribe</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </nav>
+    </div>
+  </div>
 
-</br>
-</br>
-</br>
-</br>
-<center>
-  Spurri aims to join innovative projects with funds through grants and cryptocurrency.  We're a work in progress! Featured Project or Cryptocurrency: <a href="/cryptocurrency/interzone">Interzone</a>
-</center>
 
 
       {% block content %}
@@ -177,6 +101,8 @@
           <script> $.notify("{{ message }}",{ position: 'top center', className: "{{message.level_tag }}" }); </script>
         {% endfor %}
       {% endif %}
+
+
       <script>
       $('.like').click(function(){
         {% if request.user.is_authenticated %}
@@ -199,40 +125,10 @@
         {% endif %}
       })
       </script>
-      <script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
- 
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
- 
-  return t;
-}(document, "script", "twitter-wjs"));</script>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=236647900066394";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
-      <hr>
-      <a class="twitter-follow-button"
-  href="https://twitter.com/spurri"
-  data-size="large">
-Follow @Spurri</a>
-<div class="fb-like" data-href="https://www.facebook.com/Spurri-1589021564738666/" data-layout="standard" data-action="like" data-size="large" data-show-faces="true">
-</div>
-  <a href="https://github.com/Spurri/website" target="_new">Source Code</a> | 
-  <a href="https://join.slack.com/t/spurri/shared_invite/enQtMjkyNjQ4NjYwODY2LWViMGM1NDY3NTQyMDIzZTk0YmEzOWNmZmFlM2YxZjdjMWE1OTk5MGU5YWQ2Y2EwOTY4ZDVlNmZmY2ZmMTZhNWY"> Join the Spurri team on Slack</a> | Market data provided by <a href="https://coinmarketcap.com/" target="_new"> CoinMarketCap</a>
+
+
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -244,7 +140,56 @@ Follow @Spurri</a>
 
 </script>
 
-<script id="cid0020000172413408368" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 200px;height: 300px;">{"handle":"spurri2","arch":"js","styles":{"a":"CC0000","b":100,"c":"FFFFFF","d":"FFFFFF","k":"CC0000","l":"CC0000","m":"CC0000","n":"FFFFFF","p":"10","q":"CC0000","r":100,"pos":"br","cv":1,"cvbg":"CC0000","cvw":75,"cvh":30}}</script>
 
-    </body>
-  </html>
+ <div class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <p class="lead">Get daily updates on crypto, projects and grants for <b>$5 / month</b></p>
+          <form class="form-inline">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Your e-mail here"> </div>
+            <button type="submit" class="btn btn-primary ml-3">Subscribe</button>
+          </form>
+        </div>
+        <div class="col-2 col-md-1 align-self-center">
+          <a href="https://www.twitter.com/spurri" target="_blank">
+            <icon class="fab fa-twitter fa-2x"></icon>
+          </a>
+        </div>
+        <div class="col-2 col-md-1 align-self-center">
+          <a href="https://facebook.com/spurri" target="_blank">
+            <icon class="fab fa-facebook fa-2x"></icon>
+          </a>
+        </div>
+        <div class="col-2 col-md-1 align-self-center">
+          <a href="https://join.slack.com/t/spurri/shared_invite/enQtMjkyNjQ4NjYwODY2LWViMGM1NDY3NTQyMDIzZTk0YmEzOWNmZmFlM2YxZjdjMWE1OTk5MGU5YWQ2Y2EwOTY4ZDVlNmZmY2ZmMTZhNWY" target="_blank">
+            <icon class="fab fa-slack fa-2x"></icon>
+          </a>
+        </div>
+        <div class="col-2 col-md-1 align-self-center">
+          <a href="https://discord.gg/BpRJ9Qp" target="_blank">
+            <icon class="fab fa-discord fa-2x"></icon>
+          </a>
+        </div>
+        <div class="col-2 col-md-1 align-self-center">
+          <a href="https://www.github.com/spurri" target="_blank">
+            <icon class="fab fa-github fa-2x"></icon>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3 text-center">
+          <p>© Copyright 2018 Spurri - All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:180px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo&nbsp;&nbsp;
+    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
+  </pingendo>
+</body>
+
+</html>

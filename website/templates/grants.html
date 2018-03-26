@@ -3,56 +3,54 @@
 {% load comments %}
 {% load humanize %}
 {% block content %}
-	<style>
-	table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	}
-	table, th, td {
-	border: 1px solid black;
-	padding: 10px;
-	text-align:left;
-	line-height:30px;
-	}
-	</style>
-	<div class="row">
-		<center>
-		<h1>List of maker related grants</h1>
-		<table cellpadding="10" cellspacing="10">
-			<tr>
-				<th>&nbsp;</th>
-				<th>Name</th>
-				<th>Solicitation #</th>
-				<th>Amount Max</th>
-				<th>Deadline</th>
-			</tr>
-			{% for grant in grants %}
-				<tr>
-					<td><a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
-					<td><a href="/grant/{{grant.id}}" target="_new">{{grant.name}}</a></td>
-					<td><a href="{{grant.link}}" target="_new">{{grant.soliciation_number}}</a></td>
-					<td>${{grant.amount_max.normalize|intcomma}}</td>
-					<td bgcolor="{% if grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
-					{{grant.deadline}}
-				</td>
-			</tr>
-		{% endfor %}
-	</table>
-	</center>
-</div>
-{% if is_paginated %}
-	<div class="pagination">
-		<span class="page-links">
-			{% if page_obj.has_previous %}
-				<a href="/list?page={{ page_obj.previous_page_number }}">previous</a>
-			{% endif %}
-			<span class="page-current">
-				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-			</span>
-			{% if page_obj.has_next %}
-				<a href="/list?page={{ page_obj.next_page_number }}">next</a>
-			{% endif %}
-		</span>
+	<div class="container">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 py-3">
+					<ul class="breadcrumb" style="margin-bottom:0px;margin-top:0px">
+						<li class="breadcrumb-item">
+							<a href="#">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Grants</li>
+					</ul>
+				</div>
+				<div class="col-md-2 d-flex align-items-center ">
+					<a class="btn text-center btn-danger" href="#">Add a Grant </a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 py-2">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Name</th>
+							<th>ID#</th>
+							<th>Max $</th>
+							<th>Deadline</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for grant in grants %}
+							<tr onclick="document.location.href='/grant/{{grant.id}}';">
+								<td>
+									<a href="{{grant.organization.website}}" target="_new">
+										<img class="img-thumbnail rounded-circle" src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" alt="Card image">
+									</a>
+								</td>
+								<td class="text-left">{{grant.name}}</td>
+								<td><a href="{{grant.link}}" target="_new">{{grant.soliciation_number}}</a></td>
+								<td>${{grant.amount_max.normalize|intcomma}}</td>
+								<td nowrap="" class="text-left">{{grant.deadline|date:"m/d/Y"}}
+									<br>{{grant.deadline|date:"g:i a"}}
+									<icon class="fa {% if grant.is_past %}fa-ban text-danger{% else %}fa-check-circle text-success{% endif %} "></icon>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-{% endif %}
 {% endblock %}

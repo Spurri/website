@@ -2,71 +2,68 @@
 {% load staticfiles %}
 {% load comments %}
 {% block content %}
-
-	<div class="container-fluid">
-		 {% include '_search.html' %}
-		<div class="row">
-			{% if projects %}
-			<ul class="list-unstyled">
-
+	<div class="py-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="breadcrumb" style="margin-bottom:0px;margin-top:0px">
+						<li class="breadcrumb-item">
+							<a href="/">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Projects</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="py-3">
+		<div class="container">
+			<div class="row">
+				{% if projects %}
 				{% for project in projects %}
-					<li>
-						<div class="col-md-4 col-xs-6 text-center">
-							<a href="/{{ project.slug }}" >
-								<div class="project" >
-									<div style="height:200px; overflow:hidden;">
-										<img src="{{MEDIA_ROOT}}{{project.image.url}}"  width="200px" ></img>
+					<div class="col-md-4 pb-4">
+						<div class="card">
+							<div class="project-large">
+							<img class="card-img-top portrait" src="{{MEDIA_ROOT}}{{project.image.url}}" alt="Card image cap"> </div>
+							<div class="card-body">
+								<div class="row">
+									<a href="project/{{project.id}}/rate/1" class="like" id="{{project.id}}" onclick="return false;">
+										<div class="col-md-1 col-1 col-sm-1"><i class="d-block fa fa-thumbs-up text-dark"><span id="vote_count_{{project.id}}">{{project.rating.likes }}</span></i></div>
+									</a>
+									<div class="col-lg-9 col-9 col-md-8">
+										<h5 class="card-title">{{ project.name }}</h5>
 									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<a href="project/{{project.id}}/rate/1" class="like" id="{{project.id}}" onclick="return false;">
-												<span class="glyphicon glyphicon-triangle-top vote1" aria-hidden="true"></span>
-												<p id="vote_count_{{project.id}}" style="font-size: 18px; margin-top: -10px;">
-													{{project.rating.likes }}
-												</p>
-											</a>
-											
-
-										</div>
-										<div class="col-md-6">
-											<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-											{% get_comment_count for project as comment_count %}
-											{{comment_count}}
-										</div>
-									</div>
-									<h4>{{ project.name }}</h4>
-									<!-- <p class="text-center"><strong>Category:</strong> Drones</p> -->
-									<div style="height:44px; overflow:hidden;">
-										<p>{{ project.description }}</p>
-									</div>
-									<a href="/{{ project.slug }}" class="btn-center btn btn-success">Learn More</a>
+									<div class="col-md-1 col-1 col-sm-1"><i class="d-block fa fa-1x fa-comment "><span>
+										{% get_comment_count for project as comment_count %}
+										{{comment_count}}
+									</span></i></div>
 								</div>
-							</a>
+								<p class="card-text">{{ project.description }}</p>
+								<a href="/{{ project.slug }}" class="btn btn-primary">Learn More</a>
+							</div>
 						</div>
-					</li>
+					</div>
 				{% endfor %}
-				</ul>
-				{% else %}
-				<h1> No projects found matching your search: {{request.GET.q}}</h1>
-				{% endif %}
-			</div>
-			</div>
-
-    {% if is_paginated %}
-        <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="/list?page={{ page_obj.previous_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
-                {% endif %}
-                <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="/list?page={{ page_obj.next_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
-                {% endif %}
-            </span>
-        </div>
-    {% endif %}
-
-		{% endblock %}
-
+			</ul>
+		{% else %}
+			<h1> No projects found matching your search: {{request.GET.q}}</h1>
+		{% endif %}
+	</div>
+</div>
+</div>
+{% if is_paginated %}
+<div class="pagination">
+	<span class="page-links">
+		{% if page_obj.has_previous %}
+			<a href="/list?page={{ page_obj.previous_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
+		{% endif %}
+		<span class="page-current">
+			Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+		</span>
+		{% if page_obj.has_next %}
+			<a href="/list?page={{ page_obj.next_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
+		{% endif %}
+	</span>
+</div>
+{% endif %}
+{% endblock %}

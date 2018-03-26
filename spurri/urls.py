@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^list/$', ProjectListView.as_view()),
     url(r'^grants/$', GrantListView.as_view()),
     url(r'^cryptocurrency/(?P<slug>[\w-]+)/$', cache_page(60*60)(CryptocurrencyDetailView.as_view())),
-    url(r'^cryptocurrency/$', cache_page(60*60)(CryptocurrencyListView.as_view())),
+    url(r'^coins/$', cache_page(60*60)(CryptocurrencyListView.as_view())),
 
     url(r'^grant/(?P<pk>\d+)/$', GrantDetailView.as_view()),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
@@ -36,7 +36,9 @@ urlpatterns = [
     url(r'^comments/posted/$', website.views.comment_posted, name='comment_posted'),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^fly_eye/$', FlyEyeView.as_view()),
-    url(r'^(?P<slug>[^/]+)/$', ProjectDetailView.as_view(), name="project"),
+    #url(r'^(?P<slug>[\w-]+)/$', CryptocurrencyDetailView.as_view()),
+    url(r'^(?P<slug>[\w-]+)/$', ProjectDetailView.as_view(), name="project"),
+    
     url(r'^emoji/', include('emoji.urls')),
     url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ")),
     

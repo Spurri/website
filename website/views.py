@@ -26,6 +26,8 @@ from django.utils.html import format_html
 from django.template.defaultfilters import slugify
 import requests
 from datetime import datetime, timedelta
+from django.contrib.humanize.templatetags.humanize import intcomma
+from decimal import *
 
 def comment_posted( request ):
     if request.GET['c']:
@@ -83,14 +85,81 @@ class CryptocurrencyFilter(FilterSet):
 
 
 class CryptoTable(tables.Table):
+    def __init__(self, *args, _overriden_value="",**kwargs):
+        super().__init__(*args, **kwargs)
+        self.base_columns['market_cap_usd'].verbose_name = "Market Cap"
+        self.base_columns['price_usd'].verbose_name = "Price"
+        self.base_columns['volume_usd_24h'].verbose_name = "Volume (24h)"
+        self.base_columns['available_supply'].verbose_name = "Circulating Supply"
+        self.base_columns['percent_change_24h'].verbose_name = "Change (24h)"
+        self.base_columns['chart_24h'].verbose_name = "Price Graph (24h)"
+
+
+    name = tables.Column(
+        attrs={
+            "td": {"align": "left"}, 'th':{'style':'text-align: left;'}
+        }
+    )
+    market_cap_usd = tables.Column(
+        attrs={
+            "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
+        }
+    )
+    price_usd = tables.Column(
+        attrs={
+            "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
+        }
+    )
+    volume_usd_24h = tables.Column(
+        attrs={
+            "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
+        }
+    )
+    available_supply = tables.Column(
+        attrs={
+            "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
+        }
+    )
+    percent_change_24h = tables.Column(
+        attrs={
+            "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
+        }
+    )
     class Meta:
         model = Cryptocurrency
-        exclude = ['id','slug','symbol','description']
+        fields = ['name','market_cap_usd','price_usd','volume_usd_24h','available_supply','symbol','percent_change_24h','chart_24h']
 
-        name = tables.Column()
+        row_attrs = {
+            'onclick': lambda record: "document.location.href='/cryptocurrency/" + record.slug + "';"
+        }
 
     def render_name(self, value, record):
-        return format_html('<div class="s-s-{} currency-logo-sprite"></div><span><a href="/cryptocurrency/{}">{}</a></span>', record.slug, record.slug, value )
+        return format_html('<a href="https://coinmarketcap.com/currencies/{}/" target="_new"> <icon class="s-s-{} currency-logo-sprite"></icon></a> <a href="/cryptocurrency/{}">{}</a>', record.slug, record.slug, record.slug, value )
+
+    def render_market_cap_usd(self, value):
+        return "$" + intcomma(value)
+
+    def render_price_usd(self, value):
+        if value > 1:
+            return "$" + intcomma("{0:.2f}".format(value))
+        else:
+            return "$" + intcomma(value.normalize())
+
+    def render_volume_usd_24h(self, value):
+        return "$" + intcomma(value.normalize())
+
+    def render_available_supply(self, value, record):
+        return intcomma(value)
+
+    def render_percent_change_24h(self, value):
+        if value > 0:
+            return format_html('<b class="text-success">{}</b>', value )
+        else:
+            return format_html('<b class="text-danger">{}</b>', value )
+
+    def render_chart_24h(self, value):
+        return format_html('<span class="inlinesparkline" style="display:none; ">{}</span>', value )
+
 
 class FlyEyeView(ListView):
     model = Cryptocurrency
@@ -99,12 +168,11 @@ class FlyEyeView(ListView):
 
 class CryptocurrencyListView(SingleTableMixin, FilterView):
     model = Cryptocurrency
-    template_name = 'cryptocurrency_list.html'
+    template_name = 'coins.html'
     context_object_name = "cryptocurrencies"
     paginate_by = 100 
     table_class = CryptoTable
     filterset_class = CryptocurrencyFilter
-    
 
     def get_context_data(self, **kwargs):
             context = super(CryptocurrencyListView, self).get_context_data(**kwargs)
