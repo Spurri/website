@@ -13,7 +13,7 @@
           <div class="card text-white p-5 bg-primary">
             <div class="card-body">
 
-              <h1 class="mb-4">Sign Up</h1>
+              <h1 class="mb-4">Login</h1>
                {% get_providers as socialaccount_providers %}
               <form class="login" method="POST" action="{% url 'account_login' %}?next={{next}}">
                 {% csrf_token %}

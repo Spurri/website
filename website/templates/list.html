@@ -36,7 +36,7 @@
 											</div>
 										</a>
 										<div class="col-lg-9 col-9 col-md-8">
-											<h5 class="card-title">{{ project.name|truncatechars:100 }}</h5>
+											<h5 class="card-title">{{ project.name|truncatechars:30 }}</h5>
 										</div>
 										<div class="col-md-1 col-1 col-sm-1">
 											<i class="d-block fa fa-1x fa-comment text-light">
@@ -47,7 +47,7 @@
 											</i>
 										</div>
 									</div>
-									<p class="card-text">{{ project.description|truncatechars:200}}</p>
+									<p class="card-text">{{ project.description|truncatechars:90}}</p>
 									<a href="/{{ project.slug }}" class="btn btn-primary">Learn More</a>
 								</div>
 							</div>
