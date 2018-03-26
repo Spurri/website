@@ -75,7 +75,7 @@
                         {% endif %}
                         {% if page_obj.has_previous or page_obj.has_next %}
                             {% for i in page_obj.paginator.page_range %}
-                                {% if table.page.number == i %}
+                                {% if page_obj.number == i %}
                                     <li class="page-item active active">
                                         <a class="page-link active disabled" >{{ i }}</a>
                                     </li>
