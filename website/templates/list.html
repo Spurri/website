@@ -20,50 +20,59 @@
 		<div class="container">
 			<div class="row">
 				{% if projects %}
-				{% for project in projects %}
-					<div class="col-md-4 pb-4">
-						<div class="card">
-							<div class="project-large">
-							<img class="card-img-top portrait" src="{{MEDIA_ROOT}}{{project.image.url}}" alt="Card image cap"> </div>
-							<div class="card-body">
-								<div class="row">
-									<a href="project/{{project.id}}/rate/1" class="like" id="{{project.id}}" onclick="return false;">
-										<div class="col-md-1 col-1 col-sm-1"><i class="d-block fa fa-thumbs-up text-dark"><span id="vote_count_{{project.id}}">{{project.rating.likes }}</span></i></div>
-									</a>
-									<div class="col-lg-9 col-9 col-md-8">
-										<h5 class="card-title">{{ project.name }}</h5>
+					{% for project in projects %}
+						<div class="col-md-4 pb-4">
+							<div class="card">
+								<div class="project-large">
+								<img class="card-img-top portrait" src="{{MEDIA_ROOT}}{{project.image.url}}" alt="Card image cap"> </div>
+								<div class="card-body">
+									<div class="row">
+										<a href="project/{{project.id}}/rate/1" class="like" id="{{project.id}}" onclick="return false;">
+											<div class="col-md-1 col-1 col-sm-1">
+												<i class="d-block fa fa-thumbs-up text-light">
+												<span id="vote_count_{{project.id}}">{{project.rating.likes }}
+												</span>
+												</i>
+											</div>
+										</a>
+										<div class="col-lg-9 col-9 col-md-8">
+											<h5 class="card-title">{{ project.name|truncatechars:100 }}</h5>
+										</div>
+										<div class="col-md-1 col-1 col-sm-1">
+											<i class="d-block fa fa-1x fa-comment text-light">
+											<span>
+												{% get_comment_count for project as comment_count %}
+												{{comment_count}}
+											</span>
+											</i>
+										</div>
 									</div>
-									<div class="col-md-1 col-1 col-sm-1"><i class="d-block fa fa-1x fa-comment "><span>
-										{% get_comment_count for project as comment_count %}
-										{{comment_count}}
-									</span></i></div>
+									<p class="card-text">{{ project.description|truncatechars:200}}</p>
+									<a href="/{{ project.slug }}" class="btn btn-primary">Learn More</a>
 								</div>
-								<p class="card-text">{{ project.description }}</p>
-								<a href="/{{ project.slug }}" class="btn btn-primary">Learn More</a>
 							</div>
 						</div>
-					</div>
-				{% endfor %}
-			</ul>
-		{% else %}
-			<h1> No projects found matching your search: {{request.GET.q}}</h1>
-		{% endif %}
+					{% endfor %}
+				</ul>
+			{% else %}
+				<h2> No projects found matching your search: {{request.GET.q}}</h2>
+			{% endif %}
+		</div>
 	</div>
 </div>
-</div>
 {% if is_paginated %}
-<div class="pagination">
-	<span class="page-links">
-		{% if page_obj.has_previous %}
-			<a href="/list?page={{ page_obj.previous_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
-		{% endif %}
-		<span class="page-current">
-			Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+	<div class="pagination">
+		<span class="page-links">
+			{% if page_obj.has_previous %}
+				<a href="/list?page={{ page_obj.previous_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
+			{% endif %}
+			<span class="page-current">
+				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+			</span>
+			{% if page_obj.has_next %}
+				<a href="/list?page={{ page_obj.next_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
+			{% endif %}
 		</span>
-		{% if page_obj.has_next %}
-			<a href="/list?page={{ page_obj.next_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
-		{% endif %}
-	</span>
-</div>
+	</div>
 {% endif %}
 {% endblock %}
