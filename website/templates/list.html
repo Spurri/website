@@ -60,19 +60,42 @@
 		</div>
 	</div>
 </div>
-{% if is_paginated %}
-	<div class="pagination">
-		<span class="page-links">
-			{% if page_obj.has_previous %}
-				<a href="/list?page={{ page_obj.previous_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">previous</a>
-			{% endif %}
-			<span class="page-current">
-				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-			</span>
-			{% if page_obj.has_next %}
-				<a href="/list?page={{ page_obj.next_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">next</a>
-			{% endif %}
-		</span>
-	</div>
-{% endif %}
+
+ {% if is_paginated %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="/list?page={{ page_obj.previous_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}" aria-label="Previous">
+                                    <span aria-hidden="true">«</span> <span class="sr-only">{% trans 'Previous' %}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if page_obj.has_previous or page_obj.has_next %}
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if table.page.number == i %}
+                                    <li class="page-item active active">
+                                        <a class="page-link active disabled" >{{ i }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="/list?page={{ i }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">{{ i }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="/list?page={{ page_obj.next_page_number }}{% if request.GET.sort %}&sort={{request.GET.sort}}{% endif %}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}" aria-label="Next"> <span aria-hidden="true">»</span> <span class="sr-only">{% trans 'Next' %}</span> </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
 {% endblock %}
