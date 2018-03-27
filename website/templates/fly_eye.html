@@ -33,14 +33,14 @@ $('.inlinesparkline').sparkline('html', { width: '100%', height: '20px', enableT
   </script>
 
 </head>
-<body>
+<body style="background: #eee;">
 
 
 {% for coin in object_list  %}
 
-<div style="display:block; width:75px; height: 19px; float:left; border: 1px solid white; padding:0; margin:0; background-color:{% if coin.percent_change_24h > 0 %}#7eca8f{% else %}#ea868f{% endif %};  position: relative;">
+<div style="display:block; background-color:white; width:75px; height: 19px; float:left; border: 0.5px solid #d8d8d8; border-radius: 30px; overflow:hidden; padding:0; margin:0;   position: relative;">
 
-<div class="s-s-{{coin.slug}} currency-logo-sprite" style="margin-right:0px; margin-top: 1px; position:absolute;" title="{{coin.name}}"></div>
+<div class="s-s-{{coin.slug}} currency-logo-sprite" style="margin-right:0px; border: 0.5px solid #d8d8d8; margin-top: 1px; background-color:white; position:absolute; border-radius: 30px; " title="{{coin.name}}"></div>
 
 <span class="inlinesparkline" style="float:right; margin:0; padding:0;" values="{{coin.chart_24h}}" sparklineColor="{% if coin.percent_change_24h > 0 %}#28a745{% else %}#dc3545{% endif %}" sparkfillColor="{% if coin.percent_change_24h > 0 %}#b1dfbb{% else %}#f1b0b7{% endif %}"></span>
 </div>
