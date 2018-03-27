@@ -27,8 +27,8 @@
   
   <script>
 $(function() {
-$(".inlinesparkline").show();
-$('.inlinesparkline').sparkline('html', { width: '100%', height: '20px' });
+
+$('.inlinesparkline').sparkline('html', { width: '100%', height: '20px', enableTagOptions:true });
 })
   </script>
 
@@ -38,11 +38,11 @@ $('.inlinesparkline').sparkline('html', { width: '100%', height: '20px' });
 
 {% for coin in object_list  %}
 
-<div style="display:block; width:75px; height: 19px; float:left; border: 1px solid {% if coin.percent_change_24h > 0 %}green{% else %}red{% endif %};  position: relative;">
+<div style="display:block; width:75px; height: 19px; float:left; border: 1px solid white; padding:0; margin:0; background-color:{% if coin.percent_change_24h > 0 %}#7eca8f{% else %}#ea868f{% endif %};  position: relative;">
 
 <div class="s-s-{{coin.slug}} currency-logo-sprite" style="margin-right:0px; margin-top: 1px; position:absolute;" title="{{coin.name}}"></div>
 
-<span class="inlinesparkline" style="display:none; float:right;">{{coin.chart_24h}}</span>
+<span class="inlinesparkline" style="float:right; margin:0; padding:0;" values="{{coin.chart_24h}}" sparklineColor="{% if coin.percent_change_24h > 0 %}#28a745{% else %}#dc3545{% endif %}" sparkfillColor="{% if coin.percent_change_24h > 0 %}#b1dfbb{% else %}#f1b0b7{% endif %}"></span>
 </div>
 
 {% endfor %}
