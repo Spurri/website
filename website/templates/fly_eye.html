@@ -1,20 +1,52 @@
-{% extends "base.html" %}
+  {% load staticfiles %}
+<html>
+<head>
 
+  
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 
-{% load render_table from django_tables2 %}
-{% load bootstrap3 %}
+  <script src="{% static "js/jquery.sparkline.js" %}"></script>
 
-{% load staticfiles %}
-{% load comments %}
-{% block content %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/0.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/1.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/2.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/3.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/4.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/5.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/6.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/7.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/8.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/9.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/10.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/11.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/12.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/13.css" %}" />
+  
+  <script>
+$(function() {
+$(".inlinesparkline").show();
+$('.inlinesparkline').sparkline('html', { width: '100%', height: '20px' });
+})
+  </script>
+
+</head>
+<body>
 
 
 {% for coin in object_list  %}
 
+<div style="display:block; width:75px; height: 19px; float:left; border: 1px solid {% if coin.percent_change_24h > 0 %}green{% else %}red{% endif %};  position: relative;">
 
-<div class="s-s-{{coin.slug}} currency-logo-sprite"></div>
+<div class="s-s-{{coin.slug}} currency-logo-sprite" style="margin-right:0px; margin-top: 1px; position:absolute;" title="{{coin.name}}"></div>
+
+<span class="inlinesparkline" style="display:none; float:right;">{{coin.chart_24h}}</span>
+</div>
 
 {% endfor %}
+</body>
+</html>
 
-		{% endblock %}
 
