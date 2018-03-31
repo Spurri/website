@@ -38,8 +38,9 @@ class CollaboratorInline(admin.TabularInline):
 
 
 class CryptocurrencyAdmin(admin.ModelAdmin):
-    list_display = ('name','slug','description','tags','created','modified')
+    list_display = ('name','slug','description','forum','tags','created','modified')
     search_fields = ('name', 'description','tags')
+    list_editable = ( 'forum', )
     list_per_page = 500
 
 class ProjectAdmin(admin.ModelAdmin):
