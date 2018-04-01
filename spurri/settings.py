@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     #'emoji',
     #'csvimport.app.CSVImportConf',
     'django_tables2',
+    'django_filters',
     #'allauth.socialaccount.providers.linkedin',
     #'allauth.socialaccount.providers.google',
     #'allauth.socialaccount.providers.facebook',

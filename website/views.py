@@ -78,10 +78,6 @@ class ProjectListView(ListView):
         return object_list
 
 
-class CryptocurrencyFilter(FilterSet):
-    class Meta:
-        model = Cryptocurrency
-        fields = ['symbol', 'name']
 
 
 class CryptoTable(tables.Table):
@@ -166,6 +162,13 @@ class FlyEyeView(ListView):
     template_name = 'fly_eye.html'  
 
 
+class CryptocurrencyFilter(FilterSet):
+    class Meta:
+        model = Cryptocurrency
+        fields = ['symbol', 'name','tags']
+        filter_fields = ['tags']
+
+
 class CryptocurrencyListView(SingleTableMixin, FilterView):
     model = Cryptocurrency
     template_name = 'coins.html'
@@ -174,13 +177,6 @@ class CryptocurrencyListView(SingleTableMixin, FilterView):
     table_class = CryptoTable
     filterset_class = CryptocurrencyFilter
 
-    def get_context_data(self, **kwargs):
-            context = super(CryptocurrencyListView, self).get_context_data(**kwargs)
-            table = CryptoTable(Cryptocurrency.objects.all(), order_by="-market_cap")
-            RequestConfig(self.request).configure(table)
-            table.paginate(page=self.request.GET.get('page', 1), per_page=100)
-            context['table'] = table     
-            return context
 
 class CryptocurrencyDetailView(DetailView):
     model = Cryptocurrency
