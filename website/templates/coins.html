@@ -39,8 +39,8 @@ $('.inlinesparkline').sparkline('html', { width: '120px', height: '24px' });
             </li>
             <li class="breadcrumb-item"><a href="/coins">Coins</a></li>
             {% if 'masternode' in request.GET.tags %}
-            <li class="breadcrumb-item active">Masternodes</li>
-            {% endif %}
+            <li class="breadcrumb-item active">Masternodes </li>
+            {% endif %} &nbsp; ({{ table.rows|length }})
           </ul>
         </div>
         <div class="col-md-2 d-flex align-items-center ">
