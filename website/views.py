@@ -89,7 +89,6 @@ class CryptoTable(tables.Table):
         self.base_columns['available_supply'].verbose_name = "Circulating Supply"
         self.base_columns['percent_change_24h'].verbose_name = "Change (24h)"
         self.base_columns['chart_24h'].verbose_name = "Price Graph (24h)"
-        self.base_columns['masternode_cost_coins'].verbose_name = "# required"
 
     name = tables.Column(
         attrs={
@@ -170,6 +169,10 @@ class CryptoTable(tables.Table):
 
 
 class MasternodeCryptoTable(CryptoTable):
+    def __init__(self, *args, _overriden_value="",**kwargs):
+        super().__init__(*args, **kwargs)
+        self.base_columns['masternode_cost_coins'].verbose_name = "# required"
+
     mn_worth = tables.Column(empty_values=[])
 
     class Meta:
