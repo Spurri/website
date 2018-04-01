@@ -33,7 +33,7 @@ def cache_on_auth(timeout):
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
-    url(r'^$', website.views.index, name='index'),
+    url(r'^$', cache_on_auth(60*60)(website.views.index), name='index'),
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^profile/$', website.views.profile, name='profile'),

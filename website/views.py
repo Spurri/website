@@ -68,12 +68,18 @@ def comment_posted( request ):
     return HttpResponseRedirect( "/" )
 
 def index(request, template="index.html"):
-    response = requests.get('http://pool.spurri.com/api/status')
-    result = response.json()
-    context = {
-         'hashrate': bytes2human(result['c11']['hashrate']) + "h/s",
-         'workers': str(result['c11']['workers']),
-    }
+    try:
+        response = requests.get('http://pool.spurri.com/api/status')
+        result = response.json()
+        context = {
+             'hashrate': bytes2human(result['c11']['hashrate']) + "h/s",
+             'workers': str(result['c11']['workers']),
+        }
+    except:
+        context = {
+             'hashrate': "",
+             'workers': "",
+        } 
     return render(request, template, context = context)
 
 class ProjectListView(ListView):
