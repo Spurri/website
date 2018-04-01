@@ -28,6 +28,7 @@ import requests
 from datetime import datetime, timedelta
 from django.contrib.humanize.templatetags.humanize import intcomma
 from decimal import *
+from django.db.models import F
 
 def comment_posted( request ):
     if request.GET['c']:
@@ -167,6 +168,12 @@ class MasternodeCryptoTable(CryptoTable):
         model = Cryptocurrency
         fields = ['name','price_usd','volume_usd_24h','available_supply','masternode_cost_coins','mn_worth','percent_change_24h','chart_24h','tags']
         exclude = ('symbol','market_cap_usd','available_supply',)
+
+    def order_mn_worth(self, queryset, is_descending):
+        queryset = queryset.annotate(
+            mn_worth=F('masternode_cost_coins') * F('price_usd')
+        ).order_by(('-' if is_descending else '') + 'mn_worth')
+        return queryset, True
 
     def render_mn_worth(self, value, record):
         return "$" + intcomma(int(record.masternode_cost_coins * record.price_usd))
