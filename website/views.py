@@ -241,7 +241,7 @@ class CryptocurrencyListView(SingleTableMixin, FilterView):
     filterset_class = CryptocurrencyFilter
 
     def get_table_class(self):
-        if self.request.GET.get('tags_contains') == "masternode":
+        if self.request.GET.get('tags__contains') == "masternode":
             return MasternodeCryptoTable
         else:
             return CryptoTable
