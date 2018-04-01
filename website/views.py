@@ -81,41 +81,32 @@ class ProjectListView(ListView):
 
 
 class CryptoTable(tables.Table):
-    def __init__(self, *args, _overriden_value="",**kwargs):
-        super().__init__(*args, **kwargs)
-        self.base_columns['market_cap_usd'].verbose_name = "Market Cap"
-        self.base_columns['price_usd'].verbose_name = "Price"
-        self.base_columns['volume_usd_24h'].verbose_name = "Volume (24h)"
-        self.base_columns['available_supply'].verbose_name = "Circulating Supply"
-        self.base_columns['percent_change_24h'].verbose_name = "Change (24h)"
-        self.base_columns['chart_24h'].verbose_name = "Price Graph (24h)"
-
     name = tables.Column(
         attrs={
             "td": {"align": "left"}, 'th':{'style':'text-align: left;'}
         }
     )
-    market_cap_usd = tables.Column(
+    market_cap_usd = tables.Column(verbose_name = "Market Cap",
         attrs={
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
         }
     )
-    price_usd = tables.Column(
+    price_usd = tables.Column(verbose_name = "Price",
         attrs={
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
         }
     )
-    volume_usd_24h = tables.Column(
+    volume_usd_24h = tables.Column(verbose_name = "Volume (24h)",
         attrs={
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
         }
     )
-    available_supply = tables.Column(
+    available_supply = tables.Column(verbose_name = "Circulating Supply",
         attrs={
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
         }
     )
-    percent_change_24h = tables.Column(
+    percent_change_24h = tables.Column(verbose_name = "Change (24h)",
         attrs={
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
         }
@@ -169,23 +160,19 @@ class CryptoTable(tables.Table):
 
 
 class MasternodeCryptoTable(CryptoTable):
-    def __init__(self, *args, _overriden_value="",**kwargs):
-        super().__init__(*args, **kwargs)
-        self.base_columns['masternode_cost_coins'].verbose_name = "# required"
-
-    mn_worth = tables.Column(empty_values=[])
+    masternode_cost_coins = tables.Column(empty_values=[], verbose_name = "# required")
+    mn_worth = tables.Column(empty_values=[], verbose_name = "MN Worth")
 
     class Meta:
         model = Cryptocurrency
-        fields = ['name','market_cap_usd','price_usd','volume_usd_24h','available_supply','masternode_cost_coins','mn_worth','percent_change_24h','chart_24h','tags']
-        exclude = ('symbol',)
+        fields = ['name','price_usd','volume_usd_24h','available_supply','masternode_cost_coins','mn_worth','percent_change_24h','chart_24h','tags']
+        exclude = ('symbol','market_cap_usd','available_supply',)
 
     def render_mn_worth(self, value, record):
-        if record.price_usd > 1:
-            return "$" + intcomma("{0:.2f}".format(record.masternode_cost_coins * record.price_usd))
-        else:
-            return "$" + intcomma(record.masternode_cost_coins * record.price_usd)
+        return "$" + intcomma(int(record.masternode_cost_coins * record.price_usd))
 
+    def render_masternode_cost_coins(self, value, record):
+        return intcomma(value)
 
 
 class FlyEyeView(ListView):
