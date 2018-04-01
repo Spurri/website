@@ -89,6 +89,7 @@ class CryptoTable(tables.Table):
         self.base_columns['available_supply'].verbose_name = "Circulating Supply"
         self.base_columns['percent_change_24h'].verbose_name = "Change (24h)"
         self.base_columns['chart_24h'].verbose_name = "Price Graph (24h)"
+        self.base_columns['masternode_cost_coins'].verbose_name = "# required"
 
     name = tables.Column(
         attrs={
@@ -166,6 +167,24 @@ class CryptoTable(tables.Table):
             string = string + '<a href="/coins/?tags=PoW" style="color:black;"><icon class="far fa-gem" title="Proof of Work"></icon></a>'
         return string and format_html(string) or ""
 
+
+
+class MasternodeCryptoTable(CryptoTable):
+    mn_worth = tables.Column(empty_values=[])
+
+    class Meta:
+        model = Cryptocurrency
+        fields = ['name','market_cap_usd','price_usd','volume_usd_24h','available_supply','masternode_cost_coins','mn_worth','percent_change_24h','chart_24h','tags']
+        exclude = ('symbol',)
+
+    def render_mn_worth(self, value, record):
+        if record.price_usd > 1:
+            return "$" + intcomma("{0:.2f}".format(record.masternode_cost_coins * record.price_usd))
+        else:
+            return "$" + intcomma(record.masternode_cost_coins * record.price_usd)
+
+
+
 class FlyEyeView(ListView):
     model = Cryptocurrency
     template_name = 'fly_eye.html'  
@@ -185,6 +204,11 @@ class CryptocurrencyListView(SingleTableMixin, FilterView):
     table_class = CryptoTable
     filterset_class = CryptocurrencyFilter
 
+    def get_table_class(self):
+        if self.request.GET.get('tags') == "masternode":
+            return MasternodeCryptoTable
+        else:
+            return CryptoTable
 
 
 class CryptocurrencyDetailView(DetailView):
