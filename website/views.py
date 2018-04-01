@@ -186,11 +186,11 @@ class CryptoTable(tables.Table):
     def render_tags(self, value):
         string = ""
         if "masternode" in value:
-            string = string + '<a href="/coins/?tags=masternode" style="color:black;"><icon class="far fa-hdd" title="Masternode"></icon></a>'
+            string = string + '<a href="/coins/?tags__contains=masternode" style="color:black;"><icon class="far fa-hdd" title="Masternode"></icon></a>'
         if "PoS" in value:
-            string = string + '<a href="/coins/?tags=PoS" style="color:black;"><icon class="fa fa-map-pin" title="Proof of Stake"></icon></a>'
+            string = string + '<a href="/coins/?tags__contains=PoS" style="color:black;"><icon class="fa fa-map-pin" title="Proof of Stake"></icon></a>'
         if "PoW" in value:
-            string = string + '<a href="/coins/?tags=PoW" style="color:black;"><icon class="far fa-gem" title="Proof of Work"></icon></a>'
+            string = string + '<a href="/coins/?tags__contains=PoW" style="color:black;"><icon class="far fa-gem" title="Proof of Work"></icon></a>'
         return string and format_html(string) or ""
 
 
@@ -226,7 +226,7 @@ class CryptocurrencyFilter(FilterSet):
     class Meta:
         model = Cryptocurrency
         fields = {
-            'tags': ['exact', 'contains'],
+            'tags': ['contains'],
             'symbol': ['exact',],
             'name': ['exact', 'contains'],
         }
@@ -241,7 +241,7 @@ class CryptocurrencyListView(SingleTableMixin, FilterView):
     filterset_class = CryptocurrencyFilter
 
     def get_table_class(self):
-        if self.request.GET.get('tags') == "masternode":
+        if self.request.GET.get('tags_contains') == "masternode":
             return MasternodeCryptoTable
         else:
             return CryptoTable

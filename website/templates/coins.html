@@ -38,7 +38,7 @@ $('.inlinesparkline').sparkline('html', { width: '120px', height: '24px', enable
               <a href="/">Home</a>
             </li>
             <li class="breadcrumb-item"><a href="/coins">Coins</a></li>
-            {% if 'masternode' in request.GET.tags %}
+            {% if 'masternode' in request.GET.tags__contains %}
             <li class="breadcrumb-item active" >Masternodes </li>
             {% endif %} &nbsp; ( {{ table.rows|length|intcomma }} )
           </ul>
