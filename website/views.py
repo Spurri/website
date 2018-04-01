@@ -30,6 +30,31 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 from decimal import *
 from django.db.models import F
 
+
+SYMBOLS = {
+    'customary'     : ('B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'),
+    'customary_ext' : ('byte', 'kilo', 'mega', 'giga', 'tera', 'peta', 'exa',
+                       'zetta', 'iotta'),
+    'iec'           : ('Bi', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi', 'Yi'),
+    'iec_ext'       : ('byte', 'kibi', 'mebi', 'gibi', 'tebi', 'pebi', 'exbi',
+                       'zebi', 'yobi'),
+}
+
+def bytes2human(n, format='%(value).1f %(symbol)s', symbols='customary'):
+    n = int(n)
+    if n < 0:
+        raise ValueError("n < 0")
+    symbols = SYMBOLS[symbols]
+    prefix = {}
+    for i, s in enumerate(symbols[1:]):
+        prefix[s] = 1 << (i+1)*10
+    for symbol in reversed(symbols[1:]):
+        if n >= prefix[symbol]:
+            value = float(n) / prefix[symbol]
+            return format % locals()
+    return format % dict(symbol=symbols[0], value=n)
+
+
 def comment_posted( request ):
     if request.GET['c']:
         comment_id = request.GET['c'] 
@@ -43,15 +68,13 @@ def comment_posted( request ):
     return HttpResponseRedirect( "/" )
 
 def index(request, template="index.html"):
-    #projects = Project.objects.all().order_by('-order')
-    # context = {
-    #     'project_count': projects.count(),
-    #     'projects': projects[0:15],
-    #     'user_count': User.objects.all().count(),
-    #     'grant_count': Grant.objects.all().count(),
-    #     'cryptocurrencies_count': Cryptocurrency.objects.all().count(),
-    # }
-    return render(request, template, context = {})
+    response = requests.get('http://pool.spurri.com/api/status')
+    result = response.json()
+    context = {
+         'hashrate': bytes2human(result['c11']['hashrate']) + "h/s",
+         'workers': str(result['c11']['workers']),
+    }
+    return render(request, template, context = context)
 
 class ProjectListView(ListView):
     model = Project

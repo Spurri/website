@@ -13,7 +13,23 @@ from updown.views import AddRatingFromModel
 from django.conf.urls.static import static
 from django.views.decorators.cache import cache_page
 
+from django.utils.decorators import available_attrs
+
+
+
 import website.views
+from functools import wraps
+
+
+
+def cache_on_auth(timeout):
+    def decorator(view_func):
+        @wraps(view_func, assigned=available_attrs(view_func))
+        def _wrapped_view(request, *args, **kwargs):
+            return cache_page(timeout, key_prefix="_auth_%s_" % request.user.is_authenticated())(view_func)(request, *args, **kwargs)
+        return _wrapped_view
+    return decorator
+
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
@@ -27,8 +43,8 @@ urlpatterns = [
     url(r'^list/$', ProjectListView.as_view()),
     url(r'^grants/$', GrantListView.as_view()),
     url(r'^cryptocurrency/$', RedirectView.as_view(url='/coins/', permanent=False), name='index'),
-    url(r'^cryptocurrency/(?P<slug>[\w-]+)/$', cache_page(60*60)(CryptocurrencyDetailView.as_view())),
-    url(r'^coins/$', cache_page(60*60)(CryptocurrencyListView.as_view())),
+    url(r'^cryptocurrency/(?P<slug>[\w-]+)/$', cache_on_auth(60*60)(CryptocurrencyDetailView.as_view())),
+    url(r'^coins/$', cache_on_auth(60*60)(CryptocurrencyListView.as_view())),
 
     url(r'^grant/(?P<pk>\d+)/$', GrantDetailView.as_view()),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
