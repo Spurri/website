@@ -42,15 +42,15 @@ def comment_posted( request ):
     return HttpResponseRedirect( "/" )
 
 def index(request, template="index.html"):
-    projects = Project.objects.all().order_by('-order')
-    context = {
-        'project_count': projects.count(),
-        'projects': projects[0:15],
-        'user_count': User.objects.all().count(),
-        'grant_count': Grant.objects.all().count(),
-        'cryptocurrencies_count': Cryptocurrency.objects.all().count(),
-    }
-    return render(request, template, context)
+    #projects = Project.objects.all().order_by('-order')
+    # context = {
+    #     'project_count': projects.count(),
+    #     'projects': projects[0:15],
+    #     'user_count': User.objects.all().count(),
+    #     'grant_count': Grant.objects.all().count(),
+    #     'cryptocurrencies_count': Cryptocurrency.objects.all().count(),
+    # }
+    return render(request, template, context = {})
 
 class ProjectListView(ListView):
     model = Project
@@ -121,9 +121,10 @@ class CryptoTable(tables.Table):
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
         }
     )
+    tags = tables.Column(empty_values=[])
     class Meta:
         model = Cryptocurrency
-        fields = ['name','market_cap_usd','price_usd','volume_usd_24h','available_supply','symbol','percent_change_24h','chart_24h']
+        fields = ['name','market_cap_usd','price_usd','volume_usd_24h','available_supply','symbol','percent_change_24h','chart_24h','tags']
 
         row_attrs = {
             'onclick': lambda record: "document.location.href='/cryptocurrency/" + record.slug + "';"
@@ -156,6 +157,15 @@ class CryptoTable(tables.Table):
     def render_chart_24h(self, value):
         return format_html('<span class="inlinesparkline" style="display:none; ">{}</span>', value )
 
+    def render_tags(self, value):
+        string = ""
+        if "masternode" in value:
+            string = string + '<a href="/coins/?tags=masternode" style="color:black;"><icon class="far fa-hdd" title="Masternode"></icon></a>'
+        if "PoS" in value:
+            string = string + '<a href="/coins/?tags=PoS" style="color:black;"><icon class="fa fa-map-pin" title="Proof of Stake"></icon></a>'
+        if "PoW" in value:
+            string = string + '<a href="/coins/?tags=PoW" style="color:black;"><icon class="far fa-gem" title="Proof of Work"></icon></a>'
+        return string and format_html(string) or ""
 
 class FlyEyeView(ListView):
     model = Cryptocurrency
@@ -166,7 +176,6 @@ class CryptocurrencyFilter(FilterSet):
     class Meta:
         model = Cryptocurrency
         fields = ['symbol', 'name','tags']
-        filter_fields = ['tags']
 
 
 class CryptocurrencyListView(SingleTableMixin, FilterView):
@@ -176,6 +185,7 @@ class CryptocurrencyListView(SingleTableMixin, FilterView):
     paginate_by = 100 
     table_class = CryptoTable
     filterset_class = CryptocurrencyFilter
+
 
 
 class CryptocurrencyDetailView(DetailView):
