@@ -2,7 +2,8 @@
 {% load render_table from django_tables2 %}
 {% load bootstrap3 %}
 {% load staticfiles %}
-{% load comments %}
+
+{% load humanize %}
 {% block extra_head %}
   <script src="{% static "js/jquery.sparkline.js" %}"></script>
   
@@ -39,8 +40,8 @@ $('.inlinesparkline').sparkline('html', { width: '120px', height: '24px' });
             </li>
             <li class="breadcrumb-item"><a href="/coins">Coins</a></li>
             {% if 'masternode' in request.GET.tags %}
-            <li class="breadcrumb-item active">Masternodes </li>
-            {% endif %} &nbsp; ({{ table.rows|length }})
+            <li class="breadcrumb-item active" >Masternodes </li>
+            {% endif %} &nbsp; ( {{ table.rows|length|intcomma }} )
           </ul>
         </div>
         <div class="col-md-2 d-flex align-items-center ">

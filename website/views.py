@@ -134,16 +134,16 @@ class CryptoTable(tables.Table):
             return "$" + intcomma(value.normalize())
 
     def render_volume_usd_24h(self, value):
-        return "$" + intcomma(value.normalize())
+        return "$" + intcomma(int(value))
 
     def render_available_supply(self, value, record):
         return intcomma(value)
 
     def render_percent_change_24h(self, value):
         if value > 0:
-            return format_html('<b class="text-success">{}</b>', value )
+            return format_html('<b class="text-success">{}%</b>', value )
         else:
-            return format_html('<b class="text-danger">{}</b>', value )
+            return format_html('<b class="text-danger">{}%</b>', value )
 
     def render_chart_24h(self, value):
         return format_html('<span class="inlinesparkline" style="display:none; ">{}</span>', value )
