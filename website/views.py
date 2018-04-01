@@ -90,8 +90,6 @@ class CryptoTable(tables.Table):
         self.base_columns['percent_change_24h'].verbose_name = "Change (24h)"
         self.base_columns['chart_24h'].verbose_name = "Price Graph (24h)"
 
-    #counter = tables.TemplateColumn('{{ row_counter }}')
-
     name = tables.Column(
         attrs={
             "td": {"align": "left"}, 'th':{'style':'text-align: left;'}

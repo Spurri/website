@@ -60,7 +60,6 @@ class Command(BaseCommand):
                 obj.chart_24h = ','.join(map(str, chart_list)).lstrip(',')
                 obj.save()
 
-                print (obj, obj.chart_24h, created)
             except Exception as error:
                 print (coin, error)
 
