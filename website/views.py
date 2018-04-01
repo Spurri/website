@@ -175,7 +175,7 @@ class CryptoTable(tables.Table):
             return format_html('<b class="text-danger">{}%</b>', value )
 
     def render_chart_24h(self, value):
-        return format_html('<span class="inlinesparkline" style="display:none; ">{}</span>', value )
+        return format_html('<span class="inlinesparkline" style="display:none; width:120px;">{}</span>', value )
 
     def render_tags(self, value):
         string = ""
