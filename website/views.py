@@ -225,7 +225,11 @@ class FlyEyeView(ListView):
 class CryptocurrencyFilter(FilterSet):
     class Meta:
         model = Cryptocurrency
-        fields = ['symbol', 'name','tags']
+        fields = {
+            'tags': ['exact', 'contains'],
+            'symbol': ['exact',],
+            'name': ['exact', 'contains'],
+        }
 
 
 class CryptocurrencyListView(SingleTableMixin, FilterView):
