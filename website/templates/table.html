@@ -71,7 +71,7 @@
                                     </li>
                                 {% else %}
                                     <li class="page-item">
-                                        <a class="page-link" >{{ i }}</a>
+                                        <a href="{% querystring table.prefixed_page_field=i %}" class="page-link" >{{ i }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}
