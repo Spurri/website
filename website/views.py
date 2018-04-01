@@ -136,9 +136,15 @@ class CryptoTable(tables.Table):
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
         }
     )
+
     percent_change_24h = tables.Column(verbose_name = "Change (24h)",
         attrs={
             "td": {"align": "right"}, 'th':{'style':'text-align: right;'}
+        }
+    )
+    chart_24h = tables.Column(
+        attrs={
+            "td": {"width": "150"}
         }
     )
     tags = tables.Column(empty_values=[])
@@ -175,7 +181,7 @@ class CryptoTable(tables.Table):
             return format_html('<b class="text-danger">{}%</b>', value )
 
     def render_chart_24h(self, value):
-        return format_html('<span class="inlinesparkline" style="display:none; width:120px;">{}</span>', value )
+        return format_html('<span class="inlinesparkline" style="width:120px;" sparkWidth="120px" values="{}" ></span>', value )
 
     def render_tags(self, value):
         string = ""
