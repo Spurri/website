@@ -7,7 +7,7 @@ from django_comments import signals, models as comment_models
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from datetime import date
-
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 
 class Cryptocurrency(models.Model):
@@ -62,10 +62,12 @@ class Cryptocurrency(models.Model):
     block_explorer_balance_in_satoshis = models.BooleanField(default=False)
     source_code = models.URLField(blank=True, null=True)
     issue_count = models.IntegerField(default=0)
+    #dob = models.DateTimeField()
     website = models.URLField(blank=True, null=True)
     logo_image = models.ImageField(upload_to="logos", blank=True, null=True)
     tags = TagField()
     logo_word = models.ImageField(upload_to="words", blank=True, null=True)
+    website_screenshot = models.ImageField(upload_to="website_screenshots", blank=True, null=True)
     paper_wallet = models.URLField(blank=True, null=True)
     white_paper = models.URLField(blank=True, null=True)
     multi_wallet = models.URLField(blank=True, null=True)
@@ -91,6 +93,23 @@ class Cryptocurrency(models.Model):
     
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Cryptocurrency._meta.fields]
+
+    def render_price_usd(self):
+        if self.price_usd > 1:
+            return "$" + intcomma("{0:.2f}".format(self.price_usd))
+        else:
+            return "$" + intcomma(self.price_usd.normalize())
+
+
+    def render_tags(self):
+        string = ""
+        if "masternode" in self.tags:
+            string = string + '<a href="/coins/?tags__contains=masternode" style="color:black;"><icon class="far fa-hdd" title="Masternode"></icon></a>'
+        if "PoS" in self.tags:
+            string = string + '<a href="/coins/?tags__contains=PoS" style="color:black;"><icon class="fa fa-map-pin" title="Proof of Stake"></icon></a>'
+        if "PoW" in self.tags:
+            string = string + '<a href="/coins/?tags__contains=PoW" style="color:black;"><icon class="far fa-gem" title="Proof of Work"></icon></a>'
+        return string
 
 
 class Goal(models.Model):

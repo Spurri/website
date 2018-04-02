@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load humanize %}
+{% load replace %}
+{% block extra_head %}
+  <script src="{% static "js/jquery.sparkline.js" %}"></script>
+  
+  <link rel="stylesheet" type="text/css" href="{% static "css/0.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/1.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/2.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/3.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/4.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/5.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/6.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/7.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/8.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/9.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/10.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/11.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/12.css" %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/13.css" %}" />
+  
+  <script>
+  function imgError(image){
+  $("<a href='https://www.google.com/search?q={{coin}}+logo&source=lnms&tbm=isch' target='_top'>Google {{coin}} logo</a>").insertBefore( $(image) );
+  }
+  $(document).ready(function() {
+  $('.inlinesparkline').sparkline('html', { width: '80px', height: '24px', enableTagOptions:true});
+  })
+  </script>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 py-3">
+          <ul class="breadcrumb" style="margin-bottom:0px;margin-top:0px">
+            <li class="breadcrumb-item">
+              <a href="#">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a href="/coins">Coins</a>
+            </li>
+            <li class="breadcrumb-item active">{{ coin.name }}</li>
+          </ul>
+        </div>
+        <div class="col-md-2 d-flex align-items-center ">
+          <a class="btn text-center btn-danger" href="#">Add a Coin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 text-left">
+          {% if prev %}
+            <a href="/cryptocurrency/{{prev.slug}}" class="btn btn-outline-primary">
+            <icon class="s-s-{{prev.slug}} currency-logo-sprite" style="margin-top:2px;"></icon> Prev</a>
+            <p class="">{{prev}} </p>
+          {% endif %}
+        </div>
+        <div class="col-md-6 text-left">
+          <h1 class="text-center">{{ coin.name }}</h1>
+        </div>
+        <div class="col-md-3 text-right ">
+          {% if next %}
+            <a href="/cryptocurrency/{{next.slug}}" class="btn btn-outline-primary">
+            <icon class="s-s-{{next.slug}} currency-logo-sprite" style="margin-top:2px;"></icon> Next</a>
+            <p class="">{{next}} </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+        <img style="height:191px;" class='backup_picture' src="../../static/img/logos/{{coin.slug}}.png" onerror="imgError(this);"> </div>
+        <div class="col-md-3">
+          <table class="table">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td align="right" style="width:10px;">Price:</td>
+              <td align="right"><b>{{coin.render_price_usd}}</b></td>
+            </tr>
+            <tr>
+              <td align="right">Cap:</td>
+              <td align="right"><b>${{coin.market_cap_usd|intcomma}}</b></td>
+            </tr>
+            <tr>
+              <td align="right">Volume:</td>
+              <td align="right"><b>${{coin.volume_usd_24h|floatformat:"0"|intcomma}}</b></td>
+            </tr>
+            <tr>
+              <td align="right">Supply:</td>
+              <td align="right" style="padding-left:0px;"><b>{{coin.available_supply|intcomma}} {{coin.symbol}}</b></td>
+            </tr>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-3">
+      <table class="table">
+      <thead></thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td style="height:49px;"><span class="inlinesparkline"  values="{{coin.chart_24h}}" ></span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span style="color:{% if coin.percent_change_1h > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_1h}}%</span><sup style="font-size:10px; color:#bbb;">1h</sup></td>
+          <td><span style="color:{% if coin.percent_change_24h > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_24h}}%</span><sup style="font-size:10px;color:#bbb;">7h</sup></td>
+          <td><span style="color:{% if coin.percent_change_7d > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_7d}}%</span><sup style="font-size:10px;color:#bbb;">30d</sup></td>
+        </tr>
+        <tr>
+          <td>Tags:</td>
+          <td colspan="2" align="left">{{coin.render_tags|safe}}</td>
+        </tr>
+        <tr>
+          <td>Links:</td>
+          <td colspan="2" align="left">
+            {% if coin.website %}
+              <a href='{{coin.website}}' target='_new'><icon class="fa fa-globe fa-1x"></icon></a>
+            {% endif %}
+            <a href="https://coinmarketcap.com/currencies/{{coin.slug}}/" target="_new"> <icon class="fa fa-dollar-sign fa-1x"></icon></a>
+            <a href='https://www.google.com/search?q={{coin}}+cryptocurrency' target='_new'><icon class="fa fa-search fa-1x"></icon></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-3">
+  <img class="img-fluid d-block" style="border: 1px solid #bbb;" src="/media/{{coin.website_screenshot}}"> </div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <p class="">{{coin.description}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div style="float:left; padding-left: 10px; padding-right: 10px;border-right: 1px solid #ddd;"><span style="font-size:10px;">Rank</span>
+    <br><span style="font-size:20px;"><b>{{coin.rank}}</b></span></div>
+    <div style="float:left; padding-left: 10px; padding-right: 10px;border-right: 1px solid #ddd;"><span style="font-size:10px;">Block Height</span>
+    <br><span style="font-size:20px;"><b>829,234</b></span></div>
+    <div style="float:left; padding-left:10px;padding-right: 10px;border-right: 1px solid #ddd;"><span style="font-size:10px;">BCT Topic #</span>
+    <br><span style="font-size:20px;"><b>234</b></span></div>
+  </div>
+  <div class="col-md-4">
+    <div style="float:left; padding-right:10px;">
+      <h2>Wallets:</h2>
+    </div>
+    <div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fa fa-fw fa-globe fa-2x"></i>
+      <br> <span style="font-size:10px;">Windows</span> </div>
+      <div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fa fa-fw fa-globe fa-2x"></i>
+        <br> <span style="font-size:10px;">Mac</span> </div>
+        <div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fa fa-fw fa-globe fa-2x"></i>
+          <br> <span style="font-size:10px;">Linux</span> </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% if cryptocurrency.goal_set.all %}
+        <div class="col-md-6 p-3">
+          <ul class="list-group text-left">
+            <li class="list-group-item active text-dark">{{coin}} GOALS&nbsp;<i class="fa fa-fw fa-trophy"></i> </li>
+            {% for goal in cryptocurrency.goal_set.all %}
+              {% if goal.status %}
+                <div class="ribbon"><span>{{goal.status}}</span></div>
+              {% endif %}
+              
+              {% if goal.status == "Complete" %}
+                <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new" class="list-group-item">
+                  <h2 style="float:left;margin-right:8px;"#{{goal.number}}</h2><b>{{goal.title}}</b>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped text-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">{% widthratio goal.current_amount goal.target_amount 100 %}%
+                    </div>
+                  </div> <b>{{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</b>
+                  <span style="float:right; font-size:10px;">Contribute {{goal.target_cryptocurrency.symbol}}:: {{goal.wallet_address}}</span>
+                </a>
+              {% else %}
+                <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new" class="list-group-item">
+                  <h2 style="float:left;margin-right:8px;"#{{goal.number}}</h2><b>{{goal.title}}</b>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped text-dark" role="progressbar" style="width: {% widthratio goal.current_amount goal.target_amount 100 %}%;" aria-valuenow="{% widthratio goal.current_amount goal.target_amount 100 %}" aria-valuemin="0" aria-valuemax="100">{% widthratio goal.current_amount goal.target_amount 100 %}%</div>
+                  </div>
+                  {% if goal.target_amount < 1 %}
+                    <b>{{goal.current_amount|floatformat:8}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat:8}} {{goal.target_cryptocurrency.symbol}}</b>
+                  {% else %}
+                    {{goal.current_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}
+                  {% endif %}
+                  <span style="float:right; font-size:10px;">Contribute {{goal.target_cryptocurrency.symbol}}: {{goal.wallet_address}}</span> </a>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+    <br>
+    <br>
+  {% endblock %}
