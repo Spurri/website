@@ -36,9 +36,13 @@ django-emoji = "*"
 rollbar = "*"
 django-heroku = "*"
 whitenoise = "*"
-pylibmc = "*"
+pylibmc = {version = "*", sys_platform = "!= 'win32'"}
 pytz = "*"
 six = "*"
+python-bitcoinrpc = "*"
+django-next-prev = "*"
+"beautifulsoup4" = "*"
+selenium = "*"
 
 
 [dev-packages]

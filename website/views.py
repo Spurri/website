@@ -29,7 +29,12 @@ from datetime import datetime, timedelta
 from django.contrib.humanize.templatetags.humanize import intcomma
 from decimal import *
 from django.db.models import F
-
+from next_prev import next_in_order, prev_in_order
+from django.core.files.base import File, ContentFile
+from bs4 import BeautifulSoup
+from django.core.files.storage import default_storage
+from PIL import Image, ImageOps
+from io import BytesIO
 
 SYMBOLS = {
     'customary'     : ('B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'),
@@ -250,41 +255,80 @@ class CryptocurrencyListView(SingleTableMixin, FilterView):
 class CryptocurrencyDetailView(DetailView):
     model = Cryptocurrency
     slug_field = "slug"     
-    context_object_name = "cryptocurrency"     
-    template_name = "cryptocurrency_detail.html"
-    
+    context_object_name = "coin"     
+    template_name = "coin-detail.html"
+
     def get_context_data(self, **kwargs):
         context = super(CryptocurrencyDetailView, self).get_context_data(**kwargs)
+        context['next']=next_in_order(self.object)
+        context['prev']=prev_in_order(self.object)
 
-        for goal in Goal.objects.filter(cryptocurrency=self.object).exclude(result="Complete"):
-            time_threshold = datetime.now() - timedelta(seconds=goal.target_cryptocurrency.block_time_seconds)
-            if time_threshold > goal.updated:
-
-                url = goal.target_cryptocurrency.block_explorer_balance_api % goal.wallet_address
-                try:
-                    r1=requests.get(url)
-                    goal.current_amount = 0
-
-                    if goal.target_cryptocurrency.name == 'Dotcoin':
-                        try:
-                            goal.current_amount = int(r1.json()['result']['tokens']['DOT'])
-                        except:
-                            goal.current_amount = 0
-                    else:
-                        try:
-                            if goal.target_cryptocurrency.block_explorer_balance_in_satoshis:
-                                goal.current_amount = int(r1.text) * .00000001
-                            else:
-                                goal.current_amount = r1.text 
-                        except:
-                            goal.current_amount = 0
-
-                    goal.updated = datetime.now()
-                    goal.save()
-                except:
-                    pass
-
+        if not self.object.website and self.request.GET.get('refresh'):
+            try:
+                page = requests.get('https://coinmarketcap.com/currencies/'+ self.object.slug +'/')
+                soup = BeautifulSoup(page.text, 'html.parser')
+                coin = self.get_object()
+                coin.website = soup.find('span', {'title' : 'Website'}).findNext('a').get('href')
+                coin.save()
+            except:
+                pass
+        if not self.object.website_screenshot and self.request.GET.get('refresh'):
+            try:
+                from selenium import webdriver
+                driver = webdriver.PhantomJS()
+                driver.set_window_size(1120, 550)
+                driver.get(self.object.website)
+                driver.get_screenshot_as_file('media\website_screenshots\/'+self.object.slug +'.png')
+                screenshot = driver.get_screenshot_as_png()
+                driver.quit()
+                img = Image.open(BytesIO(screenshot))
+                box1 = (0, 0, 1120, 800)
+                box2 = (255, 182)
+                img = img.crop(box1)
+                img = img.resize(box2)
+                buffer_ = BytesIO()
+                img.save(buffer_, 'PNG')
+                content_file = ContentFile(buffer_.getvalue())
+                coin = self.get_object()
+                coin.website_screenshot.save(self.object.slug+'.png', content_file, save=True)
+            except Exception as error:
+                print (error)
         return context
+
+    # make this a script
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(CryptocurrencyDetailView, self).get_context_data(**kwargs)
+
+    #     for goal in Goal.objects.filter(cryptocurrency=self.object).exclude(result="Complete"):
+    #         time_threshold = datetime.now() - timedelta(seconds=goal.target_cryptocurrency.block_time_seconds)
+    #         if time_threshold > goal.updated:
+
+    #             url = goal.target_cryptocurrency.block_explorer_balance_api % goal.wallet_address
+    #             try:
+    #                 r1=requests.get(url)
+    #                 goal.current_amount = 0
+
+    #                 if goal.target_cryptocurrency.name == 'Dotcoin':
+    #                     try:
+    #                         goal.current_amount = int(r1.json()['result']['tokens']['DOT'])
+    #                     except:
+    #                         goal.current_amount = 0
+    #                 else:
+    #                     try:
+    #                         if goal.target_cryptocurrency.block_explorer_balance_in_satoshis:
+    #                             goal.current_amount = int(r1.text) * .00000001
+    #                         else:
+    #                             goal.current_amount = r1.text 
+    #                     except:
+    #                         goal.current_amount = 0
+
+    #                 goal.updated = datetime.now()
+    #                 goal.save()
+    #             except:
+    #                 pass
+
+    #     return context
 
 
 
