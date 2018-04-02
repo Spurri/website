@@ -198,10 +198,10 @@
                 <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new" class="list-group-item">
                   <h2 style="float:left;margin-right:8px;">#{{goal.number}}</h2><b>{{goal.title}}</b>
                   <div class="progress">
-                    <div class="progress-bar progress-bar-striped text-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">{% widthratio goal.current_amount goal.target_amount 100 %}%
+                    <div class="progress-bar progress-bar-striped text-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%
                     </div>
                   </div> <b>{{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}} /  {{goal.target_amount|floatformat}} {{goal.target_cryptocurrency.symbol}}</b>
-                  <span style="float:right; font-size:10px;">Contribute {{goal.target_cryptocurrency.symbol}}:: {{goal.wallet_address}}</span>
+                  <span style="float:right; font-size:10px;">Contribute {{goal.target_cryptocurrency.symbol}}: {{goal.wallet_address}}</span>
                 </a>
               {% else %}
                 <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new" class="list-group-item">
