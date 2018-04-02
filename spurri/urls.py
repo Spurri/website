@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^list/$', ProjectListView.as_view()),
     url(r'^grants/$', GrantListView.as_view()),
     url(r'^cryptocurrency/$', RedirectView.as_view(url='/coins/', permanent=False), name='index'),
-    url(r'^cryptocurrency/(?P<slug>[\w-]+)/$', cache_on_auth(60*60)(CryptocurrencyDetailView.as_view())),
+    url(r'^cryptocurrency/(?P<slug>[\w-]+)/$', CryptocurrencyDetailView.as_view()),
     url(r'^coins/$', cache_on_auth(60*60)(CryptocurrencyListView.as_view())),
 
     url(r'^grant/(?P<pk>\d+)/$', GrantDetailView.as_view()),
