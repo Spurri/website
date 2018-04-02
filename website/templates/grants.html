@@ -35,12 +35,12 @@
 						{% for grant in grants %}
 							<tr onclick="document.location.href='/grant/{{grant.id}}';">
 								<td>
-									<a href="{{grant.organization.website}}" target="_new">
+									<a href="{{grant.organization.website}}" target="_blank">
 										<img class="img-thumbnail rounded-circle" src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" alt="Card image">
 									</a>
 								</td>
 								<td class="text-left">{{grant.name}}</td>
-								<td><a href="{{grant.link}}" target="_new">{{grant.soliciation_number}}</a></td>
+								<td><a href="{{grant.link}}" target="_blank">{{grant.soliciation_number}}</a></td>
 								<td>${{grant.amount_max.normalize|intcomma}}</td>
 								<td nowrap="" class="text-left">{{grant.deadline|date:"m/d/Y"}}
 									<br>{{grant.deadline|date:"g:i a"}}

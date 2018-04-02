@@ -270,7 +270,7 @@
         <div class="col-md-6">
           <ul class="icons list-unstyled list-inline list-center">
           {% for resource in project.resource_set.all %}
-            <li><a href="{{resource.link}}" style="icon-decoration: none" target="_new"><i class="fa {{resource.icon}}" align="middle"></i></a></li>
+            <li><a href="{{resource.link}}" style="icon-decoration: none" target="_blank"><i class="fa {{resource.icon}}" align="middle"></i></a></li>
             {% endfor %}
 
           </ul>
@@ -457,9 +457,9 @@
 </tr>
 {% for match in matches %}
   <tr>
-    <td><a href="/{{match.grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.grant.organization.logo.url}}" width="40"></a></td>
-    <td><a href="/grant/{{match.grant.id}}" target="_new">{{match.grant.name}}</a></td>
-    <td><a href="{{match.grant.link}}" target="_new">{{match.grant.soliciation_number}}</a></td>
+    <td><a href="/{{match.grant.organization.website}}" target="_blank"><img src="{{MEDIA_ROOT}}{{match.grant.organization.logo.url}}" width="40"></a></td>
+    <td><a href="/grant/{{match.grant.id}}" target="_blank">{{match.grant.name}}</a></td>
+    <td><a href="{{match.grant.link}}" target="_blank">{{match.grant.soliciation_number}}</a></td>
     <td>${{match.grant.amount_max.normalize|intcomma}}</td>
     <td bgcolor="{% if match.grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
     {{match.grant.deadline}}

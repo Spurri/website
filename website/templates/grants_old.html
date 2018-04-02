@@ -28,9 +28,9 @@
 			</tr>
 			{% for grant in grants %}
 				<tr>
-					<td><a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
-					<td><a href="/grant/{{grant.id}}" target="_new">{{grant.name}}</a></td>
-					<td><a href="{{grant.link}}" target="_new">{{grant.soliciation_number}}</a></td>
+					<td><a href="{{grant.organization.website}}" target="_blank"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="40"></a></td>
+					<td><a href="/grant/{{grant.id}}" target="_blank">{{grant.name}}</a></td>
+					<td><a href="{{grant.link}}" target="_blank">{{grant.soliciation_number}}</a></td>
 					<td>${{grant.amount_max.normalize|intcomma}}</td>
 					<td bgcolor="{% if grant.is_past %}#ff3333{% else %}#99ff99{% endif %}">
 					{{grant.deadline}}

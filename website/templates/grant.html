@@ -4,9 +4,9 @@
 {% load humanize %}
 {% block content %}
 
-<a href="{{grant.organization.website}}" target="_new"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="150"></a>
+<a href="{{grant.organization.website}}" target="_blank"><img src="{{MEDIA_ROOT}}{{grant.organization.logo.url}}" height="150"></a>
 
-<h1><a href="{{grant.link}}" target="_new">{{grant.name}}</a></h1>
+<h1><a href="{{grant.link}}" target="_blank">{{grant.name}}</a></h1>
 <h2>Solicitation # {{grant.soliciation_number}}</h2>
 <h3> Amount Max: ${{grant.amount_max.normalize|intcomma}} Deadline <span style="color:{% if grant.is_past %}#ff3333{% else %}#99ff99{% endif %};">{{grant.deadline}}</span></h3>
 
@@ -34,8 +34,8 @@
 			</tr>
 			{% for match in matches %}
 				<tr>
-					<td><a href="/{{match.project.slug}}" target="_new"><img src="{{MEDIA_ROOT}}{{match.project.image.url}}" width="40"></a></td>
-					<td><a href="/{{match.project.slug}}" target="_new">{{match.project}}</a></td>
+					<td><a href="/{{match.project.slug}}" target="_blank"><img src="{{MEDIA_ROOT}}{{match.project.image.url}}" width="40"></a></td>
+					<td><a href="/{{match.project.slug}}" target="_blank">{{match.project}}</a></td>
 					<td><a href="/profile/{{match.project.user}}">{{match.project.user.first_name}} {{match.project.user.last_name}}</a></td>
 					
 					<td>

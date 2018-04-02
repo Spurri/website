@@ -166,7 +166,7 @@ class CryptoTable(tables.Table):
         }
 
     def render_name(self, value, record):
-        return format_html('<a href="https://coinmarketcap.com/currencies/{}/" target="_new"> <icon class="s-s-{} currency-logo-sprite"></icon></a> <a href="/cryptocurrency/{}">{}</a>', record.slug, record.slug, record.slug, value )
+        return format_html('<a href="https://coinmarketcap.com/currencies/{}/" target="_blank"> <icon class="s-s-{} currency-logo-sprite"></icon></a> <a href="/cryptocurrency/{}">{}</a>', record.slug, record.slug, record.slug, value )
 
     def render_market_cap_usd(self, value):
         return "$" + intcomma(value)
