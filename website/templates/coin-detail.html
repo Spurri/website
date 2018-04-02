@@ -115,8 +115,8 @@
         </tr>
         <tr>
           <td><span style="color:{% if coin.percent_change_1h > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_1h}}%</span><sup style="font-size:10px; color:#bbb;">1h</sup></td>
-          <td><span style="color:{% if coin.percent_change_24h > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_24h}}%</span><sup style="font-size:10px;color:#bbb;">7h</sup></td>
-          <td><span style="color:{% if coin.percent_change_7d > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_7d}}%</span><sup style="font-size:10px;color:#bbb;">30d</sup></td>
+          <td><span style="color:{% if coin.percent_change_24h > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_24h}}%</span><sup style="font-size:10px;color:#bbb;">24h</sup></td>
+          <td><span style="color:{% if coin.percent_change_7d > 0 %}#7eca8f {% else %}#ea868f{% endif %}">{{coin.percent_change_7d}}%</span><sup style="font-size:10px;color:#bbb;">7d</sup></td>
         </tr>
         <tr>
           <td>Tags:</td>
@@ -130,6 +130,10 @@
             {% endif %}
             <a href="https://coinmarketcap.com/currencies/{{coin.slug}}/" target="_new"> <icon class="fa fa-dollar-sign fa-1x"></icon></a>
             <a href='https://www.google.com/search?q={{coin}}+cryptocurrency' target='_new'><icon class="fa fa-search fa-1x"></icon></a>
+            {% if user.is_superuser %}
+            <a href='/admin/website/cryptocurrency/{{coin.id}}/change/' target='_new'><icon class="fa fa-edit fa-1x"></icon></a>
+            <a href='?refresh=true'><icon class="fa fa-sync fa-1x"></icon></a>
+            {% endif %}
           </td>
         </tr>
       </tbody>
@@ -151,37 +155,45 @@
   <div class="col-md-8">
     <div style="float:left; padding-left: 10px; padding-right: 10px;border-right: 1px solid #ddd;"><span style="font-size:10px;">Rank</span>
     <br><span style="font-size:20px;"><b>{{coin.rank}}</b></span></div>
+    {% if coin.block_height %}
     <div style="float:left; padding-left: 10px; padding-right: 10px;border-right: 1px solid #ddd;"><span style="font-size:10px;">Block Height</span>
-    <br><span style="font-size:20px;"><b>829,234</b></span></div>
+    <br><span style="font-size:20px;"><b>{{coin.block_height}}</b></span></div>
+    {% endif %}
+    {% if coin.bct_topic_count %}
     <div style="float:left; padding-left:10px;padding-right: 10px;border-right: 1px solid #ddd;"><span style="font-size:10px;">BCT Topic #</span>
-    <br><span style="font-size:20px;"><b>234</b></span></div>
+    <br><span style="font-size:20px;"><b>{{coin.bct_topic_count}}</b></span></div>
+    {% endif %}
   </div>
   <div class="col-md-4">
     <div style="float:left; padding-right:10px;">
       <h2>Wallets:</h2>
     </div>
-    <div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fa fa-fw fa-globe fa-2x"></i>
-      <br> <span style="font-size:10px;">Windows</span> </div>
-      <div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fa fa-fw fa-globe fa-2x"></i>
-        <br> <span style="font-size:10px;">Mac</span> </div>
-        <div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fa fa-fw fa-globe fa-2x"></i>
-          <br> <span style="font-size:10px;">Linux</span> </div>
+    {% if coin.windows_wallet %}
+    <a href="{{coin.windows_wallet}}" target="_new"><div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fab fa-fw fa-windows fa-2x"></i>
+      <br>  <span style="font-size:10px;">Windows</span> </div></a>
+      {% endif %}
+      {% if coin.mac_wallet %}
+      <a href="{{coin.windows_wallet}}" target="_new"><div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fab fa-fw fa-apple fa-2x"></i>
+        <br> <span style="font-size:10px;">{{coin.mac_wallet}}</span> </div></a>
+      {% endif %}
+      {% if coin.linux_wallet %}
+        <a href="{{coin.linux_wallet}}" target="_new"><div style="float:left; padding-right:10px;margin-top:3px;"> <i class="fab fa-fw fa-linux fa-2x"></i>
+          <br> <span style="font-size:10px;">Linux</span> </div></a>
+      {% endif %}
         </div>
       </div>
     </div>
     <div class="row">
-      {% if cryptocurrency.goal_set.all %}
+      {% if coin.goal_set.all %}
         <div class="col-md-6 p-3">
           <ul class="list-group text-left">
-            <li class="list-group-item active text-dark">{{coin}} GOALS&nbsp;<i class="fa fa-fw fa-trophy"></i> </li>
-            {% for goal in cryptocurrency.goal_set.all %}
-              {% if goal.status %}
-                <div class="ribbon"><span>{{goal.status}}</span></div>
-              {% endif %}
+            <li class="list-group-item active text-dark">{{coin|upper}} GOALS&nbsp;<i class="fa fa-fw fa-trophy"></i> </li>
+            {% for goal in coin.goal_set.all %}
+
               
               {% if goal.status == "Complete" %}
                 <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new" class="list-group-item">
-                  <h2 style="float:left;margin-right:8px;"#{{goal.number}}</h2><b>{{goal.title}}</b>
+                  <h2 style="float:left;margin-right:8px;">#{{goal.number}}</h2><b>{{goal.title}}</b>
                   <div class="progress">
                     <div class="progress-bar progress-bar-striped text-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">{% widthratio goal.current_amount goal.target_amount 100 %}%
                     </div>
@@ -190,7 +202,7 @@
                 </a>
               {% else %}
                 <a href="{{goal.target_cryptocurrency.block_explorer_balance_url|replace:goal.wallet_address }}" target="new" class="list-group-item">
-                  <h2 style="float:left;margin-right:8px;"#{{goal.number}}</h2><b>{{goal.title}}</b>
+                  <h2 style="float:left;margin-right:8px;">#{{goal.number}}</h2><b>{{goal.title}}</b>
                   <div class="progress">
                     <div class="progress-bar progress-bar-striped text-dark" role="progressbar" style="width: {% widthratio goal.current_amount goal.target_amount 100 %}%;" aria-valuenow="{% widthratio goal.current_amount goal.target_amount 100 %}" aria-valuemin="0" aria-valuemax="100">{% widthratio goal.current_amount goal.target_amount 100 %}%</div>
                   </div>

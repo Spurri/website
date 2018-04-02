@@ -152,7 +152,11 @@ class CryptoTable(tables.Table):
             "td": {"width": "150"}
         }
     )
-    tags = tables.Column(empty_values=[])
+    tags = tables.Column(empty_values=[],
+        attrs={
+            'td':{'style':'padding: 0px;'}
+        }
+    )
     class Meta:
         model = Cryptocurrency
         fields = ['name','market_cap_usd','price_usd','volume_usd_24h','available_supply','symbol','percent_change_24h','chart_24h','tags']
