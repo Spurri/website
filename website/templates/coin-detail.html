@@ -140,7 +140,10 @@
     </table>
   </div>
   <div class="col-md-3">
-  <img class="img-fluid d-block" style="border: 1px solid #bbb;" src="{{coin.website_screenshot.url}}"> </div>
+    {% if coin.website_screenshot %}
+  <img class="img-fluid d-block" style="border: 1px solid #bbb;" src="{{coin.website_screenshot.url}}"> 
+  {% endif %}
+  </div>
 </div>
 </div>
 </div>
