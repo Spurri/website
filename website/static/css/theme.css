@@ -1374,6 +1374,18 @@ pre {
     opacity: .9; }
 
 
+.form-control-wide {
+  display: block;
+  padding: 0.6rem 1rem;
+  width: 80%;
+  font-size: .8rem;
+  line-height: 1.15;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
 
 
 

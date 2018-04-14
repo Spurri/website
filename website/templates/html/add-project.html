@@ -61,33 +61,39 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card">
-            <div class="card-header"> Add a Project</div>
+            <div class="card-header bg-secondary"> Add a Project</div>
+            <div class="card-body ml-3">
             <form>
               <fieldset>
-                <div class="form-group col-md-06 py-2">
-                  <div class="row"> <label class="col-md-4 control-label" for="textinput">Project Name</label>
-                    <input id="textinput" name="textinput" type="text" placeholder="Project Name" class="form-control input-md border" required="" size="48"> </div>
+                <div class="form-group col-md-06 py-2  mt-2">
+                  <div class="row"> <label class="col-md-4 control-label text-left" for="textinput">Project Name</label>
+                    <input id="textinput" name="textinput" type="text" placeholder="Project Name" class="form-control input-md border" required="" size="42"> </div>
                 </div>
                 <div class="form-group col-md-06 py-2">
-                  <div class=" row"> <label class="col-md-4 control-label" for="textinput">Spurri URL</label> <span class="input-group-addon">www.spuri.com/</span>
-                    <input id="textinput" name="textinput" type="text" placeholder="slug" class="form-control input-md border"
-                      required="" size="30"> </div>
+                  <div class="row"> <label class="col-md-4 control-label text-left" for="textinput">Spurri URL</label> <span class="input-group-addon">www.spuri.com/ </span>
+                    <input id="textinput" name="textinput" type="text" placeholder="slug" class="form-control input-md border ml-1"
+                      required="" size="24"> </div>
                 </div>
                 <div class="form-group col-md-06 py-2">
-                  <div class=" row"> <label class="col-md-4 control-label" for="textinput">Description</label> <textarea class="form-control border" id="textarea" name="textarea" cols="50" rows="10">Describe your project</textarea> </div>
+                  <div class=" row"> <label class="col-md-4 control-label text-left" for="textinput">Description</label> <textarea class="form-control border" id="textarea" name="textarea" cols="40" rows="10" placeholder="describe your project" ></textarea> </div>
                 </div>
                 <div class="form-group col-md-06 py-2">
-                  <div class=" row"> <label class="col-md-4 control-label" for="textinput">Square Image</label>
+                  <div class=" row"> <label class="col-md-4 control-label text-left" for="textinput">Square Image</label>
                     <input id="filebutton" name="filebutton" type="file" class="input-file"> </div>
                 </div>
+                </form>
+              </div>
+
                 <!-- Button -->
+                <div class="card-footer bg-white">
                 <div class="form-group">
-                  <div class="col-md-12">
-                    <button name="" class="btn btn-primary">Add Project</button>
+                  <div class="col-md-12 mt-2">
+                    <button name="" class="btn btn-primary">submit</button>
                   </div>
                 </div>
+              </div>
               </fieldset>
-            </form>
+            
           </div>
         </div>
       </div>
