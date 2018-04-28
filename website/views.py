@@ -453,7 +453,10 @@ class AddResource(View):
 
 
 def sparkline(request, slug):
-    import matplotlib.pyplot as plt
+    import matplotlib
+    matplotlib.use('Agg')
+
+    import matplotlib.pyplot as plt   
     coin = Cryptocurrency.objects.get(symbol=slug.upper())
 
     data = list([coin.chart_24h])
