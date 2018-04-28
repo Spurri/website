@@ -459,7 +459,7 @@ def sparkline(request, slug):
     import matplotlib.pyplot as plt   
     coin = Cryptocurrency.objects.get(symbol=slug.upper())
 
-    data = dict(coin.chart_24h)
+    data = [float(x) for x in coin.chart_24h.split(',') if x]
 
     fig, ax = plt.subplots(1, 1, figsize=(2, 0.5))
     ax.plot(data)
