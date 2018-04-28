@@ -58,6 +58,7 @@ urlpatterns = [
     
     url(r'^emoji/', include('emoji.urls')),
     url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ")),
+    url(r'^charts/spark_(?P<slug>[\w-]+).png$', website.views.sparkline),
     
 ]
 

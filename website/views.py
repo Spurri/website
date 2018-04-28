@@ -450,3 +450,28 @@ class AddResource(View):
   
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+
+def sparkline(request, slug):
+    import matplotlib.pyplot as plt
+    coin = Cryptocurrency.objects.get(symbol=slug.upper())
+
+    data = list([coin.chart_24h])
+
+    fig, ax = plt.subplots(1, 1, figsize=(2, 0.5))
+    ax.plot(data)
+    for k,v in ax.spines.items():
+        v.set_visible(False)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    plt.plot(len(data) - 1, data[len(data) - 1], 'r.')
+
+    ax.fill_between(range(len(data)), data, len(data)*[min(data)], alpha=0.1)
+
+    img = BytesIO()
+    plt.savefig(img, transparent=True, format='png', bbox_inches='tight', pad_inches=0)
+    img.seek(0)
+
+    response = HttpResponse(img.getvalue(), content_type='image/png')
+    return response
