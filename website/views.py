@@ -74,7 +74,7 @@ def comment_posted( request ):
 
 def index(request, template="index.html"):
     try:
-        response = requests.get('http://pool.spurri.com/api/status')
+        response = requests.get('http://pool2.spurri.com/api/status')
         result = response.json()
         context = {
              'hashrate': bytes2human(result['c11']['hashrate']) + "h/s",
